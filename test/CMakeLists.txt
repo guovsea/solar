@@ -28,6 +28,7 @@ target_sources(
   test_bytearray.cpp
   test_http.cpp
   test_http_parser.cpp
+  test_tcp_server.cpp
 )
 
 target_link_libraries(${EXE_NAME} 

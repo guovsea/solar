@@ -373,7 +373,7 @@ std::ostream & Socket::dump(std::ostream &os) const {
         os << " local_address=" << m_localAddress->toString();
     }
     if (m_remoteAddress) {
-        os << "remote_address=" << m_remoteAddress->toString();
+        os << " remote_address=" << m_remoteAddress->toString();
     }
     os << "]";
     return os;

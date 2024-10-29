@@ -9,8 +9,6 @@
 
 static solar::Logger::ptr g_logger = SOLAR_LOG_ROOT();
 
-
-
 void test_host_and_port() {
     solar::IPAddress::ptr addr = solar::Address::LookUpAnyIpAddress("www.baidu.com");
     EXPECT_TRUE(addr);

@@ -152,6 +152,8 @@ public:
 private:
     sockaddr m_addr;
 };
+
+std::ostream& operator<<(std::ostream& os, const Address& addr);
 } // namespace solar
 
 #endif // SOLAR_ADDRESS_H

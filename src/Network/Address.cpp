@@ -525,4 +525,9 @@ std::ostream & UnknownAddress::insert(std::ostream &os) const {
     return os;
 }
 
+std::ostream & operator<<(std::ostream &os, const Address &addr) {
+    os << addr.toString();
+    return os;
+}
+
 } // namespace solar
