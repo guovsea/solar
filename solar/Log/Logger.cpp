@@ -2,12 +2,18 @@
 
 namespace solar {
 
-Logger::Logger(const std::string &name) :m_name(name), m_level(LogLevel::DEBUG),m_formater(new LogFormatter("%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"))
-{
+Logger::Logger(const std::string &name)
+    : m_name(name), m_level(LogLevel::DEBUG),
+      m_formater(new LogFormatter(
+          "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n")) {}
 
+void Logger::log(LogLevel level, LogEvent::ptr event) {
+    for (auto appender : m_appenders) {
+
+        auto self = shared_from_this();
+        appender->log(self, level, event);
+    }
 }
-
-void Logger::log(LogLevel level, LogEvent::ptr event) {}
 
 void Logger::debug(LogEvent::ptr event) { log(LogLevel::DEBUG, event); }
 

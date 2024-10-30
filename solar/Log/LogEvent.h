@@ -1,3 +1,5 @@
+#ifndef SOLAR_LOG_LOGEVENT_H
+#define SOLAR_LOG_LOGEVENT_H
 #include <stdint.h>
 #include <memory>
 #include <string>
@@ -26,3 +28,5 @@ class LogEvent {
 };
 
 } // namespace solar
+
+#endif // !SOLAR_LOG_LOGEVENT_H
