@@ -26,18 +26,18 @@ class LogFormatter {
     std::string format(std::shared_ptr<Logger> logger, LogLevel level,
                        LogEvent::ptr event);
 
-  private:
     void init();
-    class FormatterItem {
+    class FormatItem {
       public:
-        typedef std::shared_ptr<FormatterItem> ptr;
-        virtual ~FormatterItem() {}
+        typedef std::shared_ptr<FormatItem> ptr;
+        virtual ~FormatItem() {}
         virtual void format(std::ostream &, std::shared_ptr<Logger> logger,
                             LogLevel level, LogEvent::ptr event) = 0;
     };
 
+  private:
     std::string m_pattern;
-    std::vector<FormatterItem::ptr> m_items;
+    std::vector<FormatItem::ptr> m_items;
 };
 } // namespace solar
 

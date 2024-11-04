@@ -17,8 +17,14 @@ LogLevel LogAppender::getLevel() const { return m_level; }
 
 void StdoutLogAppender::log(std::shared_ptr<Logger> logger, LogLevel level,
                             LogEvent::ptr event) {
-                                if (level >= m_level)
-                                std::cout << m_formatter->format(logger, level, event);
-                            }
+    if (level >= m_level)
+        std::cout << m_formatter->format(logger, level, event);
+}
+
+void FileLogAppender::log(std::shared_ptr<Logger> logger, LogLevel level,
+                          LogEvent::ptr event) {
+                            // todo
+
+                          }
 
 } // namespace solar

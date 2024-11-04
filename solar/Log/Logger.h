@@ -35,6 +35,8 @@ class Logger : public std::enable_shared_from_this<Logger> {
 
     void setLoglevel(LogLevel level);
 
+    std::string getName() const {return m_name;}
+
   private:
     std::string m_name;
     LogLevel m_level;
