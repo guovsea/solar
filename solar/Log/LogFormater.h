@@ -1,5 +1,5 @@
-#ifndef SOLAR_LOG_LOGFORMATTER_H
-#define SOLAR_LOG_LOGFORMATTER_H
+#ifndef __SOLAR_LOG_LOGFORMATTER_H__
+#define __SOLAR_LOG_LOGFORMATTER_H__
 
 #include <memory>
 #include <string>
@@ -27,6 +27,8 @@ class LogFormatter {
                        LogEvent::ptr event);
 
     void init();
+
+    bool isError() {return m_error;}
     class FormatItem {
       public:
         typedef std::shared_ptr<FormatItem> ptr;
@@ -38,7 +40,8 @@ class LogFormatter {
   private:
     std::string m_pattern;
     std::vector<FormatItem::ptr> m_items;
+    bool m_error = false;
 };
 } // namespace solar
 
-#endif // !SOLAR_LOG_LOGFORMATTER_H
+#endif // !__SOLAR_LOG_LOGFORMATTER_H

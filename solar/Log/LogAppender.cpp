@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Log/LogAppender.h"
-#include "LogAppender.h"
+#include "Log/LogEvent.h"
 
 namespace solar {
 

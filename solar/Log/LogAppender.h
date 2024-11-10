@@ -1,5 +1,5 @@
-#ifndef SOLAR_LOG_LOGAPPENDER_H
-#define SOLAR_LOG_LOGAPPENDER_H
+#ifndef __SOLAR_LOG_LOGAPPENDER_H__
+#define __SOLAR_LOG_LOGAPPENDER_H__
 
 #include <fstream>
 #include <memory>
@@ -51,4 +51,4 @@ class FileLogAppender :public LogAppender{
 };
 } // namespace solar
 
-#endif // !SOLAR_LOG_LOGAPPENDER_H
+#endif // !__SOLAR_LOG_LOGAPPENDER_H

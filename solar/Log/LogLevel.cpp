@@ -19,3 +19,23 @@ const char *solar::ToString(LogLevel level) {
     }
     return "UNKNOWN";
 }
+
+solar::LogLevel solar::FromString(const std::string &str) { 
+#define XX(level, v) \
+    if(str == #v) { \
+        return LogLevel::level; \
+    }
+    XX(DEBUG, debug);
+    XX(INFO, info);
+    XX(WARN, warn);
+    XX(ERROR, error);
+    XX(FATAL, fatal);
+
+    XX(DEBUG, DEBUG);
+    XX(INFO, INFO);
+    XX(WARN, WARN);
+    XX(ERROR, ERROR);
+    XX(FATAL, FATAL);
+    return LogLevel::UNKNOWN;
+#undef XX
+}

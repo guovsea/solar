@@ -5,6 +5,9 @@ set(PUBLIC_HEADER
   Log/LogFormater.h
   Log/Logger.h
   Log/LogLevel.h
+  Log/LoggerManager.h
+  Util/Util.h
+  Util/Singleton.h
 )
 add_executable(solar "")
 
@@ -16,5 +19,15 @@ target_sources(
   Log/LogAppender.cpp
   Log/LogEvent.cpp
   Log/LogFormater.cpp
+  Log/Logger.cpp
+  Log/LogLevel.cpp
+  Log/LoggerManager.cpp
+  Util/Util.cpp
   main.cpp
+)
+
+target_sources(
+  solar
+  PRIVATE
+  Util/Util.cpp
 )

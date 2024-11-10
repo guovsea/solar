@@ -1,5 +1,5 @@
-#ifndef SOLAR_LOG_LOGGER_H
-#define SOLAR_LOG_LOGGER_H
+#ifndef __SOLAR_LOG_LOGGER_H__
+#define __SOLAR_LOG_LOGGER_H__
 
 #include <fstream>
 #include <list>
@@ -14,6 +14,7 @@
 namespace solar {
 
 class Logger : public std::enable_shared_from_this<Logger> {
+  friend class LoggerManager;
   public:
     typedef std::shared_ptr<Logger> ptr;
     Logger(const std::string &name = "root");
@@ -31,9 +32,12 @@ class Logger : public std::enable_shared_from_this<Logger> {
 
     void cleanAppenders();
 
-    LogLevel getLoglevel();
+    void setFormatter(LogFormatter::ptr val);
 
-    void setLoglevel(LogLevel level);
+    void setFormatter(const std::string& val);
+    LogLevel getLevel();
+
+    void setLevel(LogLevel level);
 
     std::string getName() const {return m_name;}
 
@@ -42,8 +46,9 @@ class Logger : public std::enable_shared_from_this<Logger> {
     LogLevel m_level;
     std::list<LogAppender::ptr> m_appenders;
     LogFormatter::ptr m_formater;
+    Logger::ptr m_root;  // Log manager 中的根 logger
 };
 
 } // namespace solar
 
-#endif // SOLAR_LOG_LOGGER_H
+#endif // __SOLAR_LOG_LOGGER_H

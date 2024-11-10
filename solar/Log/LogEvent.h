@@ -1,5 +1,5 @@
-#ifndef SOLAR_LOG_LOGEVENT_H
-#define SOLAR_LOG_LOGEVENT_H
+#ifndef __SOLAR_LOG_LOGEVENT_H__
+#define __SOLAR_LOG_LOGEVENT_H__
 #include <stdint.h>
 #include <memory>
 #include <string>
@@ -50,6 +50,16 @@ class LogEvent {
     LogLevel m_level;
 };
 
+class LogEventWrap {
+public:
+    LogEventWrap(LogEvent::ptr e) : m_event(e) {}
+    ~LogEventWrap(); 
+    LogEvent::ptr getEvent() const { return m_event;}
+    std::stringstream& getSS() {return m_event->getSS();}
+private:
+    LogEvent::ptr m_event;
+};
+
 } // namespace solar
 
-#endif // !SOLAR_LOG_LOGEVENT_H
+#endif // !__SOLAR_LOG_LOGEVENT_H

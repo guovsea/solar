@@ -1,7 +1,9 @@
 #include <ostream>
 #include <stdarg.h>
 
-#include "LogEvent.h"
+#include "Log/LogEvent.h"
+#include "Log/Logger.h"
+#include "Log/LogEvent.h"
 
 solar::LogEvent::LogEvent(std::shared_ptr<Logger> logger, LogLevel level,
                           const char *file, int32_t line, uint32_t elapse,
@@ -24,4 +26,8 @@ void solar::LogEvent::format(const char *fmt, va_list al) {
         m_ss << std::string(buf, len);
         free(buf);
     }
+}
+
+solar::LogEventWrap::~LogEventWrap() {
+    m_event->getLogger()->log(m_event->getLevel(), m_event);
 }
