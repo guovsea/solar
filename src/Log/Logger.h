@@ -35,6 +35,7 @@ class Logger : public std::enable_shared_from_this<Logger> {
     void setFormatter(LogFormatter::ptr val);
 
     void setFormatter(const std::string& val);
+
     LogLevel getLevel();
 
     void setLevel(LogLevel level);

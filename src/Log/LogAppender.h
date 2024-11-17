@@ -21,9 +21,11 @@ class LogAppender {
                      LogEvent::ptr event) = 0;
 
     void setFormatter(LogFormatter::ptr formater) ;
+
     LogFormatter::ptr getFormatter()const;
 
     void setLevel(LogLevel level);
+
     LogLevel getLevel() const;
 
   protected:

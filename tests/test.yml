@@ -1,0 +1,22 @@
+system:
+  port: 9999
+  int_vec: 
+    - 1
+    - 2
+  int_list: [3, 4]
+  int_set: [5, 6, 6]
+  int_map:
+    k: 7
+    k1: 6
+  int_uset:
+    [8, 8, 9]
+  int_umap:
+    k: 10
+  str_int_vec_umap:
+    k: [4, 5, 6]
+
+class:
+  person:
+    name: guovsea
+    age: 18
+    sex: true

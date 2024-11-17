@@ -24,8 +24,8 @@ namespace solar
     Logger::ptr m_root;
    };
     
+   using LoggerMgr = Singleton<LoggerManager>;
 } // namespace solar
 
-using LoggerMgr = solar::Singleton<solar::LoggerManager>;
 
 #endif /* __SOLAR_LOG_LOGGERMANAGER_H__ */
