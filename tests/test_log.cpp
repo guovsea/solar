@@ -4,7 +4,6 @@
 
 // Demonstrate some basic assertions.
 TEST(TestLog, TestLog) {
-  GTEST_SKIP();
   solar::Logger::ptr pLogger(new solar::Logger);
   pLogger->addAppender(solar::LogAppender::ptr(new solar::StdoutLogAppender));
   solar::LogEvent::ptr pEvent(new solar::LogEvent(pLogger, solar::LogLevel::DEBUG, __FILE__, __LINE__, 0, solar::GetThreadId(), solar::GetFiberId(), time(0)));
