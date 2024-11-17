@@ -25,21 +25,27 @@ class ConfigVarBase {
         std::transform(m_name.begin(), m_name.end(), m_name.begin(), ::tolower);
     }
     virtual ~ConfigVarBase() {}
+
     std::string getName() const { return m_name; }
+
     void setName(const std::string &name) { m_name = name; }
+
     std::string getDiscription() const { return m_discription; }
+
     void setDiscription(const std::string &discription) {
         m_discription = discription;
     }
     /**
      * @brief 从 yaml 格式的 string 中 获取 config 的 value
      *
-     * @param str yaml 格式的 string
+     * @param str yaml 格式的 string， 在 yaml 中对应的 yaml 节点的 string
      * @return true
      * @return false
      */
     virtual bool fromYaml(const std::string &str) = 0;
+
     virtual std::string toYaml() const = 0;
+
     virtual std::string getTypeName() const = 0;
 
   protected:
@@ -245,6 +251,15 @@ class LexicalCast<std::unordered_map<std::string, T>, std::string> {
     }
 };
 
+/**
+ * @brief 
+ * 
+ * @tparam T 值的类型
+ * @tparam FromStr yaml 格式的字符串转到 T 使用的可调用对象的类型 
+ * @tparam T> 
+ * @tparam ToStr T 转到 yaml 格式的字符串使用的的可调用对象的类型  
+ * @tparam std::string> 
+ */
 template <class T, class FromStr = LexicalCast<std::string, T>,
           class ToStr = LexicalCast<T, std::string>>
 class ConfigVar : public ConfigVarBase {
@@ -323,7 +338,6 @@ class Config {
     /**
      * @brief
      *
-     * @tparam T
      * @param name
      * @param defaultValue
      * @param description
@@ -371,7 +385,7 @@ class Config {
 
     static ConfigVarBase::ptr LookupBase(const std::string &name);
 
-  private:
+   private:
     /**
      * @brief Get the Data object,
      * 不直接定义静态成员变量，而是定义一个静态成员函数返回函数中定义的静态变量。
@@ -385,84 +399,6 @@ class Config {
         return s_datas;
     }
 };
-
-template <class T>
-bool FromYaml(const YAML::Node &node, const std::string &key, T &val) {
-    if (node[key]) {
-        val = node[key].as<T>();
-        return true;
-    }
-    return false;
-}
-inline bool FromYaml(const YAML::Node &node) { return true; }
-template <typename T, typename... Args>
-bool FromYaml(const YAML::Node &node, const std::string &key, T &val,
-              Args &&...args) {
-    return FromYaml(node, key, val) && FromYaml(node, args...);
-}
-/**
- * @brief
- *
- * @tparam Args
- * @param str yaml 格式的字符串
- * @param args key, output[value], key, output[value] ...
- * @return true
- * @return false
- */
-template <typename... Args>
-bool FromYamlString(const std::string &str, Args &&...args) {
-    YAML::Node node = YAML::Load(str);
-    return FromYaml(node, args...);
-}
-template <class T>
-void ToYaml(YAML::Node &node, const std::string &key, const T &val) {
-    node[key] = val;
-}
-inline void ToYaml(YAML::Node &node) {}
-template <typename T, typename... Args>
-void ToYaml(YAML::Node &node, const std::string &key, const T &val,
-            Args &&...args) {
-    ToYaml(node, key, val);
-    ToYaml(node, args...);
-}
-// key, value, key, value ...
-/**
- * @brief
- *
- * @tparam Args
- * @param args
- * @return std::string yaml 格式的字符串
- */
-template <typename... Args> std::string ToYamlString(Args &&...args) {
-    YAML::Node node;
-    ToYaml(node, args...);
-    std::stringstream ss;
-    ss << node;
-    return ss.str();
-}
-
-struct CustomConfigVar {
-  public:
-    virtual ~CustomConfigVar() {}
-    virtual bool fromYaml(const std::string &str) = 0;
-    virtual std::string toYaml() const = 0;
-};
-
-#define RIGISTER_SOLAR_CONFIG(Type)                                            \
-    namespace solar {                                                          \
-    template <> class LexicalCast<std::string, Type> {                         \
-      public:                                                                  \
-        Type operator()(const std::string &str) {                              \
-            Type v;                                                            \
-            v.fromYaml(str);                                                   \
-            return v;                                                          \
-        }                                                                      \
-    };                                                                         \
-    template <> class LexicalCast<Type, std::string> {                         \
-      public:                                                                  \
-        std::string operator()(const Type &v) { return v.toYaml(); }           \
-    };                                                                         \
-    }
 
 } // namespace solar
 

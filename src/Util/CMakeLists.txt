@@ -6,6 +6,7 @@ set(PUBLIC_HEADER
   Util.h
   Singleton.h
   Config.h
+  CustomConfigVar.h
 )
 
 target_sources(

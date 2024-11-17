@@ -1,5 +1,6 @@
 #include "Log/Log.h"
 #include "Util/Config.h"
+#include "Util/CustomConfigVar.h"
 #include <gtest/gtest.h>
 
 solar::ConfigVar<int>::ptr g_intValueConfig =
