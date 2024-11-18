@@ -12,7 +12,6 @@ Logger::ptr LoggerManager::getLogger(const std::string &name) {
         return it->second;
     }
     Logger::ptr logger= std::make_shared<Logger>(name);
-    logger->addAppender(std::make_shared<StdoutLogAppender>());
     logger->m_root = m_root;
     return logger;
 }

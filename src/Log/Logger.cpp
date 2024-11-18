@@ -13,8 +13,10 @@ void Logger::log(LogLevel level, LogEvent::ptr event) {
         auto self = shared_from_this();
         if (!m_appenders.empty()) {
             for (auto i : m_appenders) {
-                i->log(self, level, event);
+                i->log(level, event);
             }
+            // 如果新创建了 logger 没有设置 appender ，
+            // 使用 loger Mgr 中的 root logger 的 log appenders
         } else if (m_root) {
             m_root->log(level, event);
         }

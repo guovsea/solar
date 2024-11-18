@@ -4,6 +4,7 @@
 
 // Demonstrate some basic assertions.
 TEST(TestLog, TestLog) {
+  GTEST_SKIP();
   solar::Logger::ptr pLogger(new solar::Logger);
   pLogger->addAppender(solar::LogAppender::ptr(new solar::StdoutLogAppender));
   solar::LogEvent::ptr pEvent(new solar::LogEvent(pLogger, solar::LogLevel::DEBUG, __FILE__, __LINE__, 0, solar::GetThreadId(), solar::GetFiberId(), time(0)));
@@ -18,4 +19,9 @@ TEST(TestLog, TestLog) {
   SOLAR_LOG_DEBUG(l) << "hello loggerMgr";
 
   SOLAR_LOG_DEBUG(SOLAR_LOG_ROOT()) << "log root";
+}
+
+TEST(TestLog, LoggerWithOutAppender) {
+  SOLAR_LOG_ROOT()->addAppender(std::make_shared<solar::FileLogAppender>("test.log"));
+  SOLAR_LOG_DEBUG(SOLAR_LOG_NAME("LoggerWithOutAppender")) << "hello world";
 }

@@ -17,7 +17,7 @@ class LogAppender {
     virtual ~LogAppender() {}
 
     // logger 会传给 FormatterItem
-    virtual void log(std::shared_ptr<Logger> logger, LogLevel level,
+    virtual void log(LogLevel level,
                      LogEvent::ptr event) = 0;
 
     void setFormatter(LogFormatter::ptr formater) ;
@@ -37,14 +37,15 @@ class StdoutLogAppender :public LogAppender {
   public:
     typedef std::shared_ptr<StdoutLogAppender> ptr;
 
-    void log(std::shared_ptr<Logger> logger, LogLevel level,
+    void log(LogLevel level,
                      LogEvent::ptr event) override;
 };
 class FileLogAppender :public LogAppender{
   public:
     typedef std::shared_ptr<FileLogAppender> ptr;
-
-    void log(std::shared_ptr<Logger> logger, LogLevel level,
+    FileLogAppender(const std::string& filename);
+    bool reopen();
+    void log(LogLevel level,
                      LogEvent::ptr event) override;
 
   private:

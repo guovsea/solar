@@ -18,12 +18,11 @@ class LogFormatter {
    /**
     * @brief 将 log 信息输出为 string
     * 
-    * @param logger  // 虽然只有 NameFormatItem 需要用到 logger，但为了保持接口的一致性给所有类型的 item 都传入 logger
     * @param level 
     * @param event 
     * @return std::string 
     */
-    std::string format(std::shared_ptr<Logger> logger, LogLevel level,
+    std::string format(LogLevel level,
                        LogEvent::ptr event);
 
     void init();
@@ -33,7 +32,7 @@ class LogFormatter {
       public:
         typedef std::shared_ptr<FormatItem> ptr;
         virtual ~FormatItem() {}
-        virtual void format(std::ostream &, std::shared_ptr<Logger> logger,
+        virtual void format(std::ostream &,
                             LogLevel level, LogEvent::ptr event) = 0;
     };
 
