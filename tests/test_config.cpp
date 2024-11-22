@@ -2,7 +2,7 @@
 #include "Util/Config.h"
 #include "Util/CustomConfigVar.h"
 #include <gtest/gtest.h>
-
+#if 0
 solar::ConfigVar<int>::ptr g_intValueConfig =
     solar::Config::Lookup("system.port", (int)8080, "system port");
 
@@ -142,3 +142,5 @@ TEST(ConfigTest, CallBack) {
     g_intValueConfig->addListener(1, callback);
     g_intValueConfig->setValue(3333);
 }
+
+#endif

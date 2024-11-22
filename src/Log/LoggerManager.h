@@ -18,6 +18,8 @@ namespace solar
     void init();
     
     Logger::ptr getRoot() const {return m_root;}
+
+    std::string toYamlString() const;
    
    private:
    std::map<std::string, Logger::ptr> m_loggers;

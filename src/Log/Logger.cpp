@@ -1,5 +1,7 @@
-#include "Logger.h"
 #include <iostream>
+#include <yaml-cpp/yaml.h>
+
+#include "Logger.h"
 
 namespace solar {
 
@@ -66,5 +68,21 @@ void Logger::setFormatter(const std::string &val) {
 LogLevel Logger::getLevel() { return m_level; }
 
 void Logger::setLevel(LogLevel level) { m_level = level; }
+
+std::string Logger::toYamlString() const {
+    YAML::Node node;
+    node["name"] = m_name;
+    node["level"] = ToString(m_level);
+    if (m_formater) {
+        node["formatter"] = m_formater->getPattern();
+    }
+    for (const auto &it : m_appenders) {
+        node["appenders"].push_back(YAML::Load(it->toYamlString()));
+    }
+    std::stringstream ss;
+    ss.clear();
+    ss << node;
+    return ss.str();
+}
 
 } // namespace solar

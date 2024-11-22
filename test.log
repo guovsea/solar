@@ -1,0 +1,5 @@
+2024-11-19 20:53:20	11877	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/tests/test_log.cpp:26	hello world
+2024-11-19 20:53:20	11877	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2024-11-19 20:53:20	11877	0	[DEBUG]	[root]	/home/guo/workspace/solar/tests/test_config.cpp:139	old value = 8080 new value = 3333
+2024-11-19 20:53:27	11912	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/tests/test_log.cpp:26	hello world
+2024-11-19 20:58:26	12171	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/tests/test_log.cpp:26	hello world

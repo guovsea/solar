@@ -42,6 +42,8 @@ class Logger : public std::enable_shared_from_this<Logger> {
 
     std::string getName() const {return m_name;}
 
+    std::string toYamlString() const;
+
   private:
     std::string m_name;
     LogLevel m_level;

@@ -15,25 +15,26 @@ class LogFormatter {
     typedef std::shared_ptr<LogFormatter> ptr;
     LogFormatter(const std::string &pattern);
 
-   /**
-    * @brief 将 log 信息输出为 string
-    * 
-    * @param level 
-    * @param event 
-    * @return std::string 
-    */
-    std::string format(LogLevel level,
-                       LogEvent::ptr event);
+    /**
+     * @brief 将 log 信息输出为 string
+     *
+     * @param level
+     * @param event
+     * @return std::string
+     */
+    std::string format(LogLevel level, LogEvent::ptr event);
 
     void init();
 
-    bool isError() {return m_error;}
+    bool isError() { return m_error; }
+
+    std::string getPattern() const { return m_pattern; }
     class FormatItem {
       public:
         typedef std::shared_ptr<FormatItem> ptr;
         virtual ~FormatItem() {}
-        virtual void format(std::ostream &,
-                            LogLevel level, LogEvent::ptr event) = 0;
+        virtual void format(std::ostream &, LogLevel level,
+                            LogEvent::ptr event) = 0;
     };
 
   private:

@@ -15,6 +15,7 @@ set(PUBLIC_HEADER
 target_sources(
   ${LIB}
   PRIVATE
+  Log.cpp
   LogAppender.cpp
   LogEvent.cpp
   LogFormater.cpp
