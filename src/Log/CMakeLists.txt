@@ -1,7 +1,7 @@
 
-set(LIB log)
-add_library(${LIB})
-add_library(${PROJECT_NAME}::${LIB} ALIAS ${LIB})
+set(LIB_NAME log)
+add_library(${LIB_NAME})
+add_library(${PROJECT_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
 
 set(PUBLIC_HEADER
   Log.h
@@ -13,7 +13,7 @@ set(PUBLIC_HEADER
   LoggerManager.h
 )
 target_sources(
-  ${LIB}
+  ${LIB_NAME}
   PRIVATE
   Log.cpp
   LogAppender.cpp
@@ -25,13 +25,13 @@ target_sources(
 )
 
 target_include_directories(
-  ${LIB}
+  ${LIB_NAME}
   PUBLIC
   ${SRC_DIR}
 )
 
 target_link_libraries(
-  ${LIB}
+  ${LIB_NAME}
   PUBLIC
   ${PROJECT_NAME}::util
 )

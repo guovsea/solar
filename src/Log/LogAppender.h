@@ -17,43 +17,40 @@ class LogAppender {
     virtual ~LogAppender() {}
 
     // logger 会传给 FormatterItem
-    virtual void log(LogLevel level,
-                     LogEvent::ptr event) = 0;
+    virtual void log(LogLevel level, LogEvent::ptr event) = 0;
 
     virtual std::string toYamlString() const = 0;
 
-    void setFormatter(LogFormatter::ptr formater) ;
+    void setFormatter(LogFormatter::ptr formater) { m_formatter = formater; }
 
-    LogFormatter::ptr getFormatter() const;
+    LogFormatter::ptr getFormatter() const { return m_formatter; }
 
-    void setLevel(LogLevel level);
+    void setLevel(LogLevel level) { m_level = level; }
 
-    LogLevel getLevel() const;
+    LogLevel getLevel() const { return m_level; }
 
   protected:
     LogLevel m_level;
     LogFormatter ::ptr m_formatter;
 };
 
-class StdoutLogAppender :public LogAppender {
+class StdoutLogAppender : public LogAppender {
   public:
     typedef std::shared_ptr<StdoutLogAppender> ptr;
 
-    void log(LogLevel level,
-                     LogEvent::ptr event) override;
+    void log(LogLevel level, LogEvent::ptr event) override;
 
     std::string toYamlString() const override;
 };
-class FileLogAppender :public LogAppender{
+class FileLogAppender : public LogAppender {
   public:
     typedef std::shared_ptr<FileLogAppender> ptr;
 
-    FileLogAppender(const std::string& filename);
+    FileLogAppender(const std::string &filename);
 
     bool reopen();
 
-    void log(LogLevel level,
-                     LogEvent::ptr event) override;
+    void log(LogLevel level, LogEvent::ptr event) override;
 
     std::string toYamlString() const override;
 

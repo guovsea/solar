@@ -17,17 +17,22 @@ target_sources(
   test_log.cpp
   test_config.cpp
   test_main.cpp
+  test_core.cpp
 )
+
 target_link_libraries(${EXE_NAME} 
   PRIVATE 
   ${PROJECT_NAME}::log
+  ${PROJECT_NAME}::core
   GTest::gtest
 )
+
 # copy assert files
 set(TEST_ASSERT_FILES 
   ${CMAKE_CURRENT_SOURCE_DIR}/test.yml 
   ${CMAKE_CURRENT_SOURCE_DIR}/log.yml
 )
+
 add_custom_command(
     TARGET ${EXE_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy ${TEST_ASSERT_FILES} $<TARGET_FILE_DIR:${EXE_NAME}>

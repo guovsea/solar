@@ -1,19 +1,15 @@
-set(LIB_NAME util)
+set(LIB_NAME core)
 add_library(${LIB_NAME})
 add_library(${PROJECT_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
 
 set(PUBLIC_HEADER
-  Util.h
-  Singleton.h
-  Config.h
-  CustomConfigVar.h
+  thread.h
 )
 
 target_sources(
   ${LIB_NAME}
   PRIVATE
-  Util.cpp
-  Config.cpp
+  thread.cpp
 )
 
 target_include_directories(
@@ -21,11 +17,9 @@ target_include_directories(
   PUBLIC
   ${SRC_DIR}
 )
-find_package(yaml-cpp REQUIRED)
 
 target_link_libraries(
   ${LIB_NAME}
   PUBLIC
-  yaml-cpp::yaml-cpp
   ${PROJECT_NAME}::log
 )

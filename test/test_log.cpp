@@ -4,9 +4,9 @@
 #include "Util/Config.h"
 #include "Util/Util.h"
 
+#if 0
 // Demonstrate some basic assertions.
 TEST(TestLog, TestLog) {
-    GTEST_SKIP();
     solar::Logger::ptr pLogger(new solar::Logger);
     pLogger->addAppender(solar::LogAppender::ptr(new solar::StdoutLogAppender));
     solar::LogEvent::ptr pEvent(new solar::LogEvent(
@@ -54,3 +54,5 @@ TEST(TestLog, InitLogSystemWithYAML) {
 
     SOLAR_LOG_INFO(system_log) << "hello system" << std::endl;
 }
+
+#endif

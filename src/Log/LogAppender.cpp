@@ -7,15 +7,6 @@
 
 namespace solar {
 
-void LogAppender::setFormatter(LogFormatter::ptr formater) {
-    m_formatter = formater;
-}
-
-LogFormatter::ptr LogAppender::getFormatter() const { return m_formatter; }
-
-void LogAppender::setLevel(LogLevel level) { m_level = level; }
-
-LogLevel LogAppender::getLevel() const { return m_level; }
 
 void StdoutLogAppender::log(LogLevel level, LogEvent::ptr event) {
     if (level >= m_level)
