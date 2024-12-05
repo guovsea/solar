@@ -2,7 +2,8 @@
 #include "Util/Config.h"
 #include "Util/CustomConfigVar.h"
 #include <gtest/gtest.h>
-#if 0
+#if 1
+namespace {
 solar::ConfigVar<int>::ptr g_intValueConfig =
     solar::Config::Lookup("system.port", (int)8080, "system port");
 
@@ -37,6 +38,7 @@ solar::ConfigVar<std::unordered_map<std::string, std::vector<int>>>::ptr
         "system.str_int_vec_umap",
         std::unordered_map<std::string, std::vector<int>>{{"k", {1, 2, 3}}},
         "system str int vec umap");
+} // namespace
 
 TEST(ConfigTest, BuiltinTypes) {
     EXPECT_EQ(g_intValueConfig->getValue(), 8080);

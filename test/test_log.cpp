@@ -4,7 +4,7 @@
 #include "Util/Config.h"
 #include "Util/Util.h"
 
-#if 0
+#if 1
 // Demonstrate some basic assertions.
 TEST(TestLog, TestLog) {
     solar::Logger::ptr pLogger(new solar::Logger);
@@ -30,13 +30,13 @@ TEST(TestLog, LoggerWithOutAppender) {
         std::make_shared<solar::FileLogAppender>("test.log"));
     SOLAR_LOG_DEBUG(SOLAR_LOG_NAME("LoggerWithOutAppender")) << "hello world";
 }
+
 TEST(TestLog, ToYamlString) {
     std::cout << SOLAR_LOG_ROOT()->toYamlString();
     std::cout << std::endl;
     std::cout << solar::LoggerMgr::Instance()->toYamlString();
     std::cout << std::endl;
 }
-
 
 TEST(TestLog, InitLogSystemWithYAML) {
     solar::Logger::ptr system_log = SOLAR_LOG_NAME("system");

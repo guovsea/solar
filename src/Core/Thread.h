@@ -1,9 +1,11 @@
-#ifndef __SOLAR_CORE_THREAD_H__
-#define __SOLAR_CORE_THREAD_H__
+#ifndef __SRC_CORE_THREAD_H__
+#define __SRC_CORE_THREAD_H__
 
 #include <functional>
 #include <memory>
 #include <string>
+
+#include "Core/Semaphore.h"
 
 namespace solar {
 class Thread {
@@ -32,6 +34,7 @@ class Thread {
     pthread_t m_thread = 0;
     std::function<void()> m_cb;
     std::string m_name;
+    Semaphore m_semaphore;
 };
 } // namespace solar
-#endif /* __SOLAR_CORE_THREAD_H__ */
+#endif /* __SRC_CORE_THREAD_H__ */

@@ -1,5 +1,5 @@
-#include "Core/thread.h"
 #include "Log/Log.h"
+#include "Core/Thread.h"
 
 namespace solar {
 
@@ -7,7 +7,7 @@ static thread_local Thread* t_thread = nullptr;
 static thread_local std::string t_thread_name = "UNKNOW";
 
 Thread::Thread(std::function<void()> cb, const std::string &name)
-    : m_cb(cb), m_name(name) {
+    : m_cb(cb), m_name(name), m_semaphore(0) /* 信号量初始值为0 */{
     if (name.empty()) {
         m_name = "UNKNOW";
     }
@@ -16,6 +16,7 @@ Thread::Thread(std::function<void()> cb, const std::string &name)
         SOLAR_LOG_ERROR(SOLAR_LOG_ROOT())
             << "pthread_create thread fail, rt = " << rt << "name = " << name;
     }
+    m_semaphore.wait();
 }
 Thread::~Thread() {
     if (m_thread) {
@@ -39,9 +40,10 @@ void* Thread::run(void* arg) {
     t_thread = thread;
     t_thread_name = thread->m_name;
     thread->m_id = solar::GetThreadId();
-    // 修改终端中 thread 的名字
+    // 修改通过 ps -T -p 打印出来的线程的名称, 方便调试
     pthread_setname_np(thread->m_thread, thread->m_name.substr(0, 15).c_str());
 
+    thread->m_semaphore.notify();
     std::function<void()> cb;
     cb.swap(thread->m_cb);
 

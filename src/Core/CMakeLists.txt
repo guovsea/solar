@@ -3,13 +3,18 @@ add_library(${LIB_NAME})
 add_library(${PROJECT_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
 
 set(PUBLIC_HEADER
-  thread.h
+  Thread.h
+  Semaphore.h
+  Lock.h
+  LockImpl.h
 )
 
 target_sources(
   ${LIB_NAME}
   PRIVATE
-  thread.cpp
+  Thread.cpp
+  Semaphore.cpp
+  Lock.cpp
 )
 
 target_include_directories(
