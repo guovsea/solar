@@ -4,7 +4,7 @@
 
 #include "Core/Semaphore.h"
 #include "Core/Thread.h"
-#include "Core/Lock.h"
+#include "Core/Mutex.h"
 
 solar::Logger::ptr g_logger = SOLAR_LOG_ROOT();
 void work1() {

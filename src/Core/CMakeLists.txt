@@ -5,8 +5,8 @@ add_library(${PROJECT_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
 set(PUBLIC_HEADER
   Thread.h
   Semaphore.h
-  Lock.h
-  LockImpl.h
+  Mutex.h
+  MutexImpl.h
 )
 
 target_sources(
@@ -14,7 +14,7 @@ target_sources(
   PRIVATE
   Thread.cpp
   Semaphore.cpp
-  Lock.cpp
+  Mutex.cpp
 )
 
 target_include_directories(

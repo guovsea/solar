@@ -1,4 +1,4 @@
-#include "Core/Lock.h"
+#include "Core/Mutex.h"
 
 namespace solar
 {

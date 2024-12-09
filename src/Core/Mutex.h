@@ -1,5 +1,5 @@
-#ifndef __SOLAR_CORE_LOCK_H__
-#define __SOLAR_CORE_LOCK_H__
+#ifndef __SRC_CORE_MUTEX_H__
+#define __SRC_CORE_MUTEX_H__
 
 #include <pthread.h>
 #include <atomic>
@@ -48,9 +48,6 @@ class SpinLock {
     pthread_spinlock_t m_mutex;
 };
 
-class CASLock {
-
-};
 
 /**
  * @brief 读写锁
@@ -94,4 +91,4 @@ public:
 
 } // namespace solar
 
-#endif /* __SOLAR_CORE_LOCK_H__ */
+#endif /* __SRC_CORE_MUTEX_H__ */

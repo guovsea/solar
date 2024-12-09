@@ -7,6 +7,7 @@
 #include <sstream>
 #include <string>
 
+#include "Core/Mutex.h"
 #include "Log/LogAppender.h"
 #include "Log/LogEvent.h"
 #include "Log/LogFormater.h"
@@ -17,6 +18,7 @@ class Logger : public std::enable_shared_from_this<Logger> {
   friend class LoggerManager;
   public:
     typedef std::shared_ptr<Logger> ptr;
+    typedef Mutex MutexType;
     Logger(const std::string &name = "root");
 
     void log(LogLevel level, LogEvent::ptr event);
@@ -42,7 +44,7 @@ class Logger : public std::enable_shared_from_this<Logger> {
 
     std::string getName() const {return m_name;}
 
-    std::string toYamlString() const;
+    std::string toYamlString();
 
   private:
     std::string m_name;
@@ -50,6 +52,7 @@ class Logger : public std::enable_shared_from_this<Logger> {
     std::list<LogAppender::ptr> m_appenders;
     LogFormatter::ptr m_formater;
     Logger::ptr m_root;  // Log manager 中的根 logger
+    MutexType m_mutex;
 };
 
 } // namespace solar

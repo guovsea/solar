@@ -34,4 +34,5 @@ target_link_libraries(
   ${LIB_NAME}
   PUBLIC
   ${PROJECT_NAME}::util
+  ${PROJECT_NAME}::core
 )
