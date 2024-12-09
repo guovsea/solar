@@ -2,7 +2,7 @@
 #define __SOLAR_CORE_LOCK_H__
 
 #include <pthread.h>
-
+#include <atomic>
 #include "Core/LockImpl.h"
 
 namespace solar {
@@ -69,6 +69,27 @@ class RWMutex {
 
   private:
     pthread_rwlock_t m_lock;
+};
+
+// Compare and swap (OS)
+class CASLock {
+public:
+  typedef ScopedLockImpl<CASLock> ScopedLock;
+  CASLock() {
+    m_mutex.clear();
+  }
+  ~CASLock() {
+
+  }
+  void lock() {
+    while (std::atomic_flag_test_and_set_explicit(&m_mutex, std::memory_order_acquire))
+    ;
+  }
+  void unlock() {
+    std::atomic_flag_test_and_set_explicit(&m_mutex, std::memory_order_release);
+  }
+  private:
+  volatile std::atomic_flag m_mutex;
 };
 
 } // namespace solar

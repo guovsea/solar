@@ -3,12 +3,16 @@
 [2024-11-17] 优化 CMake
 
 2024-11-17
-[] 给 log 相关的所有类添加 fromYaml 和 toYaml 方法用于序列化
+[2024-11-24] 给 log 相关的所有类添加 fromYaml 和 toYaml 方法用于序列化
 [2024-11-18] 修改新增的 logger 的输出逻辑：如果新创建了 logger 并不默认添加一个 StdoutAppender，
    而是使用 loger Mgr 中的 root logger 的 log appenders. 在 formatter 使用 log 输出 logger 名称时，并不输出它的所有者的名称，而是输出 event 中的名字，
    因为 root logger 的 appender 也可能输出其他 logger 的信息（当其他 logger 没有设置 appenders 时）
 
 2024-11-18
-[] 实现初始化 log 时，读取 config 中关于 log 的配置
-[] config 中的 log 配置变更时，更新 log 的属性
+[2024-11-30] 实现初始化 log 时，读取 config 中关于 log 的配置
+[2024-11-30] config 中的 log 配置变更时，更新 log 的属性
 
+2024-12-5
+[] 使 Log 模块线程安全
+[] 学习 CAS Lock, std::automic_flag
+[] 测试多线程下有锁和没锁的 Log 模块的不同
