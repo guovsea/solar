@@ -1,18 +1,11 @@
 #ifndef __SOLAR_UTIL_CONFIG_H__
 #define __SOLAR_UTIL_CONFIG_H__
 #include <algorithm>
-#include <boost/lexical_cast.hpp>
-#include <list>
-#include <map>
 #include <memory>
-#include <set>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <vector>
-#include <yaml-cpp/yaml.h>
 
 #include "Log/Log.h"
+
+#include "Util/LexicalCast.h"
 
 namespace solar {
 class ConfigVarBase {
@@ -53,203 +46,6 @@ protected:
   std::string m_discription;
 };
 
-template <class F, class T> class LexicalCast {
-public:
-  T operator()(const F &v) { return boost::lexical_cast<T>(v); }
-};
-
-// 偏特化
-// std::vector
-/**
- * @brief 将 yaml 格式的字符串转成 std::vector<T>
- *
- * @tparam T
- */
-template <class T>
-// F = std::string, T = std::vector<T>
-class LexicalCast<std::string, std::vector<T>> {
-public:
-  std::vector<T> operator()(const std::string &v) {
-    YAML::Node node = YAML::Load(v);
-    typename std::vector<T> vec;
-    std::stringstream ss;
-    for (size_t i = 0; i < node.size(); ++i) {
-      ss.str(""); // 清空
-      ss << node[i];
-      vec.push_back(LexicalCast<std::string, T>{}(ss.str()));
-    }
-    return vec;
-  }
-};
-/**
- * @brief 将 std::vector<T> 转成 yaml 格式的字符串
- *
- * @tparam T
- */
-template <class T>
-// F = std::string, T = std::vector<T>
-class LexicalCast<std::vector<T>, std::string> {
-public:
-  std::string operator()(const std::vector<T> &v) {
-    YAML::Node node;
-    for (const auto &it : v) {
-      node.push_back(YAML::Load(LexicalCast<T, std::string>{}(it)));
-    }
-    std::stringstream ss;
-    ss << node;
-    return ss.str();
-  }
-};
-
-// std::list
-template <class T> class LexicalCast<std::string, std::list<T>> {
-public:
-  std::list<T> operator()(const std::string &v) {
-    YAML::Node node = YAML::Load(v);
-    typename std::list<T> vec;
-    std::stringstream ss;
-    for (size_t i = 0; i < node.size(); ++i) {
-      ss.str(""); // 清空
-      ss << node[i];
-      vec.push_back(LexicalCast<std::string, T>{}(ss.str()));
-    }
-    return vec;
-  }
-};
-
-template <class T> class LexicalCast<std::list<T>, std::string> {
-public:
-  std::string operator()(const std::list<T> &v) {
-    YAML::Node node;
-    for (const auto &it : v) {
-      node.push_back(YAML::Load(LexicalCast<T, std::string>{}(it)));
-    }
-    std::stringstream ss;
-    ss << node;
-    return ss.str();
-  }
-};
-
-// std::set
-template <class T> class LexicalCast<std::string, std::set<T>> {
-public:
-  std::set<T> operator()(const std::string &v) {
-    YAML::Node node = YAML::Load(v);
-    typename std::set<T> set;
-    std::stringstream ss;
-    for (size_t i = 0; i < node.size(); ++i) {
-      ss.str(""); // 清空
-      ss << node[i];
-      set.insert(LexicalCast<std::string, T>{}(ss.str()));
-    }
-    return set;
-  }
-};
-
-template <class T> class LexicalCast<std::set<T>, std::string> {
-public:
-  std::string operator()(const std::set<T> &v) {
-    YAML::Node node;
-    for (const auto &it : v) {
-      node.push_back(YAML::Load(LexicalCast<T, std::string>{}(it)));
-    }
-    std::stringstream ss;
-    ss << node;
-    return ss.str();
-  }
-};
-
-// std::map
-template <class T> class LexicalCast<std::string, std::map<std::string, T>> {
-public:
-  std::map<std::string, T> operator()(const std::string &v) {
-    YAML::Node node = YAML::Load(v);
-    typename std::map<std::string, T> map;
-    std::stringstream ss;
-    for (auto it = node.begin(); it != node.end(); ++it) {
-      ss.str(""); // 清空
-      ss << it->second;
-      map.insert(std::make_pair(it->first.Scalar(),
-                                LexicalCast<std::string, T>{}(ss.str())));
-    }
-    return map;
-  }
-};
-
-template <class T> class LexicalCast<std::map<std::string, T>, std::string> {
-public:
-  std::string operator()(const std::map<std::string, T> &v) {
-    YAML::Node node;
-    for (const auto [key, val] : v) {
-      node[key] = YAML::Load(LexicalCast<T, std::string>{}(val));
-    }
-    std::stringstream ss;
-    ss << node;
-    return ss.str();
-  }
-};
-
-// std::unordered_set
-template <class T> class LexicalCast<std::string, std::unordered_set<T>> {
-public:
-  std::unordered_set<T> operator()(const std::string &v) {
-    YAML::Node node = YAML::Load(v);
-    typename std::unordered_set<T> set;
-    std::stringstream ss;
-    for (size_t i = 0; i < node.size(); ++i) {
-      ss.str(""); // 清空
-      ss << node[i];
-      set.insert(LexicalCast<std::string, T>{}(ss.str()));
-    }
-    return set;
-  }
-};
-
-template <class T> class LexicalCast<std::unordered_set<T>, std::string> {
-public:
-  std::string operator()(const std::unordered_set<T> &v) {
-    YAML::Node node;
-    for (const auto &it : v) {
-      node.push_back(YAML::Load(LexicalCast<T, std::string>{}(it)));
-    }
-    std::stringstream ss;
-    ss << node;
-    return ss.str();
-  }
-};
-
-// std::unordered_map
-template <class T>
-class LexicalCast<std::string, std::unordered_map<std::string, T>> {
-public:
-  std::unordered_map<std::string, T> operator()(const std::string &v) {
-    YAML::Node node = YAML::Load(v);
-    typename std::unordered_map<std::string, T> map;
-    std::stringstream ss;
-    for (auto it = node.begin(); it != node.end(); ++it) {
-      ss.str(""); // 清空
-      ss << it->second;
-      map.insert(std::make_pair(it->first.Scalar(),
-                                LexicalCast<std::string, T>{}(ss.str())));
-    }
-    return map;
-  }
-};
-
-template <class T>
-class LexicalCast<std::unordered_map<std::string, T>, std::string> {
-public:
-  std::string operator()(const std::unordered_map<std::string, T> &v) {
-    YAML::Node node;
-    for (const auto &it : v) {
-      node[it.first] = YAML::Load(LexicalCast<T, std::string>{}(it.second));
-    }
-    std::stringstream ss;
-    ss << node;
-    return ss.str();
-  }
-};
-
 /**
  * @brief
  *
@@ -275,10 +71,9 @@ public:
     } catch (std::exception &e) {
       SOLAR_LOG_ERROR(SOLAR_LOG_ROOT())
           << "ConfigVar::fromYaml exception" << e.what()
-          << "convert: string to " << getTypeName()
-          // 这样 T 都需要重载 << ，是否值得？
-          /*<< " - " << val*/
-          ;
+          << "convert: string to " << getTypeName();
+      // 这样 T 都需要重载 <<
+      // << " - " << m_value;
       return false;
     }
   }
@@ -335,10 +130,10 @@ public:
   typedef std::unordered_map<std::string, ConfigVarBase::ptr> ConfigVarMap;
 
   /**
-   * @brief
+   * @brief 存在则返回, 不存在则创建
    *
-   * @param name
-   * @param defaultValue
+   * @param name 名称，以 . 进行分割，每个点对应 yaml 中的一个层级
+   * @param defaultValue 不存在时以该值进行创建
    * @param description
    * @return ConfigVar<T>::ptr
    */
@@ -346,6 +141,7 @@ public:
   static typename ConfigVar<T>::ptr
   Lookup(const std::string &name, const T &defaultValue,
          const std::string &description = "") {
+    // 查找，存在则返回
     auto it = GetData().find(name);
     if (it != GetData().end()) {
       auto temp = std::dynamic_pointer_cast<ConfigVar<T>>(it->second);
@@ -361,6 +157,7 @@ public:
         return nullptr;
       }
     }
+    // 不存在则创建
     if (name.find_first_not_of("abcdefghikjlmnopqrstuvwxyz._0123456789") !=
         std::string::npos) {
       SOLAR_LOG_ERROR(SOLAR_LOG_ROOT()) << "Lookup name invalid " << name;
@@ -382,6 +179,12 @@ public:
 
   static void LoadFromYaml(const YAML::Node &root);
 
+  /**
+     * @brief 不存在则返回 nullptr 
+     * 
+     * @param name 名称，以 . 进行分割，每个点对应 yaml 中的一个层级
+     * @return ConfigVarBase::ptr 
+     */
   static ConfigVarBase::ptr LookupBase(const std::string &name);
 
 private:

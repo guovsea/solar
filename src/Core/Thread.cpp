@@ -11,12 +11,15 @@ Thread::Thread(std::function<void()> cb, const std::string &name)
   if (name.empty()) {
     m_name = "UNKNOW";
   }
-  int rt = pthread_create(&m_thread, nullptr, &Thread::run, this);
+  int rt = pthread_create(&m_thread, nullptr, &Thread::Run, this);
   if (rt) {
     SOLAR_LOG_ERROR(SOLAR_LOG_ROOT())
         << "pthread_create thread fail, rt = " << rt << "name = " << name;
   }
-  m_semaphore.wait();
+  m_semaphore.wait(); // 创建 Thread 对象的线程阻塞等待子线程创建成功并设置
+                      // Thread 对象的 ID
+  // 比如创建 Thread 对象 t 之后立马想 t.GetId()
+  // 此时 m_id 还没准备好，要在子线程运行时才准备好
 }
 Thread::~Thread() {
   if (m_thread) {
@@ -34,7 +37,7 @@ void Thread::join() {
   }
 }
 
-void *Thread::run(void *arg) {
+void *Thread::Run(void *arg) {
   Thread *thread = (Thread *)arg;
   t_thread = thread;
   t_thread_name = thread->m_name;
@@ -42,7 +45,8 @@ void *Thread::run(void *arg) {
   // 修改通过 ps -T -p 打印出来的线程的名称, 方便调试
   pthread_setname_np(thread->m_thread, thread->m_name.substr(0, 15).c_str());
 
-  thread->m_semaphore.notify();
+  thread->m_semaphore.notify(); // 线程对象中的所有数据都已经准备好了，通知创建
+                                // Thread 对象的线程
   std::function<void()> cb;
   cb.swap(thread->m_cb);
 

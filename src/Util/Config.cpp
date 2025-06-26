@@ -1,8 +1,8 @@
 #include "Config.h"
 
-static void
-ListAllMaps(const std::string &prefix, const YAML::Node &node,
-            std::list<std::pair<std::string, const YAML::Node>> &output) {
+namespace {
+void ListAllMaps(const std::string &prefix, const YAML::Node &node,
+                 std::list<std::pair<std::string, const YAML::Node>> &output) {
   if (prefix.find_first_not_of("abcdefghikjlmnopqrstuvwxyz._0123456789") !=
       std::string::npos) {
     SOLAR_LOG_ERROR(SOLAR_LOG_ROOT())
@@ -11,6 +11,7 @@ ListAllMaps(const std::string &prefix, const YAML::Node &node,
   }
   output.push_back(std::make_pair(prefix, node));
   if (node.IsMap()) {
+    // 递归展开节点，展开成没有层级的列表 A A.B1 A.B1.C A.B2
     for (auto it = node.begin(); it != node.end(); ++it) {
       ListAllMaps(prefix.empty() ? it->first.Scalar()
                                  : prefix + "." + it->first.Scalar(),
@@ -18,6 +19,7 @@ ListAllMaps(const std::string &prefix, const YAML::Node &node,
     }
   }
 }
+} // namespace
 
 namespace solar {
 void Config::LoadFromYaml(const YAML::Node &root) {
@@ -28,14 +30,14 @@ void Config::LoadFromYaml(const YAML::Node &root) {
       continue;
     }
     std::transform(key.begin(), key.end(), key.begin(), ::tolower);
-    ConfigVarBase::ptr var = LookupBase(key);
-    if (var) {
+    ConfigVarBase::ptr pVar = LookupBase(key);
+    if (pVar) {
       if (node.IsScalar()) {
-        var->fromYaml(node.Scalar());
+        pVar->fromYaml(node.Scalar());
       } else {
         std::stringstream ss;
         ss << node;
-        var->fromYaml(ss.str());
+        pVar->fromYaml(ss.str());
       }
     }
   }

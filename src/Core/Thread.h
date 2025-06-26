@@ -25,7 +25,7 @@ public:
   static void SetName(const std::string &name);
 
   // 线程的工作函数
-  static void *run(void *arg);
+  static void *Run(void *arg);
 
 private:
   Thread(const Thread &) = delete;

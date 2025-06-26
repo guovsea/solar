@@ -20,3 +20,4 @@ class:
     name: guovsea
     age: 18
     sex: true
+    vec: [1, 2, 3]

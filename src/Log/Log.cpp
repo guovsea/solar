@@ -80,7 +80,9 @@ LogIniter::LogIniter() {
     for (const auto &x : newVal) {
       assert(x.valid);
       auto it = oldVal.find(x);
-      // 1. 找到需要更新的 logger，无论是新增的还是修改的
+      // 学习此种方法：1. 找到需要更新的 logger，无论是新增的还是修改的
+      // LoggerDefine 重载的 == 是所有数据必须完全一样，所以当 it != end
+      // 时，新的 x 必定和旧的 *it 完全一摸一样
       solar::Logger::ptr pLogger;
       if (it == oldVal.end()) {
         // 新增的 loggerDefine
@@ -91,6 +93,7 @@ LogIniter::LogIniter() {
           pLogger = SOLAR_LOG_NAME(x.name);
         }
       }
+      // 2. 只需要对需要更新的 logger 更新
       pLogger->setLevel(x.level);
       if (!x.formatter.empty()) {
         pLogger->setFormatter(x.formatter);
@@ -99,9 +102,9 @@ LogIniter::LogIniter() {
       for (const auto &x : x.appenders) {
         solar::LogAppender::ptr pAppender;
         if (x.type == LogAppenderType::FileLogAppender) {
-          pAppender.reset(new FileLogAppender(x.file));
+          pAppender = std::make_shared<FileLogAppender>(x.file);
         } else if (x.type == LogAppenderType::StdoutLogAppender) {
-          pAppender.reset(new StdoutLogAppender);
+          pAppender = std::make_shared<StdoutLogAppender>();
         }
         pAppender->setLevel(x.level);
         pLogger->addAppender(pAppender);
