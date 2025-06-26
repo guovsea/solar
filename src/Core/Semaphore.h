@@ -6,19 +6,19 @@
 
 namespace solar {
 class Semaphore {
-  public:
-    Semaphore(uint32_t count = 0);
-    ~Semaphore();
-    void wait();
-    void notify();
+public:
+  Semaphore(uint32_t count = 0);
+  ~Semaphore();
+  void wait();
+  void notify();
 
-  private:
-    Semaphore(const Semaphore &) = delete;
-    Semaphore(const Semaphore &&) = delete;
-    Semaphore &operator=(const Semaphore &) = delete;
+private:
+  Semaphore(const Semaphore &) = delete;
+  Semaphore(const Semaphore &&) = delete;
+  Semaphore &operator=(const Semaphore &) = delete;
 
-  private:
-    sem_t m_semaphore;
+private:
+  sem_t m_semaphore;
 };
 } // namespace solar
 

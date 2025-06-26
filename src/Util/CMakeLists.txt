@@ -26,6 +26,6 @@ find_package(yaml-cpp REQUIRED)
 target_link_libraries(
   ${LIB_NAME}
   PUBLIC
-  yaml-cpp::yaml-cpp
+  yaml-cpp
   ${PROJECT_NAME}::log
 )

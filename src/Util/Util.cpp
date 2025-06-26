@@ -1,12 +1,8 @@
 #include "Util/Util.h"
 
 namespace solar {
-pid_t GetThreadId() {
-    return syscall(SYS_gettid);
-}
+pid_t GetThreadId() { return syscall(SYS_gettid); }
 
-uint32_t GetFiberId() {
-    return 0;
-}
+uint32_t GetFiberId() { return 0; }
 
-}
+} // namespace solar

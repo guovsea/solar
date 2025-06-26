@@ -12,37 +12,37 @@ namespace solar {
  * @tparam N  区分同一类型 T 创建的多个独立的单例实例
  */
 template <class T, class X = void, int N = 0> class Singleton {
-  public:
-    static T *Instance() {
-        static T v;
-        return &v;
-    }
+public:
+  static T *Instance() {
+    static T v;
+    return &v;
+  }
 
-    Singleton(const Singleton &) = delete;
-    Singleton &operator=(const Singleton &) = delete;
-    Singleton(Singleton &&) = delete;
-    Singleton &operator=(Singleton &&) = delete;
+  Singleton(const Singleton &) = delete;
+  Singleton &operator=(const Singleton &) = delete;
+  Singleton(Singleton &&) = delete;
+  Singleton &operator=(Singleton &&) = delete;
 
-  protected:
-    Singleton() = default;
-    ~Singleton() = default;
+protected:
+  Singleton() = default;
+  ~Singleton() = default;
 };
 
 template <class T, class X = void, int N = 0> class SingletonSharedPtr {
-    public :
-    static std::shared_ptr<T> Instance() {
-        std::shared_ptr<T> v(new T());
-        return v;
-    }
+public:
+  static std::shared_ptr<T> Instance() {
+    std::shared_ptr<T> v(new T());
+    return v;
+  }
 
-    SingletonSharedPtr(const SingletonSharedPtr &) = delete;
-    SingletonSharedPtr &operator=(const SingletonSharedPtr &) = delete;
-    SingletonSharedPtr(SingletonSharedPtr &&) = delete;
-    SingletonSharedPtr &operator=(SingletonSharedPtr &&) = delete;
+  SingletonSharedPtr(const SingletonSharedPtr &) = delete;
+  SingletonSharedPtr &operator=(const SingletonSharedPtr &) = delete;
+  SingletonSharedPtr(SingletonSharedPtr &&) = delete;
+  SingletonSharedPtr &operator=(SingletonSharedPtr &&) = delete;
 
-  protected:
-    SingletonSharedPtr() = default;
-    ~SingletonSharedPtr() = default;
+protected:
+  SingletonSharedPtr() = default;
+  ~SingletonSharedPtr() = default;
 };
 } // namespace solar
 

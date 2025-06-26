@@ -3,3 +3,135 @@
 2024-11-19 20:53:20	11877	0	[DEBUG]	[root]	/home/guo/workspace/solar/tests/test_config.cpp:139	old value = 8080 new value = 3333
 2024-11-19 20:53:27	11912	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/tests/test_log.cpp:26	hello world
 2024-11-19 20:58:26	12171	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/tests/test_log.cpp:26	hello world
+2025-06-25 23:53:09	8006	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:53:09	8006	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:53:09	8006	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:53:09	8006	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:53:09	8006	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:53:09	8007	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 8007 this.id = 8007
+2025-06-25 23:53:09	8008	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 8008 this.id = 8008
+2025-06-25 23:53:09	8009	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 8009 this.id = 8009
+2025-06-25 23:53:09	8010	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 8010 this.id = 8010
+2025-06-25 23:53:09	8011	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 8011 this.id = 8011
+2025-06-25 23:53:09	8006	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:53:15	8200	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:53:15	8200	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:53:15	8200	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:53:15	8200	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:53:15	8200	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:53:15	8201	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 8201 this.id = 8201
+2025-06-25 23:53:15	8202	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 8202 this.id = 8202
+2025-06-25 23:53:15	8203	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 8203 this.id = 8203
+2025-06-25 23:53:15	8204	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 8204 this.id = 8204
+2025-06-25 23:53:15	8205	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 8205 this.id = 8205
+2025-06-25 23:53:15	8200	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:54:07	8445	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:54:07	8445	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:54:07	8445	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:54:07	8445	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:54:07	8445	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:54:07	8446	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 8446 this.id = 8446
+2025-06-25 23:54:07	8447	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 8447 this.id = 8447
+2025-06-25 23:54:07	8448	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 8448 this.id = 8448
+2025-06-25 23:54:07	8449	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 8449 this.id = 8449
+2025-06-25 23:54:07	8450	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 8450 this.id = 8450
+2025-06-25 23:54:07	8445	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:56:10	9655	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:56:10	9655	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:56:10	9655	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:56:10	9655	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:56:10	9655	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:56:10	9656	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 9656 this.id = 9656
+2025-06-25 23:56:10	9657	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 9657 this.id = 9657
+2025-06-25 23:56:10	9658	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 9658 this.id = 9658
+2025-06-25 23:56:10	9659	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 9659 this.id = 9659
+2025-06-25 23:56:10	9660	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 9660 this.id = 9660
+2025-06-25 23:56:10	9655	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:58:43	10113	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:58:43	10113	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:58:43	10113	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:58:43	10113	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:58:43	10113	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:58:43	10114	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 10114 this.id = 10114
+2025-06-25 23:58:43	10115	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 10115 this.id = 10115
+2025-06-25 23:58:43	10116	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 10116 this.id = 10116
+2025-06-25 23:58:43	10117	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 10117 this.id = 10117
+2025-06-25 23:58:43	10118	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 10118 this.id = 10118
+2025-06-25 23:58:43	10113	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:59:08	10327	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:59:08	10327	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:59:08	10327	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:59:08	10327	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:59:08	10327	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:59:08	10328	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 10328 this.id = 10328
+2025-06-25 23:59:08	10329	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 10329 this.id = 10329
+2025-06-25 23:59:08	10330	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 10330 this.id = 10330
+2025-06-25 23:59:08	10331	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 10331 this.id = 10331
+2025-06-25 23:59:08	10332	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 10332 this.id = 10332
+2025-06-25 23:59:08	10327	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:59:11	10509	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:59:11	10509	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:59:11	10509	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:59:11	10509	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:59:11	10509	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:59:11	10510	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 10510 this.id = 10510
+2025-06-25 23:59:11	10511	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 10511 this.id = 10511
+2025-06-25 23:59:11	10512	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 10512 this.id = 10512
+2025-06-25 23:59:11	10513	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 10513 this.id = 10513
+2025-06-25 23:59:11	10514	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 10514 this.id = 10514
+2025-06-25 23:59:11	10509	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:59:19	10708	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:59:19	10708	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:59:19	10708	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:59:19	10708	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:59:19	10708	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:59:19	10709	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 10709 this.id = 10709
+2025-06-25 23:59:19	10710	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 10710 this.id = 10710
+2025-06-25 23:59:19	10711	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 10711 this.id = 10711
+2025-06-25 23:59:19	10712	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 10712 this.id = 10712
+2025-06-25 23:59:19	10713	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 10713 this.id = 10713
+2025-06-25 23:59:19	10708	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:59:20	10882	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:59:20	10882	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:59:20	10882	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:59:20	10882	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:59:20	10882	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:59:20	10883	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 10883 this.id = 10883
+2025-06-25 23:59:20	10884	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 10884 this.id = 10884
+2025-06-25 23:59:20	10885	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 10885 this.id = 10885
+2025-06-25 23:59:20	10886	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 10886 this.id = 10886
+2025-06-25 23:59:20	10887	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 10887 this.id = 10887
+2025-06-25 23:59:20	10882	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:59:29	11084	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:59:29	11084	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:59:29	11084	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:59:29	11084	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:59:29	11084	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:59:29	11085	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 11085 this.id = 11085
+2025-06-25 23:59:29	11086	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 11086 this.id = 11086
+2025-06-25 23:59:29	11087	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 11087 this.id = 11087
+2025-06-25 23:59:29	11088	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 11088 this.id = 11088
+2025-06-25 23:59:29	11089	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 11089 this.id = 11089
+2025-06-25 23:59:29	11084	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-25 23:59:48	11314	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-25 23:59:48	11314	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-25 23:59:48	11314	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:358	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-25 23:59:48	11314	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:141	old value = 8080 new value = 3333
+2025-06-25 23:59:48	11314	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:21	main thread begin
+2025-06-25 23:59:48	11315	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 11315 this.id = 11315
+2025-06-25 23:59:48	11316	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 11316 this.id = 11316
+2025-06-25 23:59:48	11317	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 11317 this.id = 11317
+2025-06-25 23:59:48	11318	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 11318 this.id = 11318
+2025-06-25 23:59:48	11319	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 11319 this.id = 11319
+2025-06-25 23:59:48	11314	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end

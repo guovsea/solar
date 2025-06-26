@@ -16,43 +16,44 @@ namespace solar {
 
 class Logger : public std::enable_shared_from_this<Logger> {
   friend class LoggerManager;
-  public:
-    typedef std::shared_ptr<Logger> ptr;
-    typedef Mutex MutexType;
-    Logger(const std::string &name = "root");
 
-    void log(LogLevel level, LogEvent::ptr event);
-    void debug(LogEvent::ptr event);
-    void info(LogEvent::ptr event);
-    void warn(LogEvent::ptr event);
-    void error(LogEvent::ptr event);
-    void fatal(LogEvent::ptr event);
+public:
+  typedef std::shared_ptr<Logger> ptr;
+  typedef Mutex MutexType;
+  Logger(const std::string &name = "root");
 
-    void addAppender(LogAppender::ptr appender);
+  void log(LogLevel level, LogEvent::ptr event);
+  void debug(LogEvent::ptr event);
+  void info(LogEvent::ptr event);
+  void warn(LogEvent::ptr event);
+  void error(LogEvent::ptr event);
+  void fatal(LogEvent::ptr event);
 
-    void delAppender(LogAppender::ptr appender);
+  void addAppender(LogAppender::ptr appender);
 
-    void cleanAppenders();
+  void delAppender(LogAppender::ptr appender);
 
-    void setFormatter(LogFormatter::ptr val);
+  void cleanAppenders();
 
-    void setFormatter(const std::string& val);
+  void setFormatter(LogFormatter::ptr val);
 
-    LogLevel getLevel();
+  void setFormatter(const std::string &val);
 
-    void setLevel(LogLevel level);
+  LogLevel getLevel();
 
-    std::string getName() const {return m_name;}
+  void setLevel(LogLevel level);
 
-    std::string toYamlString();
+  std::string getName() const { return m_name; }
 
-  private:
-    std::string m_name;
-    LogLevel m_level;
-    std::list<LogAppender::ptr> m_appenders;
-    LogFormatter::ptr m_formater;
-    Logger::ptr m_root;  // Log manager 中的根 logger
-    MutexType m_mutex;
+  std::string toYamlString();
+
+private:
+  std::string m_name;
+  LogLevel m_level;
+  std::list<LogAppender::ptr> m_appenders;
+  LogFormatter::ptr m_formater;
+  Logger::ptr m_root; // Log manager 中的根 logger
+  MutexType m_mutex;
 };
 
 } // namespace solar
