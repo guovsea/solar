@@ -1,5 +1,6 @@
 #include "Log/Log.h"
 #include "Util/Config.h"
+#include "test_util.h"
 #include <gtest/gtest.h>
 #if 1
 namespace {
@@ -72,7 +73,7 @@ TEST(ConfigTest, ComplexTypes) {
 }
 
 TEST(ConfigTest, LoadFromYAML) {
-  YAML::Node root = YAML::LoadFile("test.yml");
+  YAML::Node root = YAML::LoadFile(TEST_DIR + "test.yml");
   solar::Config::LoadFromYaml(root);
   EXPECT_EQ(g_intValueConfig->getValue(), 9999);
 
@@ -161,7 +162,7 @@ TEST(ConfigTest, CustomType) {
       solar::Config::Lookup("class.person", p, "class person");
   EXPECT_EQ(pPersonConfig->getValue(), p);
 
-  YAML::Node root = YAML::LoadFile("test.yml");
+  YAML::Node root = YAML::LoadFile(TEST_DIR + "test.yml");
   solar::Config::LoadFromYaml(root);
 
   Person res;

@@ -27,14 +27,18 @@ target_link_libraries(${EXE_NAME}
   GTest::gtest
 )
 
-# copy assert files
-set(TEST_ASSERT_FILES 
-  ${CMAKE_CURRENT_SOURCE_DIR}/test.yml 
-  ${CMAKE_CURRENT_SOURCE_DIR}/log.yml
-)
+set(TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_custom_command(
-    TARGET ${EXE_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${TEST_ASSERT_FILES} $<TARGET_FILE_DIR:${EXE_NAME}>
-    COMMENT "Copy test assert files."
-)
+target_compile_definitions(${EXE_NAME} PRIVATE __TEST_DIR="${TEST_DIR}/")
+
+# copy assert files
+# set(TEST_ASSERT_FILES 
+#   ${CMAKE_CURRENT_SOURCE_DIR}/test.yml 
+#   ${CMAKE_CURRENT_SOURCE_DIR}/log.yml
+# )
+
+# add_custom_command(
+#     TARGET ${EXE_NAME} POST_BUILD
+#     COMMAND ${CMAKE_COMMAND} -E copy ${TEST_ASSERT_FILES} $<TARGET_FILE_DIR:${EXE_NAME}>
+#     COMMENT "Copy test assert files."
+# )

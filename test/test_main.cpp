@@ -8,7 +8,7 @@
 // static solar::LogIniter __logInit;
 
 int main(int argc, char **argv) {
-    solar::LogIniter __logInit;
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+  solar::LogIniter __logInit;
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }

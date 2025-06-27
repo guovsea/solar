@@ -135,3 +135,27 @@
 2025-06-25 23:59:48	11318	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 11318 this.id = 11318
 2025-06-25 23:59:48	11319	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 11319 this.id = 11319
 2025-06-25 23:59:48	11314	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:31	main thread end
+2025-06-27 08:09:31	36825	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:31	hello world
+2025-06-27 08:09:31	36825	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:43	hello system
+
+2025-06-27 08:09:31	36825	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-27 08:09:31	36825	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-27 08:09:31	36825	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:22	main thread begin
+2025-06-27 08:09:31	36826	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_0 this.name = solar_thread_0 id = 36826 this.id = 36826
+2025-06-27 08:09:31	36827	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_1 this.name = solar_thread_1 id = 36827 this.id = 36827
+2025-06-27 08:09:31	36828	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_2 this.name = solar_thread_2 id = 36828 this.id = 36828
+2025-06-27 08:09:31	36829	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_3 this.name = solar_thread_3 id = 36829 this.id = 36829
+2025-06-27 08:09:31	36830	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:11	name = solar_thread_4 this.name = solar_thread_4 id = 36830 this.id = 36830
+2025-06-27 08:09:31	36825	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:33	main thread end
+2025-06-27 08:10:17	37061	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-27 08:10:17	37061	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:44	hello system
+
+2025-06-27 08:10:17	37061	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-27 08:12:35	38381	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-27 08:12:35	38381	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:44	hello system
+
+2025-06-27 08:12:35	38381	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-27 08:13:45	38730	0	[DEBUG]	[LoggerWithOutAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-27 08:13:45	38730	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:44	hello system
+
+2025-06-27 08:13:45	38730	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
