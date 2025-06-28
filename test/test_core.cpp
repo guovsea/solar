@@ -8,13 +8,14 @@
 
 solar::Logger::ptr g_logger = SOLAR_LOG_ROOT();
 void work1() {
+  return; // 避免在单元测试时打印太多信息, TODO 使用测试断言，而不是肉眼观察
   SOLAR_LOG_INFO(g_logger) << "name = " << solar::Thread::GetName()
                            << " this.name = "
                            << solar::Thread::GetThis()->getName()
-                           << " id = " << solar::GetThreadId() << " this.id = "
-                           << solar::Thread::GetThis()->getId();
+                           << " id = " << solar::GetThreadId()
+                           << " this.id =" << solar::Thread::GetThis()->getId();
   // ps -p -T 查看线程信息
-  // using namespace std::literals;
+  // using namespace std::literals; // 防止线程退出太快，终端上看不到线程信息
   // std::this_thread::sleep_for(1min);
 }
 
@@ -129,24 +130,27 @@ TEST(TestCore, TestMutexLock) {
   EXPECT_EQ(g_cnt4, 5 * 1000'000);
 }
 
-// void work5() {
-//     for (int i = 0; i < 10000; ++i) {
-//     SOLAR_LOG_INFO(g_logger) << "name = " << solar::Thread::GetName()
-//         << " this.name = " << solar::Thread::GetThis()->getName() <<
-//         " id = " << solar::GetThreadId()
-//         << " this.id = " << solar::Thread::GetThis()->getId();
-//     }
-// }
+void work6() {
+  return; // 避免在单元测试时打印太多信息, TODO 使用测试断言，而不是肉眼观察
+  for (int i = 0; i < 10000; ++i) {
+    SOLAR_LOG_INFO(g_logger)
+        << "name = " << solar::Thread::GetName()
+        << " this.name = " << solar::Thread::GetThis()->getName()
+        << " id = " << solar::GetThreadId()
+        << " this.id = " << solar::Thread::GetThis()->getId();
+  }
+}
 
-// TEST(TestCore, TestLoggerInMutiThread) {
+TEST(TestCore, TestLoggerInMutiThread) {
 
-//     std::vector<solar::Thread::ptr> thrs;
-//     for (int i= 0; i  < 5; ++i) {
-//         solar::Thread::ptr pThr(new solar::Thread(work5, "logger_thread_" +
-//         std::to_string(i))); thrs.push_back(pThr);
-//     }
+  std::vector<solar::Thread::ptr> thrs;
+  for (int i = 0; i < 5; ++i) {
+    solar::Thread::ptr pThr(
+        new solar::Thread(work6, "logger_thread_" + std::to_string(i)));
+    thrs.push_back(pThr);
+  }
 
-//     for (int i = 0; i < 5; ++ i) {
-//         thrs[i]->join();
-//     }
-// }
+  for (int i = 0; i < 5; ++i) {
+    thrs[i]->join();
+  }
+}

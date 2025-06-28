@@ -8,7 +8,7 @@
 
 // 定义一个 LogEventWrap 局部对象，该对象析构时调用 log 方法输出 logEvent 的信息
 #define SOLAR_LOG_LEVEL(logger, level)                                         \
-  if (logger->getLevel() <= level)                                             \
+  if (level >= logger->getLevel())                                             \
   solar::LogEventWrap(                                                         \
       solar::LogEvent::ptr(new solar::LogEvent(                                \
           logger, level, __FILE__, __LINE__, 0, solar::GetThreadId(),          \
