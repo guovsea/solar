@@ -159,3 +159,554 @@
 2025-06-27 08:13:45	38730	0	[INFO]	[system]	/home/guo/workspace/solar/test/test_log.cpp:44	hello system
 
 2025-06-27 08:13:45	38730	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-28 23:12:39	51556	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-28 23:12:39	51556	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-28 23:15:09	52010	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-28 23:15:09	52010	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 09:47:07	52810	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 09:47:07	52810	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 09:47:34	53150	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 09:47:34	53150	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:00:37	54113	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:00:37	54113	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:02:33	54520	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:02:33	54520	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:12:22	55527	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:12:22	55527	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:15:20	55751	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:15:20	55751	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:16:28	55921	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:16:28	55921	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:16:40	56349	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:16:40	56349	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:20:11	56661	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:20:11	56661	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:20:30	56811	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:20:30	56811	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:20:33	57006	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:20:33	57006	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:30:22	57889	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:30:22	57889	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:30:41	58106	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:30:41	58106	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:32:29	58329	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:32:29	58329	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:33:44	58553	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:33:44	58553	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:34:06	58751	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:34:06	58751	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:35:37	58982	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:35:37	58982	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:36:33	59291	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:36:33	59291	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:37:02	59511	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:37:02	59511	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 10:37:12	59728	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 10:37:12	59728	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 11:09:12	60711	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 11:09:12	60711	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 11:09:39	61031	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 11:09:39	61031	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 11:10:21	61549	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 11:10:21	61549	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 11:18:32	62601	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 11:18:32	62601	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 11:36:51	63683	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 11:36:51	63683	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 13:51:15	64978	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 13:51:15	64978	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:10:48	69053	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:10:48	69053	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:11:36	69293	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:11:36	69293	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:14:35	69534	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:14:35	69534	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:17:03	69767	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:17:03	69767	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:23:52	69982	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:23:52	69982	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:24:08	70195	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:24:08	70195	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:25:47	70410	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:25:47	70410	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:26:33	70633	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:26:33	70633	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:27:11	70850	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:27:11	70850	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:28:56	71146	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:28:56	71146	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 16:31:39	71397	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 16:31:39	71397	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:22:26	72562	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:22:26	72562	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:23:57	72817	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:23:57	72817	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:24:58	73059	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:24:58	73059	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:26:38	73298	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:26:38	73298	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:27:52	73723	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:27:52	73723	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:28:15	73955	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:28:15	73955	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:29:07	74177	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:29:07	74177	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:29:07	74177	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:29:07	74177	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:29:07	74177	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:29:07	74177	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:29:07	74177	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:29:07	74177	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:29:07	74177	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:29:07	74177	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:29:07	74177	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:29:30	74406	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:29:30	74406	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:29:30	74406	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:29:30	74406	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:29:30	74406	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:29:30	74406	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:29:30	74406	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:29:30	74406	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:29:30	74406	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:29:30	74406	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:29:30	74406	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:29:55	74636	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:29:55	74636	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:29:55	74636	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:29:55	74636	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:29:55	74636	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:29:55	74636	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:29:55	74636	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:29:55	74636	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:29:55	74636	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:29:55	74636	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:29:55	74636	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:30:39	74841	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:30:39	74841	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:30:39	74841	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:30:39	74841	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:30:39	74841	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:30:39	74841	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:30:39	74841	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:30:39	74841	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:30:39	74841	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:30:39	74841	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:30:39	74841	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:30:39	74841	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:30:39	74841	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:30:39	74841	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:31:29	75081	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:31:29	75081	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:31:29	75081	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:31:29	75081	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:31:29	75081	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:31:29	75081	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:31:29	75081	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:31:29	75081	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:31:29	75081	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:31:29	75081	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:31:29	75081	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:31:29	75081	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:31:29	75081	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:31:29	75081	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:31:43	75258	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:31:43	75258	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:31:43	75258	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:31:43	75258	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:31:43	75258	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:31:43	75258	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:31:43	75258	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:31:43	75258	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:31:43	75258	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:31:43	75258	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:31:43	75258	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:31:43	75258	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:31:43	75258	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:31:43	75258	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:33:32	75537	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:33:32	75537	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:33:32	75537	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:33:32	75537	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:33:32	75537	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:33:32	75537	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:33:32	75537	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:33:32	75537	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:33:32	75537	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:33:32	75537	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:33:32	75537	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:33:32	75537	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:33:32	75537	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:33:32	75537	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:34:23	75763	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:34:23	75763	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:34:23	75763	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:34:23	75763	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:34:23	75763	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:34:23	75763	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:34:23	75763	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:34:23	75763	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:34:23	75763	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:34:23	75763	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:34:23	75763	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:34:23	75763	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:34:23	75763	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:34:23	75763	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:34:38	75976	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:34:38	75976	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:34:38	75976	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:34:38	75976	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:34:38	75976	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:34:38	75976	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:34:38	75976	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:34:38	75976	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:34:38	75976	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:34:38	75976	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:34:38	75976	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:34:38	75976	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:34:38	75976	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:34:38	75976	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:36:25	76247	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:36:25	76247	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:36:25	76247	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:36:25	76247	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:36:25	76247	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:36:25	76247	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:36:26	76247	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:36:26	76247	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:36:26	76247	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:36:26	76247	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:36:26	76247	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:36:26	76247	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:36:26	76247	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:36:26	76247	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:36:42	76464	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:36:42	76464	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:36:42	76464	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:36:42	76464	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:36:42	76464	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:36:42	76464	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:36:42	76464	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:36:42	76464	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:36:42	76464	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:36:42	76464	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:36:42	76464	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:36:42	76464	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:36:42	76464	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:36:42	76464	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:37:50	76700	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:37:50	76700	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:37:50	76700	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:37:50	76700	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:37:50	76700	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:37:50	76700	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:37:50	76700	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:37:50	76700	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:37:50	76700	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:37:50	76700	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:37:50	76700	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:37:50	76700	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:37:50	76700	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:38:02	76917	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:38:02	76917	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:38:02	76917	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:38:02	76917	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:38:02	76917	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:38:02	76917	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:38:02	76917	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:38:02	76917	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:38:02	76917	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:38:02	76917	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:38:02	76917	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:38:02	76917	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:38:02	76917	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:38:02	76917	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:38:17	77118	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:38:17	77118	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:38:17	77118	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:38:17	77118	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:38:17	77118	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:38:17	77118	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:38:17	77118	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:38:17	77118	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:38:17	77118	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:38:17	77118	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:38:17	77118	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:38:17	77118	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:38:17	77118	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:38:17	77118	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:40:10	77387	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:40:10	77387	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:40:10	77387	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:40:10	77387	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:40:10	77387	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:40:10	77387	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:40:10	77387	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:40:10	77387	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:40:10	77387	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:40:10	77387	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:40:10	77387	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:40:10	77387	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:40:10	77387	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:40:10	77387	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:40:39	77620	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:40:39	77620	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:40:39	77620	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:40:39	77620	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:40:39	77620	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:40:39	77620	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:40:39	77620	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:40:39	77620	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:40:39	77620	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:40:39	77620	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:40:39	77620	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:40:39	77620	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:40:39	77620	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:40:39	77620	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:40:55	77858	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:40:55	77858	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:40:55	77858	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:40:55	77858	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:40:55	77858	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:40:55	77858	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:40:55	77858	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:40:55	77858	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:40:55	77858	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:40:55	77858	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:40:55	77858	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:40:55	77858	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:40:55	77858	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:40:55	77858	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:43:21	78080	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:43:21	78080	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:43:21	78080	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:43:21	78080	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:43:21	78080	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:43:21	78080	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:43:21	78080	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:43:21	78080	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:43:21	78080	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:43:21	78080	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:43:21	78080	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:43:21	78080	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:43:21	78080	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:43:21	78080	1	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:150	aaaaa
+2025-06-29 23:43:21	78080	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:45:13	78308	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:45:13	78308	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:45:13	78308	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:45:13	78308	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:45:13	78308	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:45:13	78308	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:45:13	78308	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:45:13	78308	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:45:13	78308	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:45:13	78308	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:45:13	78308	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:45:13	78308	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:45:13	78308	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:45:13	78308	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:47:12	78567	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:47:12	78567	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:47:12	78567	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:47:12	78567	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:47:12	78567	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:47:12	78567	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:47:12	78567	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:47:12	78567	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:17	main begin
+2025-06-29 23:47:12	78567	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:47:12	78567	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:47:12	78567	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:20	main after swapIn
+2025-06-29 23:47:12	78567	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:47:12	78567	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:22	main after end
+2025-06-29 23:47:12	78567	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:48:00	78785	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:48:00	78785	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:48:00	78785	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:48:00	78785	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:48:00	78785	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:48:00	78785	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:48:00	78785	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:48:00	78785	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:18	main begin
+2025-06-29 23:48:00	78785	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:48:00	78785	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:48:00	78785	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:21	main after swapIn
+2025-06-29 23:48:00	78785	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:48:00	78785	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:23	main after end
+2025-06-29 23:48:00	78785	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:49:34	79242	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:49:34	79242	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:49:34	79242	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:49:34	79242	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:49:34	79242	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:49:34	79242	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:49:34	79242	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:49:34	79242	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:18	main begin
+2025-06-29 23:49:34	79242	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:49:34	79242	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:49:34	79242	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:21	main after swapIn
+2025-06-29 23:49:34	79242	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:49:34	79242	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:23	main after end
+2025-06-29 23:49:34	79242	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:25	main after end 2
+2025-06-29 23:49:34	79242	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:49:47	79459	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:49:47	79459	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:49:47	79459	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:49:47	79459	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:49:47	79459	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:49:47	79459	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:49:47	79459	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:49:47	79459	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:18	main begin
+2025-06-29 23:49:47	79459	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:49:47	79459	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:49:47	79459	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:21	main after swapIn
+2025-06-29 23:49:47	79459	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:49:47	79459	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:23	main after end
+2025-06-29 23:49:47	79459	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:26	main after end 2
+2025-06-29 23:49:47	79459	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:77	Fiber::~Fiber id=0
+2025-06-29 23:50:23	79691	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:50:23	79691	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:50:23	79691	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:50:23	79691	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:50:23	79691	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:50:23	79691	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:50:23	79691	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:50:23	79691	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:18	main begin
+2025-06-29 23:50:23	79691	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:50:23	79691	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:50:23	79691	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:21	main after swapIn
+2025-06-29 23:50:23	79691	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:50:23	79691	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:23	main after end
+2025-06-29 23:50:23	79691	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-29 23:50:23	79691	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:26	main after end 2
+2025-06-29 23:50:23	79691	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-29 23:50:52	79914	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:50:52	79914	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:50:52	79914	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:50:52	79914	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:50:52	79914	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:50:52	79914	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:50:52	79914	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:50:52	79914	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:18	main begin
+2025-06-29 23:50:52	79914	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:50:52	79914	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:9	run_in_fiber begin
+2025-06-29 23:50:52	79914	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:21	main after swapIn
+2025-06-29 23:50:52	79914	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:11	run_in_fiber end
+2025-06-29 23:50:52	79914	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:23	main after end
+2025-06-29 23:50:52	79914	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-29 23:50:52	79914	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:27	main after end 2
+2025-06-29 23:50:52	79914	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-29 23:54:44	80307	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:54:44	80307	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:54:44	80307	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:54:44	80307	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:54:44	80307	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:54:44	80307	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:54:44	80307	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:54:44	80307	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:23	main begin
+2025-06-29 23:54:44	80307	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:54:44	80307	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:12	run_in_fiber begin
+2025-06-29 23:54:44	80307	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:26	main after swapIn
+2025-06-29 23:54:44	80307	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:14	run_in_fiber end
+2025-06-29 23:54:44	80307	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:29	main after end
+2025-06-29 23:54:44	80307	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-29 23:54:44	80307	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:40	main after end 2
+2025-06-29 23:54:44	80307	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-29 23:54:59	80524	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:54:59	80524	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:54:59	80524	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:54:59	80524	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:54:59	80524	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:54:59	80524	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:54:59	80524	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:54:59	80524	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:23	main begin
+2025-06-29 23:54:59	80524	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:54:59	80524	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:12	run_in_fiber begin
+2025-06-29 23:54:59	80524	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:26	main after swapIn
+2025-06-29 23:54:59	80524	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:14	run_in_fiber end
+2025-06-29 23:54:59	80524	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:29	main after end
+2025-06-29 23:54:59	80524	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-29 23:54:59	80524	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:41	main after end 2
+2025-06-29 23:54:59	80524	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-29 23:55:39	80742	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:55:39	80742	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:55:39	80742	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:55:39	80742	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:55:39	80742	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:55:39	80742	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:55:39	80742	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:55:39	80742	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:23	main begin
+2025-06-29 23:55:39	80742	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:55:39	80742	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:12	run_in_fiber begin
+2025-06-29 23:55:39	80742	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:26	main after swapIn
+2025-06-29 23:55:39	80742	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:14	run_in_fiber end
+2025-06-29 23:55:39	80742	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:29	main after end
+2025-06-29 23:55:39	80742	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-29 23:55:39	80742	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:42	main after end 2
+2025-06-29 23:55:39	80742	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-29 23:57:00	81026	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:57:00	81026	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:57:00	81026	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:57:00	81026	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:57:00	81026	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:57:00	81026	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:57:00	81026	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:57:00	81026	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:57:00	81026	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-29 23:57:00	81026	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-29 23:57:15	81243	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-29 23:57:15	81243	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-29 23:57:15	81243	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-29 23:57:15	81243	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-29 23:57:15	81243	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-29 23:57:15	81243	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-29 23:57:15	81243	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-29 23:57:15	81243	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-29 23:57:15	81243	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-29 23:57:15	81243	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-30 00:07:37	82806	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-30 00:07:37	82806	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-30 00:07:37	82806	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-30 00:07:37	82806	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-30 00:07:37	82806	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-30 00:07:37	82806	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-30 00:07:37	82806	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-30 00:07:37	82806	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-30 00:07:37	82806	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-30 00:07:37	82806	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-30 00:08:21	83127	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-30 00:08:21	83127	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-30 00:08:21	83127	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-30 00:08:21	83127	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-30 00:08:21	83127	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-30 00:08:21	83127	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-30 00:08:21	83127	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-30 00:08:21	83127	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:23	main begin
+2025-06-30 00:08:21	83127	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-30 00:08:21	83127	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:12	run_in_fiber begin
+2025-06-30 00:08:21	83127	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:26	main after swapIn
+2025-06-30 00:08:21	83127	1	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:14	run_in_fiber end
+2025-06-30 00:08:21	83127	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:29	main after end
+2025-06-30 00:08:21	83127	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-30 00:08:21	83127	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_fiber.cpp:41	main after end 2
+2025-06-30 00:08:21	83127	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-30 00:08:31	83344	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-30 00:08:31	83344	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-30 00:08:31	83344	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-30 00:08:31	83344	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-30 00:08:31	83344	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-30 00:08:31	83344	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-30 00:08:31	83344	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-30 00:08:31	83344	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-30 00:08:31	83344	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-30 00:08:31	83344	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0
+2025-06-30 00:10:15	83576	0	[DEBUG]	[LoggerWithFileAppender]	/home/guo/workspace/solar/test/test_log.cpp:32	hello world
+2025-06-30 00:10:15	83576	0	[INFO]	[root]	/home/guo/workspace/solar/src/Log/Log.cpp:79	on_logger_config_changed
+2025-06-30 00:10:15	83576	0	[ERROR]	[root]	/home/guo/workspace/solar/src/Util/Config.h:153	Lookup name = system.port exist, but type not :f real_type = i
+2025-06-30 00:10:15	83576	0	[DEBUG]	[root]	/home/guo/workspace/solar/test/test_config.cpp:178	old value = 9999 new value = 3333
+2025-06-30 00:10:15	83576	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:25	main thread begin
+2025-06-30 00:10:15	83576	0	[INFO]	[root]	/home/guo/workspace/solar/test/test_core.cpp:36	main thread end
+2025-06-30 00:10:15	83576	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:46	Fiber::Fiber
+2025-06-30 00:10:15	83576	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:61	Fiber::Fiber id=1
+2025-06-30 00:10:15	83576	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=1
+2025-06-30 00:10:15	83576	0	[DEBUG]	[system]	/home/guo/workspace/solar/src/Core/Fiber.cpp:78	Fiber::~Fiber id=0

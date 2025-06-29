@@ -86,6 +86,8 @@ RUN apt-get update && \
     wget \
     fonts-powerline \
     net-tools \
+    man \
+    gdb \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

@@ -3,7 +3,7 @@
 #include "Log/Log.h"
 #include "Util/Config.h"
 #include "Util/Util.h"
-#include "test_util.h"
+#include "test_dir.h"
 
 #if 1
 // Demonstrate some basic assertions.
@@ -34,76 +34,29 @@ TEST(TestLog, LoggerWithFileAppender) {
 
 TEST(TestLog, ToYamlString) {
   std::stringstream ss;
-  ss << SOLAR_LOG_ROOT()->toYamlString();
-  std::string root_log_yaml = R"(name: root
+  ss << SOLAR_LOG_NAME("xxx")->toYamlString();
+  std::cout << ss.str();
+  std::string log_yaml = R"(name: xxx
 level: DEBUG
-formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-appenders:
-  - type: StdoutLogAppender
-    formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-  - type: FileLogAppender
-    file: test.log
-    formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n")";
-  EXPECT_EQ(ss.str(), root_log_yaml);
-  ss.clear();
-  ss << solar::LoggerMgr::Instance()->toYamlString();
-  std::string logger_mgr_yaml = R"(name: root
-level: DEBUG
-formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-appenders:
-  - type: StdoutLogAppender
-    formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-  - type: FileLogAppender
-    file: test.log
-    formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"logs:
-  - name: LoggerWithFileAppender
-    level: DEBUG
-    formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-  - name: XX
-    level: DEBUG
-    formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-  - name: root
-    level: DEBUG
-    formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-    appenders:
-      - type: StdoutLogAppender
-        formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-      - type: FileLogAppender
-        file: test.log
-        formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n")";
-  EXPECT_EQ(ss.str(), logger_mgr_yaml);
+formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n")";
+  EXPECT_EQ(ss.str(), log_yaml);
 }
 
 TEST(TestLog, InitLogSystemWithYAML) {
-  YAML::Node node = YAML::LoadFile(TEST_DIR + "log.yml");
+  YAML::Node node = YAML::LoadFile(TEST_DIR + "test_log.yml");
   solar::Config::LoadFromYaml(node);
   std::stringstream ss;
-  ss << solar::LoggerMgr::Instance()->toYamlString();
-  std::string logger_mgr_updated_yaml = R"(logs:
-  - name: LoggerWithFileAppender
-    level: DEBUG
-    formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-  - name: XX
-    level: DEBUG
-    formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"
-  - name: root
-    level: INFO
+  ss << SOLAR_LOG_NAME("test_logger")->toYamlString();
+  std::cout << ss.str();
+  std::string logger_mgr_updated_yaml = R"(name: test_logger
+level: INFO
+formatter: "%d%T%m%n"
+appenders:
+  - type: FileLogAppender
+    file: test.txt
     formatter: "%d%T%m%n"
-    appenders:
-      - type: FileLogAppender
-        file: root.txt
-        formatter: "%d%T%m%n"
-      - type: StdoutLogAppender
-        formatter: "%d%T%m%n"
-  - name: system
-    level: DEBUG
-    formatter: "%d%T%m%n"
-    appenders:
-      - type: FileLogAppender
-        file: system.txt
-        formatter: "%d%T%m%n"
-      - type: StdoutLogAppender
-        formatter: "%d%T%m%n")";
+  - type: StdoutLogAppender
+    formatter: "%d%T%m%n")";
   EXPECT_EQ(ss.str(), logger_mgr_updated_yaml);
 }
 

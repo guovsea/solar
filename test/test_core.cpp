@@ -6,7 +6,9 @@
 #include "Core/Semaphore.h"
 #include "Core/Thread.h"
 
+namespace {
 solar::Logger::ptr g_logger = SOLAR_LOG_ROOT();
+}
 void work1() {
   return; // 避免在单元测试时打印太多信息, TODO 使用测试断言，而不是肉眼观察
   SOLAR_LOG_INFO(g_logger) << "name = " << solar::Thread::GetName()

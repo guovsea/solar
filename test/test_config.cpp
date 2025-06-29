@@ -1,6 +1,6 @@
 #include "Log/Log.h"
 #include "Util/Config.h"
-#include "test_util.h"
+#include "test_dir.h"
 #include <gtest/gtest.h>
 #if 1
 namespace {

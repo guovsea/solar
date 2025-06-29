@@ -18,6 +18,8 @@ target_sources(
   test_config.cpp
   test_main.cpp
   test_core.cpp
+  test_util.cpp
+  test_fiber.cpp
 )
 
 target_link_libraries(${EXE_NAME} 

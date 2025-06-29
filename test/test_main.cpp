@@ -9,6 +9,7 @@
 
 int main(int argc, char **argv) {
   solar::LogIniter __logInit;
+  SOLAR_LOG_NAME("null_logger")->setLevel(solar::LogLevel::DELETED);
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
