@@ -55,4 +55,5 @@ lib/*
 bin/*
 test/test_runner
 
+# logs
 /*.txt
