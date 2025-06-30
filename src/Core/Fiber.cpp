@@ -112,7 +112,7 @@ Fiber::ptr Fiber::GetThis() {
   if (t_fiber) {
     return t_fiber->shared_from_this();
   }
-  // 没有当前协程，因此也没有主协程
+  // 没有当前协程，因此也没有主协程, 创建主协程
   Fiber::ptr mainFiber = std::shared_ptr<Fiber>(new Fiber);
   SOLAR_ASSERT(t_fiber == mainFiber.get());
   t_threadFiber = mainFiber;

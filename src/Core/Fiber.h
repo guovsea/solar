@@ -26,12 +26,12 @@ public:
   void reset(std::function<void()> cb);
   // 让出执行权
   /**
-   * @brief 切换到当前协程执行
+   * @brief 主协程切换到当前协程
    *
    */
   void swapIn();
   /**
-   * @brief 当前协程道后台执行
+   * @brief 当前协程切换到主协程
    *
    */
   void swapOut();
@@ -40,7 +40,7 @@ public:
 
 public:
   /**
-   * @brief 设置当前协程
+   * @brief 设置主协程为当前协程
    *
    * @param f
    */
@@ -48,15 +48,20 @@ public:
 
   static Fiber::ptr GetThis();
   /**
-   * @brief 当前协程切换到后台，并且设置为 Read 状态
+   * @brief 当前协程切换到主协程，并将当前协程设置为 Read 状态
    *
    */
   static void YeildToRead();
   /**
-   * @brief 当前协程切换到后台，并且设置为 Hold 状态
+   * @brief 当前协程切换到主协程，并将设置为 Hold 状态
    *
    */
   static void YeildToHold();
+  /**
+   * @brief 当前进程中的总协程数
+   *
+   * @return uint64_t
+   */
   static uint64_t TotalFibers();
 
   /**
@@ -65,15 +70,19 @@ public:
    */
   static void MainFunc();
 
+  /**
+   * @brief Get the Fiber ID of current fiber
+   *
+   * @return uint64_t
+   */
   static uint64_t GetFiberID();
-
-  Fiber();
 
 private:
   /**
    * @brief 主协程的构造函数
    *
    */
+  Fiber();
   uint64_t m_id{0};
   uint32_t m_stacksize{0};
   State m_state{INIT};
