@@ -221,18 +221,18 @@ void LogFormatter::init() {
         [](const std::string &fmt) { return FormatItem::ptr(new Item(fmt)); }  \
   }
 
-          XX(m, MessageFormatItem),
-          XX(p, LevelFormatItem),
-          XX(r, ElapseFormatItem),
-          XX(c, LogNameFormatItem),
-          XX(t, ThreadIdFormatItem),
-          XX(n, NewLineFormatItem),
-          XX(d, DateTimeFormatItem),
-          XX(f, FileNameFormatItem),
-          XX(l, LineFormatItem),
-          XX(T, TabFormatItem),
-          XX(F, FiberIdFormatItem),
-          XX(N, ThreadNameFormatItem)
+          XX(m, MessageFormatItem),   // m:消息
+          XX(p, LevelFormatItem),     // p:日志级别
+          XX(r, ElapseFormatItem),    // r:累计毫秒数
+          XX(c, LogNameFormatItem),   // c:日志名称
+          XX(t, ThreadIdFormatItem),  // t:线程 id
+          XX(n, NewLineFormatItem),   // n:换行
+          XX(d, DateTimeFormatItem),  // d:时间
+          XX(f, FileNameFormatItem),  // f:文件名
+          XX(l, LineFormatItem),      // l:行号
+          XX(T, TabFormatItem),       // T:Tab 键
+          XX(F, FiberIdFormatItem),   // F:协程 id
+          XX(N, ThreadNameFormatItem) // N:线程名称
 #undef XX
       };
 
