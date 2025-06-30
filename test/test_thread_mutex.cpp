@@ -21,7 +21,7 @@ void work1() {
   // std::this_thread::sleep_for(1min);
 }
 
-TEST(TestCore, TestThread) {
+TEST(TestThreadMutex, TestThread) {
   SOLAR_LOG_INFO(g_logger) << "main thread begin";
   std::vector<solar::Thread::ptr> thrs;
   for (int i = 0; i < 5; ++i) {
@@ -47,7 +47,7 @@ void work2() {
   g_sem.notify();
 }
 
-TEST(TestCore, TestThreadAndSemaphore) {
+TEST(TestThreadMutex, TestThreadAndSemaphore) {
   std::vector<solar::Thread::ptr> thrs;
   for (int i = 0; i < 5; ++i) {
     solar::Thread::ptr pThr(
@@ -72,7 +72,7 @@ void work3() {
   g_rw_mutex.unlock();
 }
 
-TEST(TestCore, TestRwLock) {
+TEST(TestThreadMutex, TestRwLock) {
   std::vector<solar::Thread::ptr> thrs;
   for (int i = 0; i < 5; ++i) {
     solar::Thread::ptr pThr(
@@ -95,7 +95,7 @@ void work4() {
   }
 }
 
-TEST(TestCore, TestRWScopedMutexLock) {
+TEST(TestThreadMutex, TestRWScopedMutexLock) {
   std::vector<solar::Thread::ptr> thrs;
   for (int i = 0; i < 5; ++i) {
     solar::Thread::ptr pThr(
@@ -118,7 +118,7 @@ void work5() {
   }
 }
 
-TEST(TestCore, TestMutexLock) {
+TEST(TestThreadMutex, TestMutexLock) {
   std::vector<solar::Thread::ptr> thrs;
   for (int i = 0; i < 5; ++i) {
     solar::Thread::ptr pThr(
@@ -143,8 +143,7 @@ void work6() {
   }
 }
 
-TEST(TestCore, TestLoggerInMutiThread) {
-
+TEST(TestThreadMutex, TestLoggerInMutiThread) {
   std::vector<solar::Thread::ptr> thrs;
   for (int i = 0; i < 5; ++i) {
     solar::Thread::ptr pThr(

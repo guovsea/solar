@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "Core/Thread.h"
 #include "Log/Log.h"
 #include "Util/Config.h"
 
@@ -10,6 +11,7 @@
 int main(int argc, char **argv) {
   solar::LogIniter __logInit;
   SOLAR_LOG_NAME("null_logger")->setLevel(solar::LogLevel::DELETED);
+  solar::Thread::SetName("main");
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

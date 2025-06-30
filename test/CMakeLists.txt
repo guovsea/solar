@@ -17,7 +17,7 @@ target_sources(
   test_log.cpp
   test_config.cpp
   test_main.cpp
-  test_core.cpp
+  test_thread_mutex.cpp
   test_util.cpp
   test_fiber.cpp
 )

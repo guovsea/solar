@@ -1,6 +1,7 @@
 #ifndef __SOLAR_LOG_LOG_H
 #define __SOLAR_LOG_LOG_H
 
+#include "Core/Thread.h"
 #include "Log/LogEvent.h"
 #include "Log/Logger.h"
 #include "Log/LoggerManager.h"
@@ -12,7 +13,7 @@
   solar::LogEventWrap(                                                         \
       solar::LogEvent::ptr(new solar::LogEvent(                                \
           logger, level, __FILE__, __LINE__, 0, solar::GetThreadId(),          \
-          solar::GetFiberId(), time(0))))                                      \
+          solar::GetFiberId(), time(0), solar::Thread::GetName())))            \
       .getSS()
 
 // 流式风格
@@ -27,7 +28,7 @@
   solar::LogEventWrap(                                                         \
       solar::LogEvent::ptr(new solar::LogEvent(                                \
           logger, level, __FILE__, __LINE__, 0, solar::GetThreadId(),          \
-          solar::GetFiberId(), time(0))))                                      \
+          solar::GetFiberId(), time(0), solar::Thread::GetName())))            \
       .getEvent()                                                              \
       ->format(fmt, __VA_ARGS__)
 

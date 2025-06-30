@@ -10,9 +10,10 @@
 TEST(TestLog, TestLog) {
   solar::Logger::ptr pLogger(new solar::Logger);
   pLogger->addAppender(solar::LogAppender::ptr(new solar::StdoutLogAppender));
-  solar::LogEvent::ptr pEvent(new solar::LogEvent(
-      pLogger, solar::LogLevel::DEBUG, __FILE__, __LINE__, 0,
-      solar::GetThreadId(), solar::GetFiberId(), time(0)));
+  solar::LogEvent::ptr pEvent(
+      new solar::LogEvent(pLogger, solar::LogLevel::DEBUG, __FILE__, __LINE__,
+                          0, solar::GetThreadId(), solar::GetFiberId(), time(0),
+                          solar::Thread::GetName()));
   pEvent->getSS() << "hello solar log";
   pLogger->log(solar::LogLevel::DEBUG, pEvent);
 
@@ -38,7 +39,7 @@ TEST(TestLog, ToYamlString) {
   std::cout << ss.str();
   std::string log_yaml = R"(name: xxx
 level: DEBUG
-formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%F%T[%p]%T[%c]%T%f:%l%T%m%n")";
+formatter: "%d{%Y-%m-%d %H:%M:%S}%T%t%T%N%T%F%T[%p]%T[%c]%T%f:%l%T%m%n")";
   EXPECT_EQ(ss.str(), log_yaml);
 }
 

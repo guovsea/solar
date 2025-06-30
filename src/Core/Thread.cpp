@@ -58,6 +58,6 @@ Thread *Thread::GetThis() { return t_thread; }
 
 std::string Thread::GetName() { return t_thread_name; }
 
-void SetName(const std::string &name) { t_thread_name = name; }
+void Thread::SetName(const std::string &name) { t_thread_name = name; }
 
 } // namespace solar

@@ -8,10 +8,11 @@
 
 namespace solar {
 /**
- * @brief 不能在栈上创建 Fiber 对象
+ * @brief 协程对象
  *
  */
 class Fiber : public std::enable_shared_from_this<Fiber> {
+  // 不能在栈上创建 Fiber 对象
 public:
   typedef std::shared_ptr<Fiber> ptr;
   enum State { INIT, HOLD, EXEC, TERM, READY, EXCEPT };

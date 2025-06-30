@@ -16,7 +16,7 @@ public:
 
   LogEvent(std::shared_ptr<Logger> logger, LogLevel level, const char *file,
            int32_t line, uint32_t elapse, uint32_t threadId, uint32_t fiber_id,
-           uint64_t time);
+           uint64_t time, const std::string &threadName);
   const char *getFile() const { return m_file; }
 
   int32_t getLine() const { return m_line; }
@@ -36,6 +36,8 @@ public:
   LogLevel getLevel() const { return m_level; }
 
   std::stringstream &getSS() { return m_ss; }
+
+  const std::string &getThreadName() const { return m_threadName; }
   /**
    * @brief 传入 logEvent  的内容
    *

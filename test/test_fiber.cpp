@@ -4,7 +4,7 @@
 
 namespace {
 // 防止单元测试时时打印过多干扰信息
-solar::Logger::ptr g_logger = SOLAR_LOG_NAME("null_logger");
+solar::Logger::ptr g_logger = SOLAR_LOG_NAME("root");
 
 std::stringstream ss;
 } // namespace
@@ -19,7 +19,7 @@ void run_in_fiber() {
   solar::Fiber::YeildToHold();
 }
 
-TEST(TestFiber, TestSwapOut) {
+void test_fiber() {
   {
     solar::Fiber::GetThis();
     ss << "main begin\n";
@@ -34,6 +34,11 @@ TEST(TestFiber, TestSwapOut) {
     fiber->swapIn();
     // fiber 对象析构
   }
+  SOLAR_LOG_INFO(g_logger) << "main after end 2";
+}
+
+TEST(TestFiber, TestSwapOut) {
+  test_fiber();
   std::string result = R"(main begin
 run_in_fiber begin
 main after swapIn
@@ -41,6 +46,16 @@ run_in_fiber end
 main after end
 )";
   EXPECT_EQ(ss.str(), result);
-  SOLAR_LOG_INFO(g_logger) << "main after end 2";
+}
+
+TEST(TestFiber, TestFiberInMutiThreads) {
+  std::vector<solar::Thread::ptr> thrs;
+  for (int i = 0; i < 3; ++i) {
+    thrs.push_back(std::make_shared<solar::Thread>(
+        test_fiber, "thread_" + std::to_string(i)));
+  }
+  for (auto i : thrs) {
+    i->join();
+  }
 }
 } // namespace solar

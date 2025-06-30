@@ -82,6 +82,7 @@ public:
     os << "\t";
   }
 };
+
 class NewLineFormatItem : public LogFormatter::FormatItem {
 public:
   NewLineFormatItem(const std::string &str = "") {}
@@ -107,6 +108,15 @@ public:
     os << event->getElapse();
   }
 };
+
+class ThreadNameFormatItem : public LogFormatter::FormatItem {
+public:
+  ThreadNameFormatItem(const std::string &str = "") {}
+  void format(std::ostream &os, LogLevel level, LogEvent::ptr event) override {
+    os << event->getThreadName();
+  }
+};
+
 class DateTimeFormatItem : public LogFormatter::FormatItem {
 public:
   DateTimeFormatItem(const std::string &format = "%Y-%m-%d %H:%M:%S")
@@ -207,16 +217,22 @@ void LogFormatter::init() {
       s_format_items = {
 #define XX(str, Item)                                                          \
   {                                                                            \
-#str,                                                                      \
+    #str,                                                                      \
         [](const std::string &fmt) { return FormatItem::ptr(new Item(fmt)); }  \
   }
 
-          XX(m, MessageFormatItem),  XX(p, LevelFormatItem),
-          XX(r, ElapseFormatItem),   XX(c, LogNameFormatItem),
-          XX(t, ThreadIdFormatItem), XX(n, NewLineFormatItem),
-          XX(d, DateTimeFormatItem), XX(f, FileNameFormatItem),
-          XX(l, LineFormatItem),     XX(T, TabFormatItem),
+          XX(m, MessageFormatItem),
+          XX(p, LevelFormatItem),
+          XX(r, ElapseFormatItem),
+          XX(c, LogNameFormatItem),
+          XX(t, ThreadIdFormatItem),
+          XX(n, NewLineFormatItem),
+          XX(d, DateTimeFormatItem),
+          XX(f, FileNameFormatItem),
+          XX(l, LineFormatItem),
+          XX(T, TabFormatItem),
           XX(F, FiberIdFormatItem),
+          XX(N, ThreadNameFormatItem)
 #undef XX
       };
 
