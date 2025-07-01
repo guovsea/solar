@@ -8,6 +8,7 @@ set(PUBLIC_HEADER
   Mutex.h
   MutexImpl.h
   Fiber.h
+  Scheduler.h
 )
 
 target_sources(
@@ -17,6 +18,7 @@ target_sources(
   Semaphore.cpp
   Mutex.cpp
   Fiber.cpp
+  Scheduler.cpp
 )
 
 target_include_directories(
