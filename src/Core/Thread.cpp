@@ -1,10 +1,12 @@
 #include "Core/Thread.h"
 #include "Log/Log.h"
+using namespace solar;
 
+namespace {
+thread_local Thread *t_thread = nullptr;
+thread_local std::string t_thread_name = "UNKNOW";
+} // namespace
 namespace solar {
-
-static thread_local Thread *t_thread = nullptr;
-static thread_local std::string t_thread_name = "UNKNOW";
 
 Thread::Thread(std::function<void()> cb, const std::string &name)
     : m_cb(cb), m_name(name), m_semaphore(0) /* 信号量初始值为0 */ {

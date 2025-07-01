@@ -5,21 +5,24 @@
 
 #include "Fiber.h"
 
+using namespace solar;
+
 namespace {
-solar::Logger::ptr g_logger = SOLAR_LOG_NAME("system");
-}
-namespace solar {
+Logger::ptr g_logger = SOLAR_LOG_NAME("system");
 // 统计所有线程的所有协程
-static std::atomic<uint64_t> s_fiber_id{0};
-static std::atomic<uint64_t> s_fiber_count{0};
+std::atomic<uint64_t> s_fiber_id{0};
+std::atomic<uint64_t> s_fiber_count{0};
 
 // 当前线程中的前协程
-static thread_local Fiber *t_fiber{nullptr};
+thread_local Fiber *t_fiber{nullptr};
 // 当前线程中的主协程
-static thread_local Fiber::ptr t_threadFiber{nullptr};
+thread_local Fiber::ptr t_threadFiber{nullptr};
 
-static ConfigVar<uint32_t>::ptr g_fiber_stack_size = Config::Lookup<uint32_t>(
+ConfigVar<uint32_t>::ptr g_fiber_stack_size = Config::Lookup<uint32_t>(
     "fiber.stack_size", 1024 * 1024, "fiber stack size");
+
+} // namespace
+namespace solar {
 
 class MallocStackAllocator {
 public:
