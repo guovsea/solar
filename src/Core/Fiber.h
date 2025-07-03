@@ -19,7 +19,8 @@ class Fiber : public std::enable_shared_from_this<Fiber> {
 public:
   typedef std::shared_ptr<Fiber> ptr;
   enum State { INIT, HOLD, EXEC, TERM, READY, EXCEPT };
-  Fiber(std::function<void()> cb, size_t stackSize = 0);
+  Fiber(std::function<void()> cb, size_t stackSize = 0,
+        bool use_caller = false);
   ~Fiber();
   /**
    * @brief 重置协程函数并重置状态，当协程状态为 INIT，TERM
@@ -33,6 +34,9 @@ public:
    *
    */
   void swapIn();
+
+  void call();
+  void back();
   /**
    * @brief 当前协程切换到主协程
    *
@@ -74,6 +78,8 @@ public:
    *
    */
   static void MainFunc();
+
+  static void CallerMainFunc();
 
   /**
    * @brief Get the Fiber ID of current fiber

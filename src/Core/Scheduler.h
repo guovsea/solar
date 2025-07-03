@@ -148,10 +148,18 @@ private:
     FiberAndThread(std::function<void()> *cb, int thr) : thread(thr) {
       cb->swap(*cb);
     }
-    FiberAndThread(std::function<void()> &&cb, int thr)
-        : cb{std::move(cb)}, thread(thr) {}
+    // FiberAndThread(std::function<void()> &&cb, int thr)
+    //     : cb{std::move(cb)}, thread(thr) {}
 
     FiberAndThread() = default;
+    /**
+     * @brief 重置数据
+     */
+    void reset() {
+      fiber = nullptr;
+      cb = nullptr;
+      thread = -1;
+    }
   };
 
   void setThis();

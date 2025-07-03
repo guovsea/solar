@@ -1,9 +1,9 @@
+#include "Fiber.h"
+#include "Core/Scheduler.h"
 #include "Util/Config.h"
 #include "Util/macro.h"
 #include <atomic>
 #include <exception>
-
-#include "Fiber.h"
 
 using namespace solar;
 
@@ -49,7 +49,7 @@ Fiber::Fiber() {
   SOLAR_LOG_DEBUG(g_logger) << "Fiber::Fiber";
 }
 
-Fiber::Fiber(std::function<void()> cb, size_t stackSize)
+Fiber::Fiber(std::function<void()> cb, size_t stackSize, bool use_caller)
     : m_id(++s_fiber_id), m_cb{cb} {
   ++s_fiber_count;
   m_stacksize = stackSize > 0 ? stackSize : g_fiber_stack_size->getValue();
@@ -60,7 +60,11 @@ Fiber::Fiber(std::function<void()> cb, size_t stackSize)
   m_ctx.uc_link = nullptr;
   m_ctx.uc_stack.ss_sp = m_stack;
   m_ctx.uc_stack.ss_size = m_stacksize;
-  makecontext(&m_ctx, &Fiber::MainFunc, 0);
+  if (!use_caller) {
+    makecontext(&m_ctx, &Fiber::MainFunc, 0);
+  } else {
+    makecontext(&m_ctx, &Fiber::CallerMainFunc, 0);
+  }
   SOLAR_LOG_DEBUG(g_logger) << "Fiber::Fiber id=" << m_id;
 }
 
@@ -95,17 +99,33 @@ void Fiber::reset(std::function<void()> cb) {
   m_state = INIT;
 }
 
-void Fiber::swapIn() {
+void Fiber::call() {
   SetThis(this);
-  SOLAR_ASSERT(m_state != EXEC);
+  m_state = EXEC;
   if (swapcontext(&t_threadFiber->m_ctx, &m_ctx)) {
     SOLAR_ASSERT2(false, "swapcontext");
   }
 }
 
-void Fiber::swapOut() {
+void Fiber::back() {
   SetThis(t_threadFiber.get());
   if (swapcontext(&m_ctx, &t_threadFiber->m_ctx)) {
+    SOLAR_ASSERT2(false, "swapcontext");
+  }
+}
+void Fiber::swapIn() {
+  SetThis(this);
+  SOLAR_ASSERT(m_state != EXEC);
+  m_state = EXEC;
+  if (swapcontext(&Scheduler::GetMainFiber()->m_ctx, &m_ctx)) {
+    SOLAR_ASSERT2(false, "swapcontext");
+  }
+}
+
+void Fiber::swapOut() {
+  // 防止自己切换到自己，MainFunc 直接运行到底了
+  SetThis(Scheduler::GetMainFiber());
+  if (swapcontext(&m_ctx, &Scheduler::GetMainFiber()->m_ctx)) {
     SOLAR_ASSERT2(false, "swapcontext");
   }
 }
@@ -146,15 +166,48 @@ void Fiber::MainFunc() {
     cur->m_state = TERM;
   } catch (std::exception &ex) {
     cur->m_state = EXCEPT;
-    SOLAR_LOG_ERROR(g_logger) << "Fiber Except: " << ex.what();
+    SOLAR_LOG_ERROR(g_logger) << "Fiber Except: " << ex.what()
+                              << " id = " << GetFiberID() << std::endl
+                              << BacktraceToString();
   } catch (...) {
     cur->m_state = EXCEPT;
-    SOLAR_LOG_ERROR(g_logger) << "Fiber Excpet";
+    SOLAR_LOG_ERROR(g_logger) << "Fiber Excpet"
+                              << " id = " << GetFiberID() << std::endl
+                              << BacktraceToString();
   }
   auto raw_ptr = cur.get();
   cur.reset();
   raw_ptr->swapOut();
   SOLAR_ASSERT2(false, "nerver reach");
+  SOLAR_LOG_ERROR(g_logger) << " id = " << GetFiberID() << std::endl
+                            << BacktraceToString();
+}
+
+void Fiber::CallerMainFunc() {
+  Fiber::ptr cur = GetThis();
+  SOLAR_ASSERT(cur);
+  try {
+    cur->m_cb();
+    cur->m_cb = nullptr; // 将 function 析构，取消其对各种资源（比如 function
+                         // 中的智能指针）的所有权
+    cur->m_state = TERM;
+  } catch (std::exception &ex) {
+    cur->m_state = EXCEPT;
+    SOLAR_LOG_ERROR(g_logger) << "Fiber Except: " << ex.what()
+                              << " id = " << GetFiberID() << std::endl
+                              << BacktraceToString();
+  } catch (...) {
+    cur->m_state = EXCEPT;
+    SOLAR_LOG_ERROR(g_logger) << "Fiber Excpet"
+                              << " id = " << GetFiberID() << std::endl
+                              << BacktraceToString();
+  }
+  auto raw_ptr = cur.get();
+  cur.reset();
+  raw_ptr->back();
+  SOLAR_ASSERT2(false, "nerver reach");
+  SOLAR_LOG_ERROR(g_logger) << " id = " << GetFiberID() << std::endl
+                            << BacktraceToString();
 }
 
 uint64_t Fiber::GetFiberID() {

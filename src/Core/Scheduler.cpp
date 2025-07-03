@@ -25,12 +25,13 @@ Scheduler::Scheduler(size_t threads, bool use_caller, const std::string &name)
     t_scheduler = this;
 
     // 在新协程上执行 run 函数
-    m_rootFiber = std::make_shared<Fiber>([this]() { this->run(); });
+    m_rootFiber = std::make_shared<Fiber>([this]() { this->run(); }, 0, true);
     Thread::SetName(m_name);
 
     // 主协程是执行 run 方法的协程
     t_fiber = m_rootFiber.get();
     m_rootThread = solar::GetThreadId();
+    m_threadIds.push_back(m_rootThread);
   } else {
     m_rootThread = -1;
   }
@@ -41,12 +42,12 @@ Scheduler::Scheduler(size_t threads, bool use_caller, const std::string &name)
 
 Scheduler::~Scheduler() {
   SOLAR_ASSERT(m_stopping);
-  if (Scheduler::GetThis() == this) {
+  if (GetThis() == this) {
     t_scheduler = nullptr;
   }
 }
 
-Fiber *Scheduler::GetMainFiber() { return nullptr; }
+Fiber *Scheduler::GetMainFiber() { return t_fiber; }
 
 void Scheduler::start() {
   MutexType::ScopedLock lock(m_mutex);
@@ -63,24 +64,25 @@ void Scheduler::start() {
   }
   lock.unlock();
   if (m_rootFiber) {
-    m_rootFiber->swapIn();
+    m_rootFiber->call();
+    SOLAR_LOG_INFO(g_logger) << "call out " << m_rootFiber->getState();
   }
 }
 
 void Scheduler::stop() {
   m_autoStop = true;
   if (m_rootFiber && m_threadCount == 0 &&
-      m_rootFiber->getState() == Fiber::TERM &&
-      m_rootFiber->getState() == Fiber::INIT) {
+      (m_rootFiber->getState() == Fiber::TERM ||
+       m_rootFiber->getState() == Fiber::INIT)) {
     // 只有一个主线程在运行
-    SOLAR_LOG_INFO(g_logger) << this << " stoped";
+    SOLAR_LOG_INFO(g_logger) << this << " stopped";
     m_stopping = true;
     if (stopping()) {
       return;
     }
   }
   // 有多个子线程正在运行
-  bool exit_on_this_fiber = false;
+  //   bool exit_on_this_fiber = false;
   if (m_rootThread != -1) {
     // use_caller 时必须在创建 Scheduler 的线程中 stop
     SOLAR_ASSERT(GetThis() == this);
@@ -109,12 +111,12 @@ void Scheduler::run() {
   if (solar::GetThreadId() != m_rootThread) {
     t_fiber = Fiber::GetThis().get();
   }
-  Fiber::ptr idle_fiber = std::make_shared<Fiber>(
-      std::bind(&Scheduler::idle, this)); //([this]() { this->idle(); });
+  Fiber::ptr idle_fiber = std::make_shared<Fiber>([this]() { this->idle(); });
   Fiber::ptr cb_fiber;
 
   FiberAndThread ft{};
   while (true) {
+    ft.reset();
     bool tickle_me = false;
     {
       // 从任务队列中取出任务
@@ -132,8 +134,7 @@ void Scheduler::run() {
           continue;
         }
         ft = *it;
-        tickle_me = true;
-        m_fibers.erase(it);
+        it = m_fibers.erase(it);
       }
     }
     if (tickle_me) {
@@ -181,11 +182,12 @@ void Scheduler::run() {
       }
       ++m_idleThreadCount;
       idle_fiber->swapIn();
-      if (idle_fiber->getState() != Fiber::TERM ||
-          idle_fiber->getState() == Fiber::HOLD) {
+      --m_idleThreadCount;
+      // idle_fiber 并没有执行完
+      if (idle_fiber->getState() != Fiber::TERM &&
+          idle_fiber->getState() != Fiber::EXCEPT) {
         idle_fiber->m_state = Fiber::HOLD;
       }
-      --m_idleThreadCount;
     }
   }
 }
