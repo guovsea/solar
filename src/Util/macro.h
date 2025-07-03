@@ -2,6 +2,7 @@
 #define __SOLAR_UTIL_MICRO_H__
 #include "Log/Log.h"
 #include "Util/Util.h"
+#include <assert.h>
 
 #define SOLAR_ASSERT(x)                                                        \
   if (!(x)) {                                                                  \

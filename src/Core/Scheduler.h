@@ -20,7 +20,7 @@ public:
    * @brief
    *
    * @param threads
-   * @param use_caller 把构造 Scheduler 的线程添加到线程池中
+   * @param use_caller 适当 caller 线程，把构造 Scheduler 的线程添加到线程池中
    */
   Scheduler(size_t threads = 1, bool use_caller = true,
             const std::string &name = "");
@@ -49,7 +49,7 @@ public:
     bool need_tickle = false;
     {
       MutexType::ScopedLock lock(m_mutex);
-      need_tickle = schedule(fc, thread);
+      need_tickle = scheduleNoLock(fc, thread);
     }
     if (need_tickle) {
       tickle();
@@ -82,6 +82,30 @@ public:
 
 protected:
   virtual void tickle();
+  /**
+   * @brief 执行协程调度的方法
+   *
+   */
+  void run();
+
+  virtual bool stopping();
+
+  virtual void idle();
+
+  /// @brief 线程 ID
+  std::vector<int> m_threadIds;
+  /// @brief 线程总数
+  size_t m_threadCount{0};
+  /// @brief 激活线程数量
+  std::atomic<size_t> m_activeThreadCount{0};
+  /// @brief 空闲线程数量
+  std::atomic<size_t> m_idleThreadCount{0};
+  /// @brief 是否已经停止
+  bool m_stopping{true};
+  /// @brief 自动停止
+  bool m_autoStop{false};
+  /// @brief 主线程 id, -1 表示不使用创建 Scheduler 的线程作为主线程
+  int m_rootThread{0};
 
 private:
   template <typename FiberOrCb> bool scheduleNoLock(FiberOrCb fc, int thread) {
@@ -126,13 +150,18 @@ private:
     }
     FiberAndThread(std::function<void()> &&cb, int thr)
         : cb{std::move(cb)}, thread(thr) {}
+
+    FiberAndThread() = default;
   };
+
+  void setThis();
 
 private:
   MutexType m_mutex;
   std::vector<Thread::ptr> m_threads;
   std::list<FiberAndThread> m_fibers; //< 任务队列
   std::string m_name;
+  Fiber::ptr m_rootFiber;
 };
 } // namespace solar
 

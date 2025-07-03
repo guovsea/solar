@@ -7,12 +7,15 @@
 #include "Core/Thread.h"
 
 namespace solar {
+class Scheduler;
 /**
  * @brief 协程对象
  *
  */
 class Fiber : public std::enable_shared_from_this<Fiber> {
   // 不能在栈上创建 Fiber 对象
+  friend class Scheduler;
+
 public:
   typedef std::shared_ptr<Fiber> ptr;
   enum State { INIT, HOLD, EXEC, TERM, READY, EXCEPT };
@@ -37,6 +40,8 @@ public:
   void swapOut();
 
   uint64_t getID() const { return m_id; }
+
+  State getState() const { return m_state; }
 
 public:
   /**

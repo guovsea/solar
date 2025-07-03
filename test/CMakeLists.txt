@@ -20,6 +20,7 @@ target_sources(
   test_thread_mutex.cpp
   test_util.cpp
   test_fiber.cpp
+  test_scheduler.cpp
 )
 
 target_link_libraries(${EXE_NAME} 
