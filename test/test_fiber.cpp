@@ -39,7 +39,7 @@ void test_fiber() {
   SOLAR_LOG_INFO(g_logger) << "main after end 2";
 }
 
-TEST(TestFiber, TestSwapOut) {
+TEST(TestFiber, TestBack) {
   test_fiber();
   std::string result = R"(main begin
 run_in_fiber begin

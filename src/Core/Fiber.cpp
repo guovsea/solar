@@ -57,7 +57,7 @@ Fiber::Fiber(std::function<void()> cb, size_t stackSize, bool use_caller)
   if (getcontext(&m_ctx)) {
     SOLAR_ASSERT2(false, "getcontext");
   }
-  m_ctx.uc_link = nullptr;
+  m_ctx.uc_link = &t_threadFiber.get()->m_ctx;
   m_ctx.uc_stack.ss_sp = m_stack;
   m_ctx.uc_stack.ss_size = m_stacksize;
   if (!use_caller) {
@@ -92,7 +92,7 @@ void Fiber::reset(std::function<void()> cb) {
   if (getcontext(&m_ctx)) {
     SOLAR_ASSERT2(false, "getcontext");
   }
-  m_ctx.uc_link = nullptr;
+  m_ctx.uc_link = &t_threadFiber.get()->m_ctx; // 回到主协程
   m_ctx.uc_stack.ss_sp = m_stack;
   m_ctx.uc_stack.ss_size = m_stacksize;
   makecontext(&m_ctx, &Fiber::MainFunc, 0);
@@ -175,12 +175,6 @@ void Fiber::MainFunc() {
                               << " id = " << GetFiberID() << std::endl
                               << BacktraceToString();
   }
-  auto raw_ptr = cur.get();
-  cur.reset();
-  raw_ptr->back();
-  SOLAR_ASSERT2(false, "nerver reach");
-  SOLAR_LOG_ERROR(g_logger) << " id = " << GetFiberID() << std::endl
-                            << BacktraceToString();
 }
 
 void Fiber::CallerMainFunc() {
@@ -202,12 +196,6 @@ void Fiber::CallerMainFunc() {
                               << " id = " << GetFiberID() << std::endl
                               << BacktraceToString();
   }
-  auto raw_ptr = cur.get();
-  cur.reset();
-  raw_ptr->back();
-  SOLAR_ASSERT2(false, "nerver reach");
-  SOLAR_LOG_ERROR(g_logger) << " id = " << GetFiberID() << std::endl
-                            << BacktraceToString();
 }
 
 uint64_t Fiber::GetFiberID() {
