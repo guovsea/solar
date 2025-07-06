@@ -177,7 +177,7 @@ void Fiber::MainFunc() {
   }
   auto raw_ptr = cur.get();
   cur.reset();
-  raw_ptr->swapOut();
+  raw_ptr->back();
   SOLAR_ASSERT2(false, "nerver reach");
   SOLAR_LOG_ERROR(g_logger) << " id = " << GetFiberID() << std::endl
                             << BacktraceToString();

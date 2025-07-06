@@ -13,10 +13,12 @@ namespace solar {
 void run_in_fiber() {
   ss << "run_in_fiber begin\n";
   SOLAR_LOG_INFO(g_logger) << "run_in_fiber begin";
-  solar::Fiber::YeildToHold();
+  // solar::Fiber::YeildToHold();
+  solar::Fiber::GetThis()->back();
   SOLAR_LOG_INFO(g_logger) << "run_in_fiber end";
   ss << "run_in_fiber end\n";
-  solar::Fiber::YeildToHold();
+  // solar::Fiber::YeildToHold();
+  solar::Fiber::GetThis()->back();
 }
 
 void test_fiber() {
@@ -25,13 +27,13 @@ void test_fiber() {
     ss << "main begin\n";
     SOLAR_LOG_INFO(g_logger) << "main begin";
     solar::Fiber::ptr fiber = std::make_shared<Fiber>(run_in_fiber);
-    fiber->swapIn();
-    SOLAR_LOG_INFO(g_logger) << "main after swapIn";
-    ss << "main after swapIn\n";
-    fiber->swapIn();
+    fiber->call();
+    SOLAR_LOG_INFO(g_logger) << "main after call";
+    ss << "main after call\n";
+    fiber->call();
     SOLAR_LOG_INFO(g_logger) << "main after end";
     ss << "main after end\n";
-    fiber->swapIn();
+    fiber->call();
     // fiber 对象析构
   }
   SOLAR_LOG_INFO(g_logger) << "main after end 2";
@@ -41,7 +43,7 @@ TEST(TestFiber, TestSwapOut) {
   test_fiber();
   std::string result = R"(main begin
 run_in_fiber begin
-main after swapIn
+main after call
 run_in_fiber end
 main after end
 )";
