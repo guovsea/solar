@@ -63,10 +63,10 @@ void Scheduler::start() {
     m_threadIds.push_back(m_threads[i]->getId());
   }
   lock.unlock();
-  if (m_rootFiber) {
-    m_rootFiber->call();
-    SOLAR_LOG_INFO(g_logger) << "call out " << m_rootFiber->getState();
-  }
+  // if (m_rootFiber) {
+  //   m_rootFiber->call();
+  //   SOLAR_LOG_INFO(g_logger) << "call out " << m_rootFiber->getState();
+  // }
 }
 
 void Scheduler::stop() {
@@ -82,7 +82,6 @@ void Scheduler::stop() {
     }
   }
   // 有多个子线程正在运行
-  //   bool exit_on_this_fiber = false;
   if (m_rootThread != -1) {
     // use_caller 时必须在创建 Scheduler 的线程中 stop
     SOLAR_ASSERT(GetThis() == this);
@@ -96,11 +95,28 @@ void Scheduler::stop() {
   if (m_rootFiber) {
     tickle();
   }
-  if (stopping()) {
-    return;
+  if (m_rootFiber) {
+    // while (!stopping()) {
+    //   if (m_rootFiber->getState() == Fiber::TERM ||
+    //       m_rootFiber->getState() == Fiber::EXCEPT) {
+    //     m_rootFiber.reset(new Fiber([this]() { this->run(); }, 0, true));
+    //     SOLAR_LOG_INFO(g_logger) << "root fiber is term, reset";
+    //     t_fiber = m_rootFiber.get();
+    //   }
+    //   m_rootFiber->call();
+    // }
+    if (!stopping()) {
+      m_rootFiber->call();
+    }
   }
-  //   if (exit_on_this_fiber) {
-  //     }
+  std::vector<Thread::ptr> thrs;
+  {
+    MutexType::ScopedLock lock(m_mutex);
+    thrs.swap(m_threads);
+  }
+  for (auto &i : thrs) {
+    i->join();
+  }
 }
 
 void Scheduler::tickle() { SOLAR_LOG_INFO(g_logger) << "tickle"; }
@@ -118,6 +134,7 @@ void Scheduler::run() {
   while (true) {
     ft.reset();
     bool tickle_me = false;
+    bool is_active = false;
     {
       // 从任务队列中取出任务
       MutexType::ScopedLock lock(m_mutex);
@@ -134,7 +151,10 @@ void Scheduler::run() {
           continue;
         }
         ft = *it;
-        it = m_fibers.erase(it);
+        m_fibers.erase(it);
+        ++m_activeThreadCount;
+        is_active = true;
+        break;
       }
     }
     if (tickle_me) {
@@ -144,7 +164,6 @@ void Scheduler::run() {
     if (ft.fiber && (ft.fiber->getState() != Fiber::TERM &&
                      ft.fiber->getState() != Fiber::EXCEPT)) {
       // Fiber
-      ++m_activeThreadCount;
       ft.fiber->swapIn();
       --m_activeThreadCount;
       if (ft.fiber->getState() == Fiber::READY) {
@@ -161,8 +180,6 @@ void Scheduler::run() {
       } else {
         cb_fiber.reset(new Fiber(ft.cb));
       }
-      //   ft.reset();
-      ++m_activeThreadCount;
       cb_fiber->swapIn();
       --m_activeThreadCount;
       if (cb_fiber->getState() == Fiber::READY) {
@@ -176,6 +193,9 @@ void Scheduler::run() {
         cb_fiber.reset();
       }
     } else { // 没有任务
+      if (is_active) {
+        -m_activeThreadCount;
+      }
       if (idle_fiber->getState() == Fiber::TERM) {
         SOLAR_LOG_INFO(g_logger) << "idle fiber term";
         break;
@@ -198,7 +218,12 @@ bool Scheduler::stopping() {
          m_activeThreadCount == 0;
 }
 
-void Scheduler::idle() { SOLAR_LOG_INFO(g_logger) << "idle"; }
+void Scheduler::idle() {
+  SOLAR_LOG_INFO(g_logger) << "idle";
+  while (!stopping()) {
+    Fiber::GetThis()->YeildToRead();
+  }
+}
 
 void Scheduler::setThis() { t_scheduler = this; }
 
