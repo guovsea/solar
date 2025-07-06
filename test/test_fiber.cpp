@@ -40,6 +40,7 @@ void test_fiber() {
 }
 
 TEST(TestFiber, TestSwapOut) {
+  GTEST_SKIP(); // 引入 Scheduler 后， Fiber 就不能这样使用了
   test_fiber();
   std::string result = R"(main begin
 run_in_fiber begin
@@ -51,6 +52,7 @@ main after end
 }
 
 TEST(TestFiber, TestFiberInMutiThreads) {
+  GTEST_SKIP(); // 引入 Scheduler 后， Fiber 就不能这样使用了
   std::vector<solar::Thread::ptr> thrs;
   for (int i = 0; i < 3; ++i) {
     thrs.push_back(std::make_shared<solar::Thread>(

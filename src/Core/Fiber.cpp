@@ -177,7 +177,7 @@ void Fiber::MainFunc() {
   }
   auto raw_ptr = cur.get();
   cur.reset();
-  raw_ptr->back();
+  raw_ptr->swapOut(); // 回到 Scheduler::GetMainFiber()
   SOLAR_ASSERT2(false, "nerver reach");
   SOLAR_LOG_ERROR(g_logger) << " id = " << GetFiberID() << std::endl
                             << BacktraceToString();
@@ -204,7 +204,10 @@ void Fiber::CallerMainFunc() {
   }
   auto raw_ptr = cur.get();
   cur.reset();
-  raw_ptr->back();
+  raw_ptr
+      ->back(); // 对于 UserCaller 的 Faber
+                // 来说，最终应该回到的执行流就是当前线程的主协程，同时也是调用
+                // Scheduler::stop() 的调用处
   SOLAR_ASSERT2(false, "nerver reach");
   SOLAR_LOG_ERROR(g_logger) << " id = " << GetFiberID() << std::endl
                             << BacktraceToString();

@@ -63,10 +63,6 @@ void Scheduler::start() {
     m_threadIds.push_back(m_threads[i]->getId());
   }
   lock.unlock();
-  // if (m_rootFiber) {
-  //   m_rootFiber->call();
-  //   SOLAR_LOG_INFO(g_logger) << "call out " << m_rootFiber->getState();
-  // }
 }
 
 void Scheduler::stop() {
@@ -94,17 +90,6 @@ void Scheduler::stop() {
   }
   if (m_rootFiber) {
     tickle();
-  }
-  if (m_rootFiber) {
-    // while (!stopping()) {
-    //   if (m_rootFiber->getState() == Fiber::TERM ||
-    //       m_rootFiber->getState() == Fiber::EXCEPT) {
-    //     m_rootFiber.reset(new Fiber([this]() { this->run(); }, 0, true));
-    //     SOLAR_LOG_INFO(g_logger) << "root fiber is term, reset";
-    //     t_fiber = m_rootFiber.get();
-    //   }
-    //   m_rootFiber->call();
-    // }
     if (!stopping()) {
       m_rootFiber->call();
     }
@@ -188,7 +173,7 @@ void Scheduler::run() {
       } else if (cb_fiber->getState() == Fiber::EXCEPT ||
                  cb_fiber->getState() == Fiber::TERM) {
         cb_fiber->reset(nullptr);
-      } else { // if (cb_fiber->getState() != Fiber::TERM) {
+      } else { // cb_fiber->getState() == Fiber::TERM)
         cb_fiber->m_state = Fiber::HOLD;
         cb_fiber.reset();
       }
