@@ -92,6 +92,8 @@ protected:
 
   virtual void idle();
 
+  bool hasIdleThreads() { return m_idleThreadCount > 0; }
+
   /// @brief 线程 ID
   std::vector<int> m_threadIds;
   /// @brief 线程总数

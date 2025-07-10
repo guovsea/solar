@@ -9,6 +9,7 @@ set(PUBLIC_HEADER
   MutexImpl.h
   Fiber.h
   Scheduler.h
+  IOManager.h
 )
 
 target_sources(
@@ -19,6 +20,7 @@ target_sources(
   Mutex.cpp
   Fiber.cpp
   Scheduler.cpp
+  IOManager.cpp
 )
 
 target_include_directories(
