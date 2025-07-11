@@ -53,17 +53,17 @@ IOManager::IOManager(size_t threads, bool use_caller, const std::string &name)
   m_epfd = epoll_create(5000);
   SOLAR_ASSERT(m_epfd > 0);
   int rt = pipe(m_tickleFds);
-  SOLAR_ASSERT(rt);
+  SOLAR_ASSERT(!rt);
 
   epoll_event event;
   memset(&event, 0, sizeof(epoll_event));
   event.events = EPOLLIN | EPOLLET;
   event.data.fd = m_tickleFds[0];
   rt = fcntl(m_tickleFds[0], F_SETFL, O_NONBLOCK);
-  SOLAR_ASSERT(rt);
+  SOLAR_ASSERT(!rt);
 
   rt = epoll_ctl(m_epfd, EPOLL_CTL_ADD, m_tickleFds[0], &event);
-  SOLAR_ASSERT(rt);
+  SOLAR_ASSERT(!rt);
 
   resizeContexts(32);
 
@@ -90,7 +90,7 @@ int IOManager::addEvent(int fd, Event event, std::function<void()> cb) {
   } else {
     lock.unlock();
     RWMutexType::WriteScopedLock lock2(m_mutex);
-    resizeContexts(m_fdContexts.size() * 1.5);
+    resizeContexts(fd * 1.5);
     fd_ctx = m_fdContexts[fd];
   }
 
@@ -106,7 +106,7 @@ int IOManager::addEvent(int fd, Event event, std::function<void()> cb) {
   epoll_event epevent;
   epevent.events = EPOLLET | fd_ctx->events | event;
   epevent.data.ptr = fd_ctx;
-  int op = fd_ctx->events ? EPOLL_CTL_ADD : EPOLL_CTL_ADD;
+  int op = fd_ctx->events ? EPOLL_CTL_MOD : EPOLL_CTL_ADD;
   int rt = epoll_ctl(m_epfd, op, fd, &epevent);
 
   if (rt) {
@@ -306,10 +306,10 @@ void IOManager::idle() {
       }
       int real_events = NONE;
       if (event.events & EPOLLIN) {
-        real_events | READ;
+        real_events |= READ;
       }
       if (event.events & EPOLLOUT) {
-        real_events | WRITE;
+        real_events |= WRITE;
       }
       // 如果没有事件
       if ((fd_ctx->events & real_events) == NONE) {

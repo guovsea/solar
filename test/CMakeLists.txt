@@ -14,13 +14,14 @@ include(GoogleTest)
 target_sources(
   ${EXE_NAME}
   PRIVATE
+  test_main.cpp
   test_log.cpp
   test_config.cpp
-  test_main.cpp
   test_thread_mutex.cpp
   test_util.cpp
   test_fiber.cpp
   test_scheduler.cpp
+  test_iomanager.cpp
 )
 
 target_link_libraries(${EXE_NAME} 
