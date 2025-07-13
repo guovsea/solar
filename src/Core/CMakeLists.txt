@@ -10,6 +10,7 @@ set(PUBLIC_HEADER
   Fiber.h
   Scheduler.h
   IOManager.h
+  Timer.h
 )
 
 target_sources(
@@ -21,6 +22,7 @@ target_sources(
   Fiber.cpp
   Scheduler.cpp
   IOManager.cpp
+  Timer.cpp
 )
 
 target_include_directories(

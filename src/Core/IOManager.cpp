@@ -296,7 +296,7 @@ void IOManager::idle() {
       if (event.data.fd == m_tickleFds[0]) {
         uint8_t dummy;
         while (read(m_tickleFds[0], &dummy, 1) == 1)
-          ; // 读干净，因为时 ET
+          ; // 读干净，因为是 ET
         continue;
       }
       FdContext *fd_ctx = static_cast<FdContext *>(event.data.ptr);
