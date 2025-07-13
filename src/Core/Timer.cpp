@@ -116,6 +116,7 @@ Timer::ptr TimerManager::addConditionTimer(uint64_t ms,
 
 uint64_t TimerManager::getNextTimer() {
   RWMutexType::ReadScopedLock lock(m_mutex);
+  m_ticked = false;
   if (m_timers.empty()) {
     return ~0ull; // 没有定时器, 返回最大值
   }
@@ -163,11 +164,12 @@ void TimerManager::listExpiredCb(std::vector<std::function<void()>> &cbs) {
 void TimerManager::addTimer(Timer::ptr timer,
                             RWMutexType::WriteScopedLock &lock) {
   auto it = m_timers.insert(timer).first;
+  // 如果是插入到最前面, 唤醒 epoll_wait 重新设置定时器
   bool at_front = (it == m_timers.begin());
   lock.unlock();
 
-  // 如果是插入到最前面, 能够唤醒 epoll_wait 重新设置定时器
-  if (at_front) {
+  bool need_tickle = at_front && !m_ticked;
+  if (need_tickle) {
     onTimerInsertedAtFront();
   }
 }

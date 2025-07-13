@@ -78,7 +78,7 @@ public:
    * @brief 添加计时器
    *
    * @param ms
-   * @param cb 超时回调函数
+   * @param cb 和 timer 绑定的回调函数（超时时并不会被执行，需要手动执行）
    * @param recurring 是否是循环定时器
    * @return Timer::ptr
    */
@@ -96,16 +96,34 @@ public:
   Timer::ptr addConditionTimer(uint64_t ms, std::function<void()> cb,
                                std::weak_ptr<void> weak_cond,
                                bool recurring = false);
+  /**
+   * @brief 返回当前距离下一次计时器被触发的时间
+   *
+   * @return uint64_t
+   */
   uint64_t getNextTimer();
   void listExpiredCb(std::vector<std::function<void()>> &cbs);
 
 protected:
+  /**
+   * @brief  getNextTimer 后，第一次有计时器被插入到 begin
+   * 时会被调用。而后当计时器被插入到 begin 时不会被调用，直到再次调用
+   * getNextTimer
+   *
+   */
   virtual void onTimerInsertedAtFront() = 0;
+  /**
+   * @brief
+   *
+   * @param timer
+   * @param lock TimerManager 中的锁
+   */
   void addTimer(Timer::ptr timer, RWMutexType::WriteScopedLock &lock);
 
 private:
   RWMutexType m_mutex;           //< 保护定时器的互斥锁
   std::set<Timer::ptr> m_timers; //< 定时器集合
+  bool m_ticked{false};
 };
 } // namespace solar
 
