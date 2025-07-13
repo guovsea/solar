@@ -1,9 +1,11 @@
 #ifndef __SOLAR_CORE_IOMANAGER_H
 #define __SOLAR_CORE_IOMANAGER_H
+
 #include "Core/Scheduler.h"
+#include "Timer.h"
 
 namespace solar {
-class IOManager : public Scheduler {
+class IOManager : public Scheduler, public TimerManager {
 public:
   typedef std::shared_ptr<IOManager> ptr;
   typedef RWMutex RWMutexType;
@@ -34,6 +36,8 @@ protected:
   void idle() override;
 
   void resizeContexts(size_t size);
+
+  void onTimerInsertedAtFront() override;
 
 private:
   struct FdContext {

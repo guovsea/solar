@@ -48,6 +48,7 @@ void IOManager::FdContext::triggerEvent(Event event) {
   ctx.scheduler = nullptr;
   return;
 }
+
 IOManager::IOManager(size_t threads, bool use_caller, const std::string &name)
     : Scheduler{threads, use_caller, name} {
   m_epfd = epoll_create(5000);
@@ -81,6 +82,7 @@ IOManager::~IOManager() {
     }
   }
 }
+
 int IOManager::addEvent(int fd, Event event, std::function<void()> cb) {
   FdContext *fd_ctx = nullptr;
   RWMutexType::ReadScopedLock lock(m_mutex);
@@ -257,6 +259,8 @@ void IOManager::resizeContexts(size_t size) {
   }
 }
 
+void IOManager::onTimerInsertedAtFront() { tickle(); }
+
 IOManager *IOManager::GetThis() {
   return dynamic_cast<IOManager *>(Scheduler::GetThis());
 }
@@ -270,27 +274,50 @@ void IOManager::tickle() {
 }
 
 bool IOManager::stopping() {
-  return Scheduler::stopping() && m_pendingEventCount == 0;
+  return m_pendingEventCount == 0 && Scheduler::stopping();
 }
 
 void IOManager::idle() {
   epoll_event *events = new epoll_event[64]{};
   std::shared_ptr<epoll_event> shared_events(events);
   while (true) {
+    uint64_t next_timeout{0};
     if (stopping()) {
-      SOLAR_LOG_INFO(g_logger) << "name=" << getName() << " idle stopping exit";
-      break;
+      // 为什么不把判断有无 timer 放到 stopping 中？
+      // 因为这样只有在 stopping == true 的时候才会去锁 timerMgr，
+      // 否则每次循环都要锁 timerMgr
+      next_timeout = getNextTimer(); //< 需要锁 timerMgr
+      if (next_timeout == ~0ull) {
+        SOLAR_LOG_INFO(g_logger)
+            << "name=" << getName() << " idle stopping exit";
+        break;
+      }
     }
+
     int rt = 0;
     do {
-      static const int MAX_TIMEOUT = 5000;
-      rt = epoll_wait(m_epfd, events, 64, MAX_TIMEOUT);
+      static const uint64_t MAX_TIMEOUT = 3000;
+      if (next_timeout != ~0ull) {
+        next_timeout = std::min(next_timeout, MAX_TIMEOUT);
+      } else {
+        next_timeout = MAX_TIMEOUT;
+      }
+      rt = epoll_wait(m_epfd, events, 64, static_cast<int>(next_timeout));
       if (rt < 0 && errno == EINTR) {
         continue;
       } else {
         break;
       }
     } while (true);
+
+    // 处理定时器事件
+    std::vector<std::function<void()>> cbs;
+    listExpiredCb(cbs);
+    if (!cbs.empty()) {
+      schedule(cbs.begin(), cbs.end());
+      cbs.clear();
+    }
+
     for (int i = 0; i < rt; ++i) {
       epoll_event &event = events[i];
       if (event.data.fd == m_tickleFds[0]) {

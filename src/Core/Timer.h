@@ -73,7 +73,7 @@ public:
   typedef std::shared_ptr<TimerManager> ptr;
 
   TimerManager();
-  virtual ~TimerManager();
+  virtual ~TimerManager() = default;
   /**
    * @brief 添加计时器
    *
@@ -119,6 +119,8 @@ protected:
    * @param lock TimerManager 中的锁
    */
   void addTimer(Timer::ptr timer, RWMutexType::WriteScopedLock &lock);
+
+  bool hasTimer();
 
 private:
   /**

@@ -121,11 +121,11 @@ uint64_t TimerManager::getNextTimer() {
     return ~0ull; // 没有定时器, 返回最大值
   }
   const Timer::ptr &next = *m_timers.begin();
-  uint64_t now = GetCurrentMS();
-  if (now <= next->m_next) {
+  uint64_t now_ms = GetCurrentMS();
+  if (now_ms >= next->m_next) {
     return 0;
   } else {
-    return next->m_next - now; // 返回下一个定时器的剩余时间
+    return next->m_next - now_ms; // 返回下一个定时器的剩余时间
   }
 }
 
@@ -153,6 +153,7 @@ void TimerManager::listExpiredCb(std::vector<std::function<void()>> &cbs) {
 
   expired.insert(expired.begin(), m_timers.begin(), it);
   m_timers.erase(m_timers.begin(), it);
+  cbs.reserve(expired.size());
 
   for (auto &timer : expired) {
     cbs.push_back(timer->m_cb);
@@ -176,6 +177,11 @@ void TimerManager::addTimer(Timer::ptr timer,
   if (need_tickle) {
     onTimerInsertedAtFront();
   }
+}
+
+bool TimerManager::hasTimer() {
+  RWMutexType::ReadScopedLock lock(m_mutex);
+  return !m_timers.empty();
 }
 
 bool TimerManager::detectClockRollover(uint64_t now_ms) {

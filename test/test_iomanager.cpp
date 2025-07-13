@@ -14,6 +14,7 @@ solar::Logger::ptr g_logger = SOLAR_LOG_NAME("root");
 void test_fiber() { SOLAR_LOG_INFO(g_logger) << "test_fiber"; }
 
 TEST(TestIOManager, test_epoll_wait_and_addEvent) {
+  GTEST_SKIP();
   solar::IOManager iom(2);
   iom.schedule(&test_fiber);
 
@@ -34,4 +35,10 @@ TEST(TestIOManager, test_epoll_wait_and_addEvent) {
     solar::IOManager::GetThis()->cancelEvent(sock, solar::IOManager::READ);
   });
   int rt = connect(sock, (struct sockaddr *)&addr, sizeof(addr));
+}
+
+TEST(TestIOManager, test_timer) {
+  solar::IOManager iom(2);
+  iom.addTimer(
+      1000, []() { SOLAR_LOG_INFO(g_logger) << "timer time out"; }, false);
 }

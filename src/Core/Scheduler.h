@@ -71,7 +71,7 @@ public:
     {
       MutexType::ScopedLock lock(m_mutex);
       while (begin != end) {
-        need_tickle = scheduleNoLock(std::move(*begin)) || need_tickle;
+        need_tickle = scheduleNoLock(std::move(*begin), -1) || need_tickle;
         ++begin;
       }
       if (need_tickle) {
