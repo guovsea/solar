@@ -121,9 +121,18 @@ protected:
   void addTimer(Timer::ptr timer, RWMutexType::WriteScopedLock &lock);
 
 private:
+  /**
+   * @brief 系统时间是否向前调了
+   *
+   * @param now_ms 当前时间
+   * @return true
+   * @return false
+   */
+  bool detectClockRollover(uint64_t now_ms);
   RWMutexType m_mutex;           //< 保护定时器的互斥锁
   std::set<Timer::ptr> m_timers; //< 定时器集合
   bool m_ticked{false};
+  uint64_t m_previousTime{0};
 };
 } // namespace solar
 

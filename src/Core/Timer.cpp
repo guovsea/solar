@@ -96,7 +96,7 @@ bool Timer::reset(uint64_t ms, bool from_now) {
   return true;
 }
 
-TimerManager::TimerManager() {}
+TimerManager::TimerManager() { m_previousTime = GetCurrentMS(); }
 
 Timer::ptr TimerManager::addTimer(uint64_t ms, std::function<void()> cb,
                                   bool recurring) {
@@ -139,10 +139,14 @@ void TimerManager::listExpiredCb(std::vector<std::function<void()>> &cbs) {
     }
   }
   RWMutex::WriteScopedLock lock(m_mutex);
-  Timer::ptr now_timer{new Timer{now_ms}};
 
+  bool rollover = detectClockRollover(now_ms);
+  if (!rollover && (*m_timers.begin())->m_next > now_ms) {
+    return;
+  }
+  Timer::ptr now_timer{new Timer{now_ms}};
   // it 将指向下一个 > now_ms 的 timer，或者是 end()
-  auto it = m_timers.lower_bound(now_timer);
+  auto it = rollover ? m_timers.end() : m_timers.lower_bound(now_timer);
   while (it != m_timers.end() && (*it)->m_next == now_ms) {
     ++it;
   }
@@ -172,6 +176,15 @@ void TimerManager::addTimer(Timer::ptr timer,
   if (need_tickle) {
     onTimerInsertedAtFront();
   }
+}
+
+bool TimerManager::detectClockRollover(uint64_t now_ms) {
+  bool rollover{false};
+  if (now_ms < m_previousTime && now_ms < (m_previousTime - 60 * 60 * 1000)) {
+    rollover = true;
+  }
+  m_previousTime = now_ms;
+  return rollover;
 }
 
 } // namespace solar
