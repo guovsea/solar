@@ -261,6 +261,11 @@ void IOManager::resizeContexts(size_t size) {
 
 void IOManager::onTimerInsertedAtFront() { tickle(); }
 
+bool IOManager::stopping(uint64_t &timeout) {
+  timeout = getNextTimer();
+  return timeout == ~0ul && m_pendingEventCount == 0 && Scheduler::stopping();
+}
+
 IOManager *IOManager::GetThis() {
   return dynamic_cast<IOManager *>(Scheduler::GetThis());
 }
@@ -274,7 +279,8 @@ void IOManager::tickle() {
 }
 
 bool IOManager::stopping() {
-  return m_pendingEventCount == 0 && Scheduler::stopping();
+  uint64_t dummy{0};
+  return stopping(dummy);
 }
 
 void IOManager::idle() {
@@ -282,16 +288,9 @@ void IOManager::idle() {
   std::shared_ptr<epoll_event> shared_events(events);
   while (true) {
     uint64_t next_timeout{0};
-    if (stopping()) {
-      // 为什么不把判断有无 timer 放到 stopping 中？
-      // 因为这样只有在 stopping == true 的时候才会去锁 timerMgr，
-      // 否则每次循环都要锁 timerMgr
-      next_timeout = getNextTimer(); //< 需要锁 timerMgr
-      if (next_timeout == ~0ull) {
-        SOLAR_LOG_INFO(g_logger)
-            << "name=" << getName() << " idle stopping exit";
-        break;
-      }
+    if (stopping(next_timeout)) {
+      SOLAR_LOG_INFO(g_logger) << "name=" << getName() << " idle stopping exit";
+      break;
     }
 
     int rt = 0;

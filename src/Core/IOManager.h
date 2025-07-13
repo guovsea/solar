@@ -40,6 +40,7 @@ protected:
   void onTimerInsertedAtFront() override;
 
 private:
+  bool stopping(uint64_t &timeout);
   struct FdContext {
     typedef Mutex MutexType;
     struct EventContext {

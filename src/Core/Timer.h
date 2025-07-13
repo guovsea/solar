@@ -14,20 +14,6 @@ class Timer : public std::enable_shared_from_this<Timer> {
 public:
   typedef std::shared_ptr<Timer> ptr;
 
-private:
-  /**
-   * @brief
-   *
-   * @param ms
-   * @param cb
-   * @param recurring  是否是循环定时器
-   * @param manager
-   */
-  Timer(uint64_t ms, std::function<void()> cb, bool recurring,
-        TimerManager *manager);
-
-  Timer(uint64_t next);
-
   /**
    * @brief 取消定时器
    *
@@ -52,6 +38,20 @@ private:
    * @return false 被取消或被从管理器中拿出
    */
   bool reset(uint64_t ms, bool from_now);
+
+private:
+  /**
+   * @brief
+   *
+   * @param ms
+   * @param cb
+   * @param recurring  是否是循环定时器
+   * @param manager
+   */
+  Timer(uint64_t ms, std::function<void()> cb, bool recurring,
+        TimerManager *manager);
+
+  Timer(uint64_t next);
 
 private:
   struct Comparator {

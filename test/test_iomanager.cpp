@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <thread>
 
 namespace {
 solar::Logger::ptr g_logger = SOLAR_LOG_NAME("root");
@@ -37,8 +38,29 @@ TEST(TestIOManager, test_epoll_wait_and_addEvent) {
   int rt = connect(sock, (struct sockaddr *)&addr, sizeof(addr));
 }
 
-TEST(TestIOManager, test_timer) {
+namespace {
+bool time_out{false};
+}
+TEST(TestIOManager, test_add_timer) {
+  solar::IOManager iom{2};
+  iom.addTimer(1000, []() { time_out = true; }, false);
+  std::this_thread::sleep_for(std::chrono::seconds{2});
+  EXPECT_TRUE(time_out);
+}
+
+namespace {
+int cnt{0};
+}
+TEST(TestIOManager, test_calcel_timer) {
   solar::IOManager iom(2);
-  iom.addTimer(
-      1000, []() { SOLAR_LOG_INFO(g_logger) << "timer time out"; }, false);
+  solar::Timer::ptr counter = iom.addTimer(
+      500,
+      [&counter]() {
+        if (++cnt == 5) {
+          counter->cancel();
+        }
+      },
+      true);
+  std::this_thread::sleep_for(std::chrono::seconds{3});
+  EXPECT_EQ(cnt, 5);
 }
