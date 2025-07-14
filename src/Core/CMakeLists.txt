@@ -11,6 +11,7 @@ set(PUBLIC_HEADER
   Scheduler.h
   IOManager.h
   Timer.h
+  Hook.h
 )
 
 target_sources(
@@ -23,6 +24,7 @@ target_sources(
   Scheduler.cpp
   IOManager.cpp
   Timer.cpp
+  Hook.cpp
 )
 
 target_include_directories(
@@ -35,4 +37,5 @@ target_link_libraries(
   ${LIB_NAME}
   PUBLIC
   ${PROJECT_NAME}::log
+  dl
 )

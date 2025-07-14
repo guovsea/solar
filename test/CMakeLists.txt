@@ -22,6 +22,7 @@ target_sources(
   test_fiber.cpp
   test_scheduler.cpp
   test_iomanager.cpp
+  test_hook.cpp
 )
 
 target_link_libraries(${EXE_NAME} 
@@ -34,15 +35,3 @@ target_link_libraries(${EXE_NAME}
 set(TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_compile_definitions(${EXE_NAME} PRIVATE __TEST_DIR="${TEST_DIR}/")
-
-# copy assert files
-# set(TEST_ASSERT_FILES 
-#   ${CMAKE_CURRENT_SOURCE_DIR}/test.yml 
-#   ${CMAKE_CURRENT_SOURCE_DIR}/log.yml
-# )
-
-# add_custom_command(
-#     TARGET ${EXE_NAME} POST_BUILD
-#     COMMAND ${CMAKE_COMMAND} -E copy ${TEST_ASSERT_FILES} $<TARGET_FILE_DIR:${EXE_NAME}>
-#     COMMENT "Copy test assert files."
-# )

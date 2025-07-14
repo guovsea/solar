@@ -289,7 +289,8 @@ void IOManager::idle() {
   while (true) {
     uint64_t next_timeout{0};
     if (stopping(next_timeout)) {
-      SOLAR_LOG_INFO(g_logger) << "name=" << getName() << " idle stopping exit";
+      SOLAR_LOG_INFO(g_logger)
+          << "name =" << getName() << " idle stopping exit";
       break;
     }
 

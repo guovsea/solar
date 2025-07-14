@@ -1,4 +1,5 @@
 #include "Core/Scheduler.h"
+#include "Core/Hook.h"
 #include "Core/Thread.h"
 #include "Log/Log.h"
 #include "Util/macro.h"
@@ -108,6 +109,7 @@ void Scheduler::tickle() { SOLAR_LOG_INFO(g_logger) << "tickle"; }
 
 void Scheduler::run() {
   SOLAR_LOG_DEBUG(g_logger) << "run";
+  set_hook_enable(true);
   setThis();
   if (solar::GetThreadId() != m_rootThread) {
     t_fiber = Fiber::GetThis().get();
