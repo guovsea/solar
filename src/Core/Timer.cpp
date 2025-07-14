@@ -1,8 +1,10 @@
 #include "Core/Timer.h"
+#include "Log/Log.h"
 #include "Timer.h"
 #include "Util/Util.h"
 
 namespace solar {
+static Logger::ptr g_logger = SOLAR_LOG_NAME("root");
 void OnTimer(std::weak_ptr<void> weak_cond, std::function<void()> cb) {
   std::shared_ptr<void> tmp = weak_cond.lock();
   if (tmp) {
@@ -26,7 +28,8 @@ bool Timer::Comparator::operator()(const Timer::ptr &lhs,
   // 按照下次触发时间点升序排列
   if (lhs->m_next < rhs->m_next) {
     return true;
-  } else if (lhs->m_next > rhs->m_next) {
+  }
+  if (rhs->m_next < lhs->m_next) {
     return false;
   }
   // 如果时间相同，按地址排序
@@ -145,11 +148,7 @@ void TimerManager::listExpiredCb(std::vector<std::function<void()>> &cbs) {
     return;
   }
   Timer::ptr now_timer{new Timer{now_ms}};
-  // it 将指向下一个 > now_ms 的 timer，或者是 end()
-  auto it = rollover ? m_timers.end() : m_timers.lower_bound(now_timer);
-  while (it != m_timers.end() && (*it)->m_next == now_ms) {
-    ++it;
-  }
+  auto it = rollover ? m_timers.end() : m_timers.upper_bound(now_timer);
 
   expired.insert(expired.begin(), m_timers.begin(), it);
   m_timers.erase(m_timers.begin(), it);

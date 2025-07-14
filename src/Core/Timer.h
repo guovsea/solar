@@ -131,8 +131,8 @@ private:
    * @return false
    */
   bool detectClockRollover(uint64_t now_ms);
-  RWMutexType m_mutex;           //< 保护定时器的互斥锁
-  std::set<Timer::ptr> m_timers; //< 定时器集合
+  RWMutexType m_mutex;                              //< 保护定时器的互斥锁
+  std::set<Timer::ptr, Timer::Comparator> m_timers; //< 定时器集合
   bool m_ticked{false};
   uint64_t m_previousTime{0};
 };
