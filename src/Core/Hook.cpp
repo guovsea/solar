@@ -64,6 +64,17 @@ int usleep(useconds_t usec) {
   return 0;
 }
 
-extern sleep_fun sleep_f;
-extern usleep_fun usleep_f;
+int nanosleep(const struct timespec *req, struct timespec *rem) {
+  if (!solar::t_hook_enable) {
+    return nanosleep(req, rem);
+  }
+  int timeout_ms = req->tv_sec * 1000 + req->tv_nsec / 1000 / 1000;
+  solar::Fiber::ptr fiber = solar::Fiber::GetThis();
+  solar::IOManager *iom = solar::IOManager::GetThis();
+  iom->addTimer(timeout_ms, [iom, fiber]() { iom->schedule(fiber); });
+  fiber->YeildToHold();
+  return 0;
+}
+
+int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 }

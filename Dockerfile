@@ -126,3 +126,11 @@ CMD ["/usr/sbin/sshd", "-D"]
 # docker run -it -p:2222:22 -d --name sylar --hostname sylar sylar:v12
 
 ## 记得拷贝公钥到 github
+
+# TODO 
+# sudo apt-get install -y locales
+#     apt-get install -y \
+#         man-db \
+#         manpages \
+# # 完整运行 unminimize（需要确认两次）
+# echo -e "y\ny" | sudo unminimize
