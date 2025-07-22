@@ -44,7 +44,7 @@ bool time_out{false};
 TEST(TestIOManager, test_add_timer) {
   solar::IOManager iom{2};
   iom.addTimer(1000, []() { time_out = true; }, false);
-  std::this_thread::sleep_for(std::chrono::seconds{2});
+  sleep(2);
   EXPECT_TRUE(time_out);
 }
 
@@ -61,6 +61,6 @@ TEST(TestIOManager, test_calcel_timer) {
         }
       },
       true);
-  std::this_thread::sleep_for(std::chrono::seconds{3});
+  sleep(3);
   EXPECT_EQ(cnt, 5);
 }

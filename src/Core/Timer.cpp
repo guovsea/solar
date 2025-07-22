@@ -114,7 +114,6 @@ Timer::ptr TimerManager::addConditionTimer(uint64_t ms,
                                            std::weak_ptr<void> weak_cond,
                                            bool recurring) {
   return addTimer(ms, std::bind(&OnTimer, weak_cond, cb), recurring);
-  return Timer::ptr();
 }
 
 uint64_t TimerManager::getNextTimer() {

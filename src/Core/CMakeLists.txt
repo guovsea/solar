@@ -12,6 +12,7 @@ set(PUBLIC_HEADER
   IOManager.h
   Timer.h
   Hook.h
+  fd_manager.h
 )
 
 target_sources(
@@ -25,6 +26,7 @@ target_sources(
   IOManager.cpp
   Timer.cpp
   Hook.cpp
+  fd_manager.cpp
 )
 
 target_include_directories(

@@ -17,6 +17,14 @@ public:
   IOManager(size_t threads = 1, bool use_caller = true,
             const std::string &name = "");
   ~IOManager();
+  /**
+   * @brief
+   *
+   * @param fd
+   * @param event
+   * @param cb 如果不传，则将当前协程作为事件的回调协程
+   * @return int
+   */
   int addEvent(int fd, Event event, std::function<void()> cb = {});
   bool delEvent(int fd, Event event);
 
