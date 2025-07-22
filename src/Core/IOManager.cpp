@@ -96,7 +96,7 @@ int IOManager::addEvent(int fd, Event event, std::function<void()> cb) {
     fd_ctx = m_fdContexts[fd];
   }
 
-  FdContext::MutexType::ScopedLock lock2(fd_ctx->mutex);
+  FdContext::MutexType::Lock lock2(fd_ctx->mutex);
   // 再次添加相同的事件，错误
   if (fd_ctx->events & event) {
     SOLAR_LOG_ERROR(g_logger)
@@ -143,7 +143,7 @@ bool IOManager::delEvent(int fd, Event event) {
   FdContext *fd_ctx = m_fdContexts[fd];
   lock.unlock();
 
-  FdContext::MutexType::ScopedLock lock2(fd_ctx->mutex);
+  FdContext::MutexType::Lock lock2(fd_ctx->mutex);
   if (!(fd_ctx->events & event)) {
     return false;
   }
@@ -179,7 +179,7 @@ bool IOManager::cancelEvent(int fd, Event event) {
   FdContext *fd_ctx = m_fdContexts[fd];
   lock.unlock();
 
-  FdContext::MutexType::ScopedLock lock2(fd_ctx->mutex);
+  FdContext::MutexType::Lock lock2(fd_ctx->mutex);
   if (!(fd_ctx->events & event)) {
     return false;
   }
@@ -214,7 +214,7 @@ bool IOManager::cancelAll(int fd) {
   FdContext *fd_ctx = m_fdContexts[fd];
   lock.unlock();
 
-  FdContext::MutexType::ScopedLock lock2(fd_ctx->mutex);
+  FdContext::MutexType::Lock lock2(fd_ctx->mutex);
   if (!fd_ctx->events) {
     return false;
   }
@@ -327,7 +327,7 @@ void IOManager::idle() {
         continue;
       }
       FdContext *fd_ctx = static_cast<FdContext *>(event.data.ptr);
-      FdContext::MutexType::ScopedLock lock(fd_ctx->mutex);
+      FdContext::MutexType::Lock lock(fd_ctx->mutex);
       if (event.events & (EPOLLERR | EPOLLHUP)) {
         event.events |= EPOLLIN | EPOLLOUT;
       }

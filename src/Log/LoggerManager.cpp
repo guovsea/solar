@@ -10,7 +10,7 @@ LoggerManager::LoggerManager() {
   init();
 }
 Logger::ptr LoggerManager::getLogger(const std::string &name) {
-  MutexType::ScopedLock lock(m_mutex);
+  MutexType::Lock lock(m_mutex);
   auto it = m_loggers.find(name);
   if (it != m_loggers.end()) {
     return it->second;
@@ -22,7 +22,7 @@ Logger::ptr LoggerManager::getLogger(const std::string &name) {
 }
 void LoggerManager::init() {}
 std::string LoggerManager::toYamlString() {
-  MutexType::ScopedLock lock(m_mutex);
+  MutexType::Lock lock(m_mutex);
   YAML::Node node;
   for (const auto &[key, val] : m_loggers) {
     node["logs"].push_back(YAML::Load(val->toYamlString()));

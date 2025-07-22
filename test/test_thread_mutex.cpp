@@ -112,7 +112,7 @@ TEST(TestThreadMutex, TestRWScopedMutexLock) {
 static int g_cnt4 = 0;
 solar::Mutex g_mutex;
 void work5() {
-  solar::Mutex::ScopedLock lock(g_mutex);
+  solar::Mutex::Lock lock(g_mutex);
   for (int i = 0; i < 1000'000; ++i) {
     g_cnt4++;
   }

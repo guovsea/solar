@@ -9,13 +9,13 @@ namespace solar {
 
 void StdoutLogAppender::log(LogLevel level, LogEvent::ptr event) {
   if (level >= m_level) {
-    MutexType::ScopedLock lock(m_mutex);
+    MutexType::Lock lock(m_mutex);
     std::cout << m_formatter->format(level, event);
   }
 }
 
 std::string StdoutLogAppender::toYamlString() {
-  MutexType::ScopedLock lock(m_mutex);
+  MutexType::Lock lock(m_mutex);
   YAML::Node node;
   node["type"] = "StdoutLogAppender";
   if (m_level != LogLevel::UNKNOWN) {
@@ -51,13 +51,13 @@ void FileLogAppender::log(LogLevel level, LogEvent::ptr event) {
       reopen();
       m_lastTime = now;
     }
-    MutexType::ScopedLock lock(m_mutex);
+    MutexType::Lock lock(m_mutex);
     m_filestream << m_formatter->format(level, event);
   }
 }
 
 std::string FileLogAppender::toYamlString() {
-  MutexType::ScopedLock lock(m_mutex);
+  MutexType::Lock lock(m_mutex);
   YAML::Node node;
   node["type"] = "FileLogAppender";
   node["file"] = m_filename;
@@ -73,12 +73,12 @@ std::string FileLogAppender::toYamlString() {
 }
 
 void LogAppender::setFormatter(LogFormatter::ptr formater) {
-  MutexType::ScopedLock lock(m_mutex);
+  MutexType::Lock lock(m_mutex);
   m_formatter = formater;
 }
 
 LogFormatter::ptr LogAppender::getFormatter() {
-  MutexType::ScopedLock lock(m_mutex);
+  MutexType::Lock lock(m_mutex);
   return m_formatter;
 }
 

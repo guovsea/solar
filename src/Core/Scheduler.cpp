@@ -51,7 +51,7 @@ Scheduler::~Scheduler() {
 Fiber *Scheduler::GetMainFiber() { return t_fiber; }
 
 void Scheduler::start() {
-  MutexType::ScopedLock lock(m_mutex);
+  MutexType::Lock lock(m_mutex);
   if (!m_stopping) {
     return;
   }
@@ -97,7 +97,7 @@ void Scheduler::stop() {
   }
   std::vector<Thread::ptr> thrs;
   {
-    MutexType::ScopedLock lock(m_mutex);
+    MutexType::Lock lock(m_mutex);
     thrs.swap(m_threads);
   }
   for (auto &i : thrs) {
@@ -124,7 +124,7 @@ void Scheduler::run() {
     bool is_active = false;
     {
       // 从任务队列中取出任务
-      MutexType::ScopedLock lock(m_mutex);
+      MutexType::Lock lock(m_mutex);
       auto it = m_fibers.begin();
       while (it != m_fibers.end()) {
         if (it->thread != -1 && it->thread != solar::GetFiberId()) {
@@ -200,7 +200,7 @@ void Scheduler::run() {
 }
 
 bool Scheduler::stopping() {
-  MutexType::ScopedLock lock(m_mutex);
+  MutexType::Lock lock(m_mutex);
   return m_autoStop && m_stopping && m_fibers.empty() &&
          m_activeThreadCount == 0;
 }

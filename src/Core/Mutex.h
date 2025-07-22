@@ -14,7 +14,7 @@ namespace solar {
  */
 class Mutex : public Noncopyable {
 public:
-  typedef ScopedLockImpl<Mutex> ScopedLock;
+  typedef ScopedLockImpl<Mutex> Lock;
   Mutex() { pthread_mutex_init(&m_mutex, nullptr); }
   ~Mutex() { pthread_mutex_destroy(&m_mutex); }
   void lock() { pthread_mutex_lock(&m_mutex); }
@@ -30,7 +30,7 @@ private:
  */
 class NullMutex : public Noncopyable {
 public:
-  typedef ScopedLockImpl<Mutex> ScopedLock;
+  typedef ScopedLockImpl<Mutex> Lock;
   NullMutex() {}
   ~NullMutex() {}
   void lock() {}
@@ -39,7 +39,7 @@ public:
 
 class SpinLock {
 public:
-  typedef ScopedLockImpl<SpinLock> ScopedLock;
+  typedef ScopedLockImpl<SpinLock> Lock;
   SpinLock() { pthread_spin_init(&m_mutex, 0); }
   ~SpinLock() { pthread_spin_destroy(&m_mutex); }
   void lock() { pthread_spin_lock(&m_mutex); }
@@ -71,7 +71,7 @@ private:
 // Compare and swap (OS)
 class CASLock : public Noncopyable {
 public:
-  typedef ScopedLockImpl<CASLock> ScopedLock;
+  typedef ScopedLockImpl<CASLock> Lock;
   CASLock() { m_mutex.clear(); }
   ~CASLock() {}
   void lock() {

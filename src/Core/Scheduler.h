@@ -48,7 +48,7 @@ public:
   template <typename FiberOrCb> void schedule(FiberOrCb fc, int thread = -1) {
     bool need_tickle = false;
     {
-      MutexType::ScopedLock lock(m_mutex);
+      MutexType::Lock lock(m_mutex);
       need_tickle = scheduleNoLock(fc, thread);
     }
     if (need_tickle) {
@@ -69,7 +69,7 @@ public:
   void schedule(InputIterator begin, InputIterator end) {
     bool need_tickle = false;
     {
-      MutexType::ScopedLock lock(m_mutex);
+      MutexType::Lock lock(m_mutex);
       while (begin != end) {
         need_tickle = scheduleNoLock(std::move(*begin), -1) || need_tickle;
         ++begin;
