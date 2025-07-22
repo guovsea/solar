@@ -6,9 +6,10 @@
 #include <string>
 
 #include "Core/Semaphore.h"
+#include "Util/Noncopyable.h"
 
 namespace solar {
-class Thread {
+class Thread : public Noncopyable {
 public:
   typedef std::shared_ptr<Thread> ptr;
   Thread(std::function<void()> cb, const std::string &name);

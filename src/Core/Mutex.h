@@ -2,6 +2,7 @@
 #define __SRC_CORE_MUTEX_H__
 
 #include "Core/LockImpl.h"
+#include "Util/Noncopyable.h"
 #include <atomic>
 #include <pthread.h>
 
@@ -11,7 +12,7 @@ namespace solar {
  * @brief 互斥锁
  *
  */
-class Mutex {
+class Mutex : public Noncopyable {
 public:
   typedef ScopedLockImpl<Mutex> ScopedLock;
   Mutex() { pthread_mutex_init(&m_mutex, nullptr); }
@@ -27,7 +28,7 @@ private:
  * @brief 替换某种锁，方便测试
  *
  */
-class NullMutex {
+class NullMutex : public Noncopyable {
 public:
   typedef ScopedLockImpl<Mutex> ScopedLock;
   NullMutex() {}
@@ -52,7 +53,7 @@ private:
  * @brief 读写锁
  *
  */
-class RWMutex {
+class RWMutex : public Noncopyable {
 public:
   typedef ReadScopedLockImpl<RWMutex> ReadScopedLock;
   typedef WriteScopedLockImpl<RWMutex> WriteScopedLock;
@@ -68,7 +69,7 @@ private:
 };
 
 // Compare and swap (OS)
-class CASLock {
+class CASLock : public Noncopyable {
 public:
   typedef ScopedLockImpl<CASLock> ScopedLock;
   CASLock() { m_mutex.clear(); }

@@ -1,11 +1,12 @@
 #ifndef __SOLAR_CORE_SEMAPHORE_H__
 #define __SOLAR_CORE_SEMAPHORE_H__
 
+#include "Util/Noncopyable.h"
 #include <semaphore.h>
 #include <stdint.h>
 
 namespace solar {
-class Semaphore {
+class Semaphore : public Noncopyable {
 public:
   Semaphore(uint32_t count = 0);
   ~Semaphore();
