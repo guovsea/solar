@@ -1,25 +1,25 @@
 #ifndef __SOLAR_CORE_SEMAPHORE_H__
 #define __SOLAR_CORE_SEMAPHORE_H__
 
-#include "Util/Noncopyable.h"
 #include <semaphore.h>
 #include <stdint.h>
+#include "Util/Noncopyable.h"
 
 namespace solar {
 class Semaphore : public Noncopyable {
 public:
-  Semaphore(uint32_t count = 0);
-  ~Semaphore();
-  void wait();
-  void notify();
+    Semaphore(uint32_t count = 0);
+    ~Semaphore();
+    void wait();
+    void notify();
 
 private:
-  Semaphore(const Semaphore &) = delete;
-  Semaphore(const Semaphore &&) = delete;
-  Semaphore &operator=(const Semaphore &) = delete;
+    Semaphore(const Semaphore &) = delete;
+    Semaphore(const Semaphore &&) = delete;
+    Semaphore &operator=(const Semaphore &) = delete;
 
 private:
-  sem_t m_semaphore;
+    sem_t m_semaphore;
 };
 } // namespace solar
 

@@ -3,15 +3,7 @@
 #include <string>
 
 namespace solar {
-enum class LogLevel {
-  UNKNOWN = 0,
-  DEBUG,
-  INFO,
-  WARN,
-  ERROR,
-  FATAL,
-  DELETED = 1000
-};
+enum class LogLevel { UNKNOWN = 0, DEBUG, INFO, WARN, ERROR, FATAL, DELETED = 1000 };
 
 const char *ToString(LogLevel level);
 

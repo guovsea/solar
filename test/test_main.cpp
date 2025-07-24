@@ -9,9 +9,9 @@
 // static solar::LogIniter __logInit;
 
 int main(int argc, char **argv) {
-  solar::LogIniter __logInit;
-  SOLAR_LOG_NAME("null_logger")->setLevel(solar::LogLevel::DELETED);
-  solar::Thread::SetName("main");
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+    solar::LogIniter __logInit;
+    SOLAR_LOG_NAME("null_logger")->setLevel(solar::LogLevel::DELETED);
+    solar::Thread::SetName("main");
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

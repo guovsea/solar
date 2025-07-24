@@ -11,13 +11,13 @@ void func() { SOLAR_ASSERT(false); }
 } // namespace
 
 TEST(TestUtil, TestBacktrace) {
-  // SOLAR_LOG_INFO(g_logger) << solar::BacktraceToString(10);
+    // SOLAR_LOG_INFO(g_logger) << solar::BacktraceToString(10);
 }
 
 TEST(TestUtil, TestASSERT) {
-  // func();
+    // func();
 }
 
 TEST(TestUtil, TestASSERT2) {
-  // SOLAR_ASSERT2(false, "Some message.");
+    // SOLAR_ASSERT2(false, "Some message.");
 }

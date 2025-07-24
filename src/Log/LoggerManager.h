@@ -10,21 +10,21 @@
 namespace solar {
 class LoggerManager {
 public:
-  typedef Mutex MutexType;
-  LoggerManager();
+    typedef Mutex MutexType;
+    LoggerManager();
 
-  Logger::ptr getLogger(const std::string &name);
+    Logger::ptr getLogger(const std::string &name);
 
-  void init();
+    void init();
 
-  Logger::ptr getRoot() const { return m_root; }
+    Logger::ptr getRoot() const { return m_root; }
 
-  std::string toYamlString();
+    std::string toYamlString();
 
 private:
-  std::map<std::string, Logger::ptr> m_loggers;
-  Logger::ptr m_root;
-  MutexType m_mutex;
+    std::map<std::string, Logger::ptr> m_loggers;
+    Logger::ptr m_root;
+    MutexType m_mutex;
 };
 
 using LoggerMgr = Singleton<LoggerManager>;

@@ -2,5 +2,5 @@
 #include <iostream>
 
 struct Test {
-  Test() { std::cout << "test test test" << std::endl; }
+    Test() { std::cout << "test test test" << std::endl; }
 };
