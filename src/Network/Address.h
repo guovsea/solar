@@ -14,6 +14,8 @@ class Address {
 public:
     typedef std::shared_ptr<Address> ptr;
 
+    static  Address::ptr Create(const sockaddr* addr, socklen_t addrlen);
+
     virtual ~Address() {}
     int getFamily() const;
 
@@ -30,6 +32,8 @@ public:
 class IPAddress : public Address {
 public:
     typedef std::shared_ptr<IPAddress> ptr;
+
+    static IPAddress::ptr Create(const char* address, uint32_t port = 0);
 
     ~IPAddress() override {}
 
@@ -107,6 +111,7 @@ class UnknownAddress : public Address {
 public:
     typedef std::shared_ptr<UnknownAddress> ptr;
     UnknownAddress(int family);
+    UnknownAddress(const sockaddr& addr);
 
     const sockaddr *getAddr() const override;
     size_t getAddrLen() const override;

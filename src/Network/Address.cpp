@@ -12,7 +12,7 @@
 #include "Address.h"
 
 #include <arpa/inet.h>
-#include <boost/type_traits/add_reference.hpp>
+#include  <netdb.h>
 
 namespace solar {
 static Logger::ptr g_logger = SOLAR_LOG_NAME("system");
@@ -29,6 +29,23 @@ constexpr size_t MAX_PATH_LEN = sizeof(static_cast<sockaddr_un*>(nullptr)->sun_p
 template<typename T>
 static T CreateMask(uint32_t bits) {
     return (1 << (sizeof(T) * 8 - bits)) - 1;
+}
+
+Address::ptr Address::Create(const sockaddr *addr, socklen_t addrlen) {
+    if (addr == nullptr) {return nullptr;}
+    Address::ptr result{};
+    switch (addr->sa_family) {
+        case AF_INET:
+            result = std::make_shared<IPv4Address>(*reinterpret_cast<const sockaddr_in*>(addr));
+            break;
+        case AF_INET6:
+            result = std::make_shared<IPv6Address>(*reinterpret_cast<const sockaddr_in6*>(addr));
+            break;
+        default:
+            result = std::make_shared<UnknownAddress>(*addr);
+            break;
+    }
+    return result;
 }
 
 int Address::getFamily() const { return getAddr()->sa_family; }
@@ -61,6 +78,30 @@ bool Address::operator==(const Address &rhs) const {
 
 bool Address::operator!=(const Address &rhs) const {
     return !(*this == rhs);
+}
+
+IPAddress::ptr IPAddress::Create(const char *address, uint32_t port) {
+    addrinfo hints{}, *results{};
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_flags = AI_NUMERICHOST;
+
+    if (int error = getaddrinfo(address, nullptr, &hints, &results)) {
+        SOLAR_LOG_ERROR(g_logger) << "IPAddress::Create(" << address
+        << ", " << port << ") error=" << error << " errno=" << errno << "strerror=" << strerror(errno);
+        return nullptr;
+    }
+    try {
+        IPAddress::ptr result = std::dynamic_pointer_cast<IPAddress>(
+            Address::Create(results->ai_addr, results->ai_addrlen));
+        if (result) {
+            result->setPort(port);
+        }
+        freeaddrinfo(results);
+        return  result;
+    } catch (...) {
+        freeaddrinfo(results);
+        return nullptr;
+    }
 }
 
 IPv4Address::ptr IPv4Address::Create(const char *address, uint32_t port) {
@@ -291,6 +332,10 @@ UnknownAddress::UnknownAddress(int family)
     :m_addr{}
 {
     m_addr.sa_family = family;
+}
+UnknownAddress::UnknownAddress(const sockaddr& addr)
+    :m_addr{addr} {
+
 }
 
 const sockaddr * UnknownAddress::getAddr() const {
