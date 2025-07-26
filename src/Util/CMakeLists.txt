@@ -7,6 +7,7 @@ set(PUBLIC_HEADER
   Singleton.h
   Config.h
   CustomConfigVar.h
+  Endian.h
 )
 
 target_sources(

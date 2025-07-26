@@ -4,13 +4,12 @@
 
 #ifndef SOLAR_ADDRESS_H
 #define SOLAR_ADDRESS_H
-#include <iostream>
 #include <memory>
 #include <netinet/in.h>
+#include <netinet/ip.h>
 #include <sys/socket.h>
-
+#include <sys/un.h>
 namespace solar {
-
 class Address {
 public:
     typedef std::shared_ptr<Address> ptr;
@@ -32,33 +31,32 @@ class IPAddress : public Address {
 public:
     typedef std::shared_ptr<IPAddress> ptr;
 
-    virtual ~IPAddress() {}
+    ~IPAddress() override {}
 
-    virtual IPAddress::ptr broadcastAddress(uint32_t prefix_len);
-    virtual IPAddress::ptr networkAddress(uint32_t prefix_len);
-    virtual IPAddress::ptr subnetMask(uint32_t prefix_len);
+    virtual IPAddress::ptr broadcastAddress(uint32_t prefix_len) = 0;
+    virtual IPAddress::ptr networkAddress(uint32_t prefix_len) = 0;
+    virtual IPAddress::ptr subnetMask(uint32_t prefix_len) = 0;
 
     virtual uint32_t getPort() const = 0;
-    virtual void setPort(uint32_t v);
+    virtual void setPort(uint32_t v) = 0;
 };
 
 class IPv4Address : public IPAddress {
 public:
     typedef std::shared_ptr<IPv4Address> ptr;
-    IPv4Address(uint32_t address = INETADD_ANY, uint32_t port = 0);
+    IPv4Address(uint32_t address = INADDR_ANY, uint32_t port = 0);
+    IPv4Address(const sockaddr_in& address);
 
-    virtual const sockaddr *getAddr() const = 0;
-    virtual size_t getAddrLen() const = 0;
-    virtual std::ostream &insert(std::ostream &os) const;
+    const sockaddr *getAddr() const override;
+    size_t getAddrLen() const override;
+    std::ostream &insert(std::ostream &os) const override;
 
-    virtual IPAddress::ptr broadcastAddress(uint32_t prefix_len);
-    virtual IPAddress::ptr networkAddress(uint32_t prefix_len);
+    IPAddress::ptr broadcastAddress(uint32_t prefix_len) override;
+    IPAddress::ptr networkAddress(uint32_t prefix_len) override;
+    IPAddress::ptr subnetMask(uint32_t prefix_len) override;
 
-    virtual IPAddress::ptr subnetMask(uint32_t prefix_len);
-
-    virtual uint32_t getPort() const = 0;
-    virtual void setPort(uint32_t v);
-
+    uint32_t getPort() const override;
+    void setPort(uint32_t v) override;
 private:
     sockaddr_in m_addr;
 };
@@ -66,52 +64,51 @@ private:
 class IPv6Address : public IPAddress {
 public:
     typedef std::shared_ptr<IPv4Address> ptr;
-    IPv6Address(uint32_t address = INETADD_ANY, uint32_t port = 0);
+    IPv6Address();
+    IPv6Address(const char* address, uint32_t port = 0);
+    IPv6Address(const sockaddr_in6& address);
 
-    virtual const sockaddr *getAddr() const = 0;
-    virtual size_t getAddrLen() const = 0;
-    virtual std::ostream &insert(std::ostream &os) const;
+    const sockaddr *getAddr() const override;
+    size_t getAddrLen() const override;
+    std::ostream &insert(std::ostream &os) const override;
 
-    virtual IPAddress::ptr broadcastAddress(uint32_t prefix_len);
-    virtual IPAddress::ptr networkAddress(uint32_t prefix_len);
+    IPAddress::ptr broadcastAddress(uint32_t prefix_len) override;
+    IPAddress::ptr networkAddress(uint32_t prefix_len) override;
+    IPAddress::ptr subnetMask(uint32_t prefix_len) override;
 
-    virtual IPAddress::ptr subnetMask(uint32_t prefix_len);
-
-    virtual uint32_t getPort() const = 0;
-    virtual void setPort(uint32_t v);
-
+    uint32_t getPort() const override;
+    void setPort(uint32_t v) override;
 private:
-    sockaddr_in6 m_addr;
+    sockaddr_in6 m_addr{};
 };
 
-class UinxAddress : public Address {
+class UnixAddress : public Address {
 public:
-    typedef std::shared_ptr<UinxAddress> ptr;
+    typedef std::shared_ptr<UnixAddress> ptr;
     UnixAddress(const std::string &path);
+    UnixAddress();
 
-    virtual const sockaddr *getAddr() const = 0;
-    virtual size_t getAddrLen() const = 0;
-    virtual std::ostream &insert(std::ostream &os) const;
-
+    const sockaddr *getAddr() const override;
+    size_t getAddrLen() const override;
+    std::ostream &insert(std::ostream &os) const override;
 private:
     sockaddr_un m_addr;
-    socklen m_length;
+    socklen_t m_length;
 };
 
-class UnkownAddress : public Address {
+class UnknownAddress : public Address {
 
 public:
-    typedef std::shared_ptr<UnkownAddress> ptr;
-    UnkownAddress(const std::string &path);
+    typedef std::shared_ptr<UnknownAddress> ptr;
+    UnknownAddress(int family);
 
-    virtual const sockaddr *getAddr() const = 0;
-    virtual size_t getAddrLen() const = 0;
-    virtual std::ostream &insert(std::ostream &os) const;
+    const sockaddr *getAddr() const override;
+    size_t getAddrLen() const override;
+    std::ostream &insert(std::ostream &os) const override;
 
 private:
     sockaddr m_addr;
 };
-
 } // namespace solar
 
 #endif // SOLAR_ADDRESS_H

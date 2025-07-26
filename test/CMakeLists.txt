@@ -29,6 +29,7 @@ target_link_libraries(${EXE_NAME}
   PRIVATE 
   ${PROJECT_NAME}::log
   ${PROJECT_NAME}::core
+  ${PROJECT_NAME}::network
   GTest::gtest
 )
 
