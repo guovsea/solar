@@ -13,8 +13,8 @@ namespace solar {
 class Address {
 public:
     typedef std::shared_ptr<Address> ptr;
-    virtual ~Address() {}
 
+    virtual ~Address() {}
     int getFamily() const;
 
     virtual const sockaddr *getAddr() const = 0;
@@ -44,6 +44,9 @@ public:
 class IPv4Address : public IPAddress {
 public:
     typedef std::shared_ptr<IPv4Address> ptr;
+
+    static IPv4Address::ptr Create(const char* address, uint32_t port = 0);
+
     IPv4Address(uint32_t address = INADDR_ANY, uint32_t port = 0);
     IPv4Address(const sockaddr_in& address);
 
@@ -63,9 +66,12 @@ private:
 
 class IPv6Address : public IPAddress {
 public:
-    typedef std::shared_ptr<IPv4Address> ptr;
+    typedef std::shared_ptr<IPv6Address> ptr;
+
+    static IPv6Address::ptr Create(const char* address, uint32_t port = 0);
+
     IPv6Address();
-    IPv6Address(const char* address, uint32_t port = 0);
+    IPv6Address(const uint8_t address[16], uint32_t port);
     IPv6Address(const sockaddr_in6& address);
 
     const sockaddr *getAddr() const override;

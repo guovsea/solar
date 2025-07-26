@@ -7,10 +7,18 @@
 #include <memory>
 #include <sstream>
 
-#include  "Util/Endian.h"
+#include "Util/Endian.h"
+#include "Log/Log.h"
 #include "Address.h"
 
+#include <arpa/inet.h>
+#include <boost/type_traits/add_reference.hpp>
+
 namespace solar {
+static Logger::ptr g_logger = SOLAR_LOG_NAME("system");
+
+// 末尾需要 '\0'，因此需要 -1
+constexpr size_t MAX_PATH_LEN = sizeof(static_cast<sockaddr_un*>(nullptr)->sun_path) - 1;
 
 /**
  *p
@@ -53,6 +61,18 @@ bool Address::operator==(const Address &rhs) const {
 
 bool Address::operator!=(const Address &rhs) const {
     return !(*this == rhs);
+}
+
+IPv4Address::ptr IPv4Address::Create(const char *address, uint32_t port) {
+    IPv4Address::ptr rt = std::make_shared<IPv4Address>();
+    rt->m_addr.sin_port = ByteswapOnLittleEndian(port);
+    int result = inet_pton(AF_INET, address, &rt->m_addr.sin_addr.s_addr);
+    if (result <= 0) {
+    SOLAR_LOG_ERROR(g_logger) << "IPv4Address::Create(" << address << ", "
+        << port << ") rt=" << result << " errno=" << errno << " strerror=" << strerror(errno);
+        return nullptr;
+    }
+    return rt;
 }
 
 IPv4Address::IPv4Address(uint32_t address, uint32_t port)
@@ -126,7 +146,19 @@ IPv6Address::IPv6Address()
     m_addr.sin6_family = AF_INET6;
 }
 
-IPv6Address::IPv6Address(const char *address, uint32_t port)
+IPv6Address::ptr IPv6Address::Create(const char *address, uint32_t port) {
+    IPv6Address::ptr rt = std::make_shared<IPv6Address>();
+    rt->m_addr.sin6_port = ByteswapOnLittleEndian(port);
+    int result = inet_pton(AF_INET6, address, &rt->m_addr.sin6_addr.s6_addr);
+    if (result <= 0) {
+        SOLAR_LOG_ERROR(g_logger) << "IPv4Address::Create(" << address << ", "
+            << port << ") rt=" << result << " errno=" << errno << " strerror=" << strerror(errno);
+        return nullptr;
+    }
+    return rt;
+}
+
+IPv6Address::IPv6Address(const uint8_t address[16], uint32_t port)
     :m_addr{}
 {
     m_addr.sin6_family = AF_INET6;
@@ -209,9 +241,6 @@ uint32_t IPv6Address::getPort() const {
 void IPv6Address::setPort(uint32_t v){
     m_addr.sin6_port = ByteswapOnLittleEndian(v);
 }
-
-// 末尾需要 '\0'，因此需要 -1
-constexpr size_t MAX_PATH_LEN = sizeof(static_cast<sockaddr_un*>(nullptr)->sun_path) - 1;
 
 UnixAddress::UnixAddress(const std::string &path)
     :m_addr{}
