@@ -34,7 +34,7 @@ void test_host_and_port() {
     }
     std::string buffs;
     buffs.resize(4096);
-    rt = sock->recv(&buffs[0], buffs.size()); // TODO 不调试的话只能接收到部分消息，应该是个 BUG，可能是 do_io 写的有问题
+    rt = sock->recv(&buffs[0], buffs.size());
     EXPECT_GT(rt, 0);
     if (rt > 0) {
         buffs.resize(rt);
@@ -65,7 +65,7 @@ void test_host_and_service() {
     }
     std::string buffs;
     buffs.resize(4096);
-    rt = sock->recv(&buffs[0], buffs.size()); // TODO 不调试的话只能接收到部分消息，应该是个 BUG，可能是 do_io 写的有问题
+    rt = sock->recv(&buffs[0], buffs.size());
     EXPECT_GT(rt, 0);
     if (rt > 0) {
         buffs.resize(rt);
