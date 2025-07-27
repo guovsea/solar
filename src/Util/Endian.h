@@ -5,25 +5,25 @@
 #ifndef __SOLAR_ENDIAN_H__
 #define __SOLAR_ENDIAN_H__
 
-#include  <byteswap.h>
+#define SOLAR_LITTLE_ENDIAN 1234
+#define SOLAR_BIG_ENDIAN 4321
+
+#include <byteswap.h>
 #include <type_traits>
 
 namespace solar {
 template<typename T>
-std::enable_if_t<sizeof(T) == sizeof(uint64_t)>
-Byteswap(T value) {
+std::enable_if_t<sizeof(T) == sizeof(uint64_t), T> Byteswap(T value) {
     return static_cast<T>(bswap_64(static_cast<uint64_t>(value)));
 }
 
 template<typename T>
-std::enable_if_t<sizeof(T) == sizeof(uint32_t)>
-Byteswap(T value) {
-    return static_cast<T>(bswap_64(static_cast<uint32_t>(value)));
+std::enable_if_t<sizeof(T) == sizeof(uint32_t), T> Byteswap(T value) {
+    return static_cast<T>(bswap_32(static_cast<uint32_t>(value)));
 }
 template<typename T>
-std::enable_if_t<sizeof(T) == sizeof(uint16_t)>
-Byteswap(T value) {
-    return static_cast<T>(bswap_64(static_cast<uint16_t>(value)));
+std::enable_if_t<sizeof(T) == sizeof(uint16_t), T> Byteswap(T value) {
+    return static_cast<T>(bswap_16(static_cast<uint16_t>(value)));
 }
 
 #if BYTE_ORDER == BIG_ENDIAN
@@ -39,12 +39,12 @@ T ByteswapOnLittleEndian(T t) {
 }
 template<typename T>
 T ByteswapOnBigEndian(T t) {
-    return byteswap(t);
+    return Byteswap(t);
 }
 #else
 template<typename T>
-T ByteswapOnLittileEndian(T t) {
-    return byteswap(t);
+T ByteswapOnLittleEndian(T t) {
+    return Byteswap(t);
 }
 template<typename T>
 T ByteswapOnBigEndian(T t) {
@@ -52,5 +52,5 @@ T ByteswapOnBigEndian(T t) {
 }
 #endif
 
-}
+} // namespace solar
 #endif //__SOLAR_ENDIAN_H__
