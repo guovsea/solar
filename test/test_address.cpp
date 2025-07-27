@@ -59,3 +59,19 @@ TEST(TestAddress, iface) {
         SOLAR_LOG_INFO(g_logger) << i.first << " - " << i.second.first->toString() << " - " << i.second.second;
     }
 }
+
+TEST(TestAddress, ipv4_host) {
+    auto addr = solar::IPAddress::Create("www.baidu.com");
+    EXPECT_TRUE(addr);
+    if (addr) {
+        SOLAR_LOG_INFO(g_logger) << addr->toString();
+    }
+}
+
+TEST(TestAddress, ipv4_numerical) {
+    auto addr = solar::IPAddress::Create("192.10.8.8");
+    EXPECT_TRUE(addr);
+    if (addr) {
+        SOLAR_LOG_INFO(g_logger) << addr->toString();
+    }
+}

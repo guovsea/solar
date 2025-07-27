@@ -24,6 +24,7 @@ target_sources(
   test_iomanager.cpp
   test_hook.cpp
   test_address.cpp
+  test_socket.cpp
 )
 
 target_link_libraries(${EXE_NAME} 

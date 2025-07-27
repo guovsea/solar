@@ -124,7 +124,7 @@ Address::ptr Address::LookUpAny(const std::string &host, int family, int type,
     return nullptr;
 }
 
-IPAddress::ptr Address::LookUpIpAddress(const std::string &host, int family, int type,
+IPAddress::ptr Address::LookUpAnyIpAddress(const std::string &host, int family, int type,
                                         int protocol) {
     std::vector<Address::ptr> result{};
     if (LookUp(result, host, family, type, protocol)) {
@@ -240,10 +240,9 @@ bool Address::operator!=(const Address &rhs) const {
     return !(*this == rhs);
 }
 
-IPAddress::ptr IPAddress::Create(const char *address, uint32_t port) {
+IPAddress::ptr IPAddress::Create(const char *address, uint16_t port) {
     addrinfo hints{}, *results{};
     hints.ai_family = AF_UNSPEC;
-    hints.ai_flags = AI_NUMERICHOST;
 
     if (int error = getaddrinfo(address, nullptr, &hints, &results)) {
         SOLAR_LOG_ERROR(g_logger) << "IPAddress::Create(" << address
@@ -264,7 +263,7 @@ IPAddress::ptr IPAddress::Create(const char *address, uint32_t port) {
     }
 }
 
-IPv4Address::ptr IPv4Address::Create(const char *address, uint32_t port) {
+IPv4Address::ptr IPv4Address::Create(const char *address, uint16_t port) {
     IPv4Address::ptr rt = std::make_shared<IPv4Address>();
     rt->m_addr.sin_port = ByteswapOnLittleEndian(port);
     int result = inet_pton(AF_INET, address, &rt->m_addr.sin_addr.s_addr);
@@ -276,7 +275,7 @@ IPv4Address::ptr IPv4Address::Create(const char *address, uint32_t port) {
     return rt;
 }
 
-IPv4Address::IPv4Address(uint32_t address, uint32_t port)
+IPv4Address::IPv4Address(uint32_t address, uint16_t port)
     :m_addr{}
 {
     m_addr.sin_family = AF_INET;
@@ -291,6 +290,10 @@ IPv4Address::IPv4Address(const sockaddr_in &address)
 
 const sockaddr * IPv4Address::getAddr() const {
     return reinterpret_cast<const sockaddr*>(&m_addr);
+}
+
+sockaddr * IPv4Address::getAddr() {
+    return reinterpret_cast<sockaddr*>(&m_addr);
 }
 
 size_t IPv4Address::getAddrLen() const {
@@ -333,11 +336,11 @@ IPAddress::ptr IPv4Address::subnetMask(uint32_t prefix_len) {
     return std::make_shared<IPv4Address>(subnet);
 }
 
-uint32_t IPv4Address::getPort() const {
+uint16_t IPv4Address::getPort() const {
     return ByteswapOnLittleEndian(m_addr.sin_port);
 }
 
-void IPv4Address::setPort(uint32_t v) {
+void IPv4Address::setPort(uint16_t v) {
     m_addr.sin_port = ByteswapOnLittleEndian(v);
 }
 
@@ -347,7 +350,7 @@ IPv6Address::IPv6Address()
     m_addr.sin6_family = AF_INET6;
 }
 
-IPv6Address::ptr IPv6Address::Create(const char *address, uint32_t port) {
+IPv6Address::ptr IPv6Address::Create(const char *address, uint16_t port) {
     IPv6Address::ptr rt = std::make_shared<IPv6Address>();
     rt->m_addr.sin6_port = ByteswapOnLittleEndian(port);
     int result = inet_pton(AF_INET6, address, &rt->m_addr.sin6_addr.s6_addr);
@@ -359,7 +362,7 @@ IPv6Address::ptr IPv6Address::Create(const char *address, uint32_t port) {
     return rt;
 }
 
-IPv6Address::IPv6Address(const uint8_t address[16], uint32_t port)
+IPv6Address::IPv6Address(const uint8_t address[16], uint16_t port)
     :m_addr{}
 {
     m_addr.sin6_family = AF_INET6;
@@ -374,6 +377,10 @@ IPv6Address::IPv6Address(const sockaddr_in6 &address)
 
 const sockaddr * IPv6Address::getAddr() const {
     return reinterpret_cast<const sockaddr*>(&m_addr);
+}
+
+sockaddr * IPv6Address::getAddr() {
+    return reinterpret_cast<sockaddr*>(&m_addr);
 }
 
 size_t IPv6Address::getAddrLen() const {
@@ -435,11 +442,11 @@ IPAddress::ptr IPv6Address::subnetMask(uint32_t prefix_len) {
     return std::make_shared<IPv6Address>(subnet);
 }
 
-uint32_t IPv6Address::getPort() const {
+uint16_t IPv6Address::getPort() const {
     return ByteswapOnLittleEndian(m_addr.sin6_port);
 }
 
-void IPv6Address::setPort(uint32_t v){
+void IPv6Address::setPort(uint16_t v){
     m_addr.sin6_port = ByteswapOnLittleEndian(v);
 }
 
@@ -475,8 +482,16 @@ const sockaddr * UnixAddress::getAddr() const {
     return reinterpret_cast<const sockaddr*>(&m_addr);
 }
 
+sockaddr * UnixAddress::getAddr() {
+    return reinterpret_cast<sockaddr*>(&m_addr);
+}
+
 size_t UnixAddress::getAddrLen() const {
     return m_length;
+}
+
+void UnixAddress::setAddrLen(size_t v) {
+    m_length = v;
 }
 
 std::ostream & UnixAddress::insert(std::ostream &os) const {
@@ -499,6 +514,10 @@ UnknownAddress::UnknownAddress(const sockaddr& addr)
 }
 
 const sockaddr * UnknownAddress::getAddr() const {
+    return &m_addr;
+}
+
+sockaddr * UnknownAddress::getAddr() {
     return &m_addr;
 }
 

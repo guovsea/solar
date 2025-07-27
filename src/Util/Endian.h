@@ -33,19 +33,41 @@ std::enable_if_t<sizeof(T) == sizeof(uint16_t), T> Byteswap(T value) {
 #endif
 
 #if SOLAR_BYTE_ORDER == SOLAR_BIG_ENDIAN
+/**
+ *
+ * @brief 只在小端机上执行
+ * @return
+ */
 template<typename T>
 T ByteswapOnLittleEndian(T t) {
     return t;
 }
+
+/**
+ *
+ * @brief 只在大端机上执行
+ * @return
+ */
 template<typename T>
 T ByteswapOnBigEndian(T t) {
     return Byteswap(t);
 }
 #else
+/**
+ *
+ * @brief 只在小端机上执行
+ * @return
+ */
 template<typename T>
 T ByteswapOnLittleEndian(T t) {
     return Byteswap(t);
 }
+
+/**
+ *
+ * @brief 只在大端机上执行
+ * @return
+ */
 template<typename T>
 T ByteswapOnBigEndian(T t) {
     return t;

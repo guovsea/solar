@@ -4,12 +4,14 @@ add_library(${PROJECT_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
 
 set(PUBLIC_HEADER
   Address.h
+  Socket.h
 )
 
 target_sources(
   ${LIB_NAME}
   PRIVATE
   Address.cpp
+  Socket.cpp
 )
 
 target_include_directories(
