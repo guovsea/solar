@@ -23,6 +23,7 @@ target_sources(
   test_scheduler.cpp
   test_iomanager.cpp
   test_hook.cpp
+  test_address.cpp
 )
 
 target_link_libraries(${EXE_NAME} 

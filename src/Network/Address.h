@@ -10,11 +10,36 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 namespace solar {
+class IPAddress;
 class Address {
 public:
     typedef std::shared_ptr<Address> ptr;
 
     static  Address::ptr Create(const sockaddr* addr, socklen_t addrlen);
+
+    /**
+     *
+     * @param result
+     * @param host 域名,服务器名等,形式为 name[:service] (方括号可以没有). 举例: www.google.com[:80]
+     * @param family
+     * @param type
+     * @param protocol
+     * @return
+     */
+    static  bool LookUp(std::vector<Address::ptr>& result, const std::string& host,
+                        int family = AF_INET, int type = 0, int protocol = 0);
+
+    static Address::ptr LookUpAny(const std::string& host,
+        int family = AF_INET, int type = 0, int protocol = 0);
+
+    static std::shared_ptr<IPAddress> LookUpIpAddress(const std::string &host,
+        int family = AF_INET, int type = 0, int protocol = 0);
+
+    static bool GetInterfaceAddresses(std::multimap<std::string, std::pair<Address::ptr, uint32_t>>& result,
+        int family = AF_UNSPEC);
+
+    static bool GetInterfaceAddresses(std::vector<std::pair<Address::ptr, uint32_t>>& result,
+        const std::string& iface, int family = AF_INET);
 
     virtual ~Address() {}
     int getFamily() const;

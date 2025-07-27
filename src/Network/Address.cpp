@@ -12,7 +12,8 @@
 #include "Address.h"
 
 #include <arpa/inet.h>
-#include  <netdb.h>
+#include <netdb.h>
+#include <ifaddrs.h>
 
 namespace solar {
 static Logger::ptr g_logger = SOLAR_LOG_NAME("system");
@@ -30,6 +31,16 @@ template<typename T>
 static T CreateMask(uint32_t bits) {
     return (1 << (sizeof(T) * 8 - bits)) - 1;
 }
+template<typename T>
+static uint32_t CountBytes(T value) {
+    uint32_t result = 0;
+    for (; value; ++result) {
+        // value - 1 会把最后一个是 1 的位 (p1) 变成 0
+        //  value &= value - 1; 会把 p1 从 1 变成 0 (value p1 之后的位都是 0，和 value - 1 位与后还是 0)
+        value &= value - 1;
+    }
+    return result;
+}
 
 Address::ptr Address::Create(const sockaddr *addr, socklen_t addrlen) {
     if (addr == nullptr) {return nullptr;}
@@ -46,6 +57,155 @@ Address::ptr Address::Create(const sockaddr *addr, socklen_t addrlen) {
             break;
     }
     return result;
+}
+
+bool Address::LookUp(std::vector<Address::ptr> &result, const std::string &host, int family, int type, int protocol) {
+    addrinfo hints{}, *results{nullptr}, *next{nullptr};
+    hints.ai_family = family;
+    hints.ai_flags = 0;
+    hints.ai_socktype = type;
+    hints.ai_protocol = protocol;
+    hints.ai_addrlen = 0;
+    hints.ai_canonname = nullptr;
+    hints.ai_addr = nullptr;
+    hints.ai_next = nullptr;
+
+    std::string name;
+    const char* service{nullptr};
+    if (!host.empty() && host[0]== '[') {
+        const char* endipv6 =  static_cast<const char*>(
+            memchr(host.c_str() + 1, ']', host.size() - 1));
+        if (endipv6) {
+            // TODO check out of range
+            if (*(endipv6 + 1) == ':') {
+                service = endipv6 + 2;
+            }
+            name = host.substr(1, endipv6 - host.c_str() - 1);
+        }
+    }
+    if (name.empty()) {
+        service = static_cast<const char *>(
+            memchr(host.c_str(), ':',host.size() - 1));
+        if (service) {
+            // 不能有第二个 ':'
+            if (!memchr(service + 1, ':', host.c_str() + host.size() - service - 1)) {
+                name = host.substr(0, service - host.c_str());
+                // service 指向 : 下一个字符
+                ++service;
+            }
+        }
+    }
+    if (name.empty()) {
+        name = host;
+    }
+    int error = getaddrinfo(name.c_str(), service, &hints, &results);
+    if (error) {
+        SOLAR_LOG_ERROR(g_logger) << "Address::Lookup getaddress(" << host <<", "
+            << family << ", " << type << ") error=" << error << " errstr="
+            << strerror(errno);
+        return false;
+    }
+    next = results;
+    result.clear();
+    while (next) {
+        result.push_back(Create(next->ai_addr, next->ai_addrlen));
+        next = next->ai_next;
+    }
+    freeaddrinfo(results);
+    return  true;
+}
+
+Address::ptr Address::LookUpAny(const std::string &host, int family, int type,
+                                int protocol) {
+    std::vector<Address::ptr> result{};
+    if (LookUp(result, host, family, type, protocol)) {
+        return result[0];
+    }
+    return nullptr;
+}
+
+IPAddress::ptr Address::LookUpIpAddress(const std::string &host, int family, int type,
+                                        int protocol) {
+    std::vector<Address::ptr> result{};
+    if (LookUp(result, host, family, type, protocol)) {
+        for (auto& i : result) {
+            IPAddress::ptr v = std::dynamic_pointer_cast<IPAddress>(i);
+            if (v) {
+                return v;
+            }
+        }
+    }
+    return nullptr;
+}
+
+bool Address::GetInterfaceAddresses(std::multimap<std::string, std::pair<Address::ptr, uint32_t>> &result, int family) {
+    struct ifaddrs *next{nullptr}, *results{nullptr};
+    if (getifaddrs(&results) != 0) {
+        SOLAR_LOG_ERROR(g_logger) << "Address::GetInterfaceAddresses getifaddrs errno="
+            << errno << " errstr=" << strerror(errno);
+        return false;
+    }
+    try {
+        for (next = results; next; next = next->ifa_next) {
+            Address::ptr addr;
+            uint32_t prefix_length = ~0u;
+            if (family != AF_UNSPEC && family != next->ifa_addr->sa_family) {
+                continue;
+            }
+            switch (next->ifa_addr->sa_family) {
+                case AF_INET:
+                    {
+                        addr = Create(next->ifa_addr, sizeof(sockaddr_in));
+                        uint32_t netmask = reinterpret_cast<sockaddr_in*>(next->ifa_netmask)->sin_addr.s_addr;
+                        prefix_length = CountBytes(netmask);
+                    }
+                    break;
+                case AF_INET6:
+                {
+                        addr = Create(next->ifa_addr, sizeof(sockaddr_in6));
+                        in6_addr& netmask = reinterpret_cast<sockaddr_in6*>(next->ifa_netmask)->sin6_addr;
+                        prefix_length = 0;
+                        for (int i = 0; i < 16; ++i) {
+                            prefix_length += CountBytes(netmask.s6_addr[i]);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            if (addr) {
+                result.insert({next->ifa_name,{addr, prefix_length}});;
+            }
+        }
+    } catch (...) {
+        SOLAR_LOG_ERROR(g_logger) << "Address::GetInterfaceAddresses exception";
+        freeifaddrs(results);
+        return false;
+    }
+    freeifaddrs(results);
+    return true;
+}
+
+bool Address::GetInterfaceAddresses(std::vector<std::pair<Address::ptr, uint32_t>> &result, const std::string &iface,
+        int family) {
+    if (iface.empty() || iface == "*") {
+        if (family == AF_INET || family == AF_UNSPEC) {
+            result.emplace_back(std::make_shared<IPv4Address>(), 0);
+        }
+        if (family == AF_INET6 || family == AF_UNSPEC) {
+            result.emplace_back(std::make_shared<IPv6Address>(), 0);
+        }
+        return true;
+    }
+    std::multimap<std::string, std::pair<Address::ptr, uint32_t>> results{};
+    if (!GetInterfaceAddresses(results, family)) {
+        return false;
+    }
+    auto its = results.equal_range(iface);
+    for (; its.first != its.second; ++its.first) {
+        result.push_back(its.first->second);
+    }
+    return true;
 }
 
 int Address::getFamily() const { return getAddr()->sa_family; }
@@ -87,7 +247,7 @@ IPAddress::ptr IPAddress::Create(const char *address, uint32_t port) {
 
     if (int error = getaddrinfo(address, nullptr, &hints, &results)) {
         SOLAR_LOG_ERROR(g_logger) << "IPAddress::Create(" << address
-        << ", " << port << ") error=" << error << " errno=" << errno << "strerror=" << strerror(errno);
+        << ", " << port << ") error=" << error << " errno=" << errno << "errstr=" << strerror(errno);
         return nullptr;
     }
     try {
@@ -110,7 +270,7 @@ IPv4Address::ptr IPv4Address::Create(const char *address, uint32_t port) {
     int result = inet_pton(AF_INET, address, &rt->m_addr.sin_addr.s_addr);
     if (result <= 0) {
     SOLAR_LOG_ERROR(g_logger) << "IPv4Address::Create(" << address << ", "
-        << port << ") rt=" << result << " errno=" << errno << " strerror=" << strerror(errno);
+        << port << ") rt=" << result << " errno=" << errno << " errstr=" << strerror(errno);
         return nullptr;
     }
     return rt;
@@ -193,7 +353,7 @@ IPv6Address::ptr IPv6Address::Create(const char *address, uint32_t port) {
     int result = inet_pton(AF_INET6, address, &rt->m_addr.sin6_addr.s6_addr);
     if (result <= 0) {
         SOLAR_LOG_ERROR(g_logger) << "IPv4Address::Create(" << address << ", "
-            << port << ") rt=" << result << " errno=" << errno << " strerror=" << strerror(errno);
+            << port << ") rt=" << result << " errno=" << errno << " errstr=" << strerror(errno);
         return nullptr;
     }
     return rt;
