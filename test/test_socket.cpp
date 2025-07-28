@@ -26,8 +26,8 @@ void test_host_and_port() {
     if (!connected) {
         return;
     }
-    const char buff[] = "GET / HTTP/1.0\r\nHost: www.baidu.com\r\n\r\n";
-    int rt = sock->send(buff, sizeof(buff)); // 使用strlen，避免发送末尾的\0
+    const char buff[] = "GET / HTTP/1.0\r\n\r\n";
+    int rt = sock->send(buff, sizeof(buff));
     EXPECT_GT(rt, 0);
     if (rt <= 0) {
         return;
@@ -57,8 +57,8 @@ void test_host_and_service() {
     if (!connected) {
         return;
     }
-    const char buff[] = "GET / HTTP/1.0\r\nHost: www.baidu.com\r\n\r\n";
-    int rt = sock->send(buff, sizeof(buff)); // 使用strlen，避免发送末尾的\0
+    const char buff[] = "GET / HTTP/1.0\r\n\r\n";
+    int rt = sock->send(buff, sizeof(buff));
     EXPECT_GT(rt, 0);
     if (rt <= 0) {
         return;
@@ -73,11 +73,13 @@ void test_host_and_service() {
     }
 }
 
+// 如果开了 vpn 会导致接收的消息中出现：writing response to :80: reading HTTP GET: unexpected EOF
 TEST(TestSocket, host_and_port) {
     solar::IOManager iom;
     iom.schedule(test_host_and_port);
 }
 
+// 如果开了 vpn 会导致接收的消息中出现：writing response to :80: reading HTTP GET: unexpected EOF
 TEST(TestSocket, host_and_service) {
     solar::IOManager iom;
     iom.schedule(test_host_and_service);

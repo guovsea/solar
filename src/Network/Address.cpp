@@ -62,13 +62,8 @@ Address::ptr Address::Create(const sockaddr *addr, socklen_t addrlen) {
 bool Address::LookUp(std::vector<Address::ptr> &result, const std::string &host, int family, int type, int protocol) {
     addrinfo hints{}, *results{nullptr}, *next{nullptr};
     hints.ai_family = family;
-    hints.ai_flags = 0;
     hints.ai_socktype = type;
     hints.ai_protocol = protocol;
-    hints.ai_addrlen = 0;
-    hints.ai_canonname = nullptr;
-    hints.ai_addr = nullptr;
-    hints.ai_next = nullptr;
 
     std::string name;
     const char* service{nullptr};

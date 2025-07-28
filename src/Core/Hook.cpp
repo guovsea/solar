@@ -222,8 +222,6 @@ unsigned int sleep(unsigned int seconds) {
     }
     solar::Fiber::ptr fiber = solar::Fiber::GetThis();
     solar::IOManager *iom = solar::IOManager::GetThis();
-    //   iom->addTimer(seconds * 1000,
-    // std::bind(&solar::IOManager::schedule, iom, fiber)); // bind 不支持模板函数
     iom->addTimer(seconds * 1000, [iom, fiber]() { iom->schedule(fiber); });
     fiber->YeildToHold();
     return 0;
