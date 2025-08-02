@@ -61,39 +61,75 @@ HttpRequest::HttpRequest(uint8_t version, bool close)
 }
 
 std::string HttpRequest::getHeader(const std::string &key, const std::string &default_val) {
+    auto it = m_headers.find(key);
+    return it == m_headers.end() ? default_val : it->second;
 }
 
 std::string HttpRequest::getParam(const std::string &key, const std::string &default_val) {
+    auto it = m_params.find(key);
+    return it == m_params.end() ? default_val : it->second;
 }
 
 std::string HttpRequest::getCookie(const std::string &key, const std::string &default_val) {
+    auto it = m_cookies.find(key);
+    return it == m_cookies.end() ? default_val : it->second;
 }
 
 void HttpRequest::setHeader(const std::string &key, const std::string &val) {
+    m_headers[key] = val;
 }
 
 void HttpRequest::setParam(const std::string &key, const std::string &val) {
+    m_params[key] = val;
 }
 
 void HttpRequest::setCookie(const std::string &key, const std::string &val) {
+    m_cookies[key] = val;
 }
 
 void HttpRequest::delHeader(const std::string &key) {
+    m_headers.erase(key);
 }
 
 void HttpRequest::delParam(const std::string &key) {
+    m_params.erase(key);
 }
 
 void HttpRequest::delCookie(const std::string &key) {
+    m_cookies.erase(key);
 }
 
 bool HttpRequest::hasHeader(const std::string &key, std::string *val) {
+    auto it = m_headers.find(key);
+    if (it == m_headers.end()) {
+        return false;
+    }
+    if (val) {
+        *val = it->second;
+    }
+    return true;
 }
 
 bool HttpRequest::hasParam(const std::string &key, std::string *val) {
+    auto it = m_params.find(key);
+    if (it == m_params.end()) {
+        return false;
+    }
+    if (val) {
+        *val = it->second;
+    }
+    return true;
 }
 
 bool HttpRequest::hasCookie(const std::string &key, std::string *val) {
+    auto it = m_cookies.find(key);
+    if (it == m_cookies.end()) {
+        return false;
+    }
+    if (val) {
+        *val = it->second;
+    }
+    return true;
 }
 
 }
