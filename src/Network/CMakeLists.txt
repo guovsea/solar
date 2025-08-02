@@ -5,6 +5,7 @@ add_library(${PROJECT_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
 set(PUBLIC_HEADER
   Address.h
   Socket.h
+  ByteArray.h
 )
 
 target_sources(
@@ -12,6 +13,7 @@ target_sources(
   PRIVATE
   Address.cpp
   Socket.cpp
+  ByteArray.cpp
 )
 
 target_include_directories(
