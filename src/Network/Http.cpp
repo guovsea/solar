@@ -132,5 +132,42 @@ bool HttpRequest::hasCookie(const std::string &key, std::string *val) {
     return true;
 }
 
+std::ostream & HttpRequest::dump(std::ostream &os) {
+    /* GET /uri HTTP/1.1    起始行 (Request Line)
+     * Host: www.google.com 请求头 (Request Headers)
+     * ...                  Body
+     */
+    // 1. 起始行 (Request Line)
+    // Method
+    os << HttpMethodToString(m_method) << " ";
+    // URI
+    os << m_path
+       << (m_query.empty() ? "" : "?")
+        << m_query
+        << (m_fragment.empty() ? "" : "#")
+        << m_fragment;
+    // HTTP 协议版本
+    os << " HTTP/" << ((uint32_t)m_version >> 4) // 取 (uint8_t)0x11 的高 4 位
+        << "."
+        << ((uint32_t)m_version & 0x0F) // 取 (uint8_t)0x11 的低 4 位
+        << "\r\n";
+    // 2. 请求头 (Request Headers)
+    os << "connection: " << (m_close ? "close" : "keep-alive") << "\r\n";
+    for (auto& i : m_headers) {
+        if (i.first == "connection") {
+            continue;
+        }
+        os << i.first << ":" << i.second << "\r\n";
+    }
+    if (!m_body.empty()) {
+        os << "content-length: " << m_body.size() << "\r\n\r\n";
+    }
+    // 3. Body
+    if (!m_body.empty()) {
+        os << m_body << "\r\n";
+    }
+    return os;
+}
+
 }
 

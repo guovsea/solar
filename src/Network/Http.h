@@ -218,6 +218,7 @@ public:
         return getAs(m_cookies, key, val, default_val);
     }
 
+    std::ostream& dump(std::ostream& os);
 private:
     template<typename  T>
     bool checkGetAs(const MapType& m, const std::string& key, T& val, const T& default_val = T{}) {
