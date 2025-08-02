@@ -6,6 +6,7 @@ set(PUBLIC_HEADER
   Address.h
   Socket.h
   ByteArray.h
+  Http.h
 )
 
 target_sources(
@@ -14,6 +15,7 @@ target_sources(
   Address.cpp
   Socket.cpp
   ByteArray.cpp
+  Http.cpp
 )
 
 target_include_directories(
