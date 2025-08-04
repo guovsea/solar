@@ -143,6 +143,37 @@ struct CaseInsensitiveLess {
     bool operator()(const std::string& lhs, const std::string& rhs) const;
 };
 
+template<typename MapType, typename  T>
+bool checkGetAs(const MapType& m, const std::string& key, T& val, const T& default_val = T{}) {
+    std::string str;
+    auto it = m.find(key);
+    if (it == m.end()) {
+        val = default_val;
+        return false;
+    }
+    try {
+        val = boost::lexical_cast<T>(it->second);
+        return true;
+    } catch (...) {
+        val = default_val;
+    }
+    return false;
+}
+
+template<typename MapType, typename  T>
+T getAs(const MapType& m, const std::string& key, const T& default_val = T{}) {
+    auto it = m.find(key);
+    if (it == m.end()) {
+        return default_val;
+    }
+    try {
+        return  boost::lexical_cast<T>(it->second);
+    } catch (...) {
+
+    }
+    return default_val;
+}
+
 class HttpRequest {
 public:
     typedef std::shared_ptr<HttpRequest> ptr;
@@ -150,7 +181,6 @@ public:
     HttpRequest(uint8_t version = 0x11, bool close = true);
 
     HttpMethod getMethod() const { return m_method; }
-    HttpStatus getStatus() const { return m_status; }
     uint8_t getVersion() const { return m_version; }
     const std::string& getPath() const { return m_path; }
     const std::string& getQuery() const { return m_query; }
@@ -162,7 +192,6 @@ public:
     const MapType& getCookies() const { return m_headers; }
 
     void setMethod(HttpMethod v) { m_method = v; }
-    void setStatus(HttpStatus v) { m_status = v; }
     void setVersion(uint8_t v) { m_version = v; }
     void setPath(const std::string& v) { m_path = v; }
     void setQuery(const std::string& v) { m_query = v; }
@@ -172,6 +201,9 @@ public:
     void setHeaders(const MapType& v) { m_headers = v; }
     void setParams(const MapType& v) { m_params = v; }
     void setCookies(const MapType& v) { m_cookies = v; }
+
+    bool isClose() const { return m_close; }
+    void setClose(bool v) { m_close = v; }
 
     std::string getHeader(const std::string& key, const std::string& default_val= "");
     std::string getParam(const std::string& key, const std::string& default_val= "");
@@ -218,41 +250,11 @@ public:
         return getAs(m_cookies, key, val, default_val);
     }
 
-    std::ostream& dump(std::ostream& os);
+    std::ostream& dump(std::ostream& os) const;
 private:
-    template<typename  T>
-    bool checkGetAs(const MapType& m, const std::string& key, T& val, const T& default_val = T{}) {
-        std::string str;
-        auto it = m.find(key);
-        if (it == m.end()) {
-            val = default_val;
-            return false;
-        }
-        try {
-            val = boost::lexical_cast<T>(it->second);
-            return true;
-        } catch (...) {
-            val = default_val;
-        }
-        return false;
-    }
 
-    template<typename  T>
-    T getAs(const MapType& m, const std::string& key, const T& default_val = T{}) {
-        auto it = m.find(key);
-        if (it == m.end()) {
-            return default_val;
-        }
-        try {
-            return  boost::lexical_cast<T>(it->second);
-        } catch (...) {
-
-        }
-        return default_val;
-    }
 
     HttpMethod m_method;
-    HttpStatus m_status;
     uint8_t m_version;
     bool m_close;
 
@@ -264,7 +266,51 @@ private:
     MapType m_headers;
     MapType m_params;
     MapType m_cookies;
+};
 
+class HttpResponse {
+public:
+    typedef std::shared_ptr<HttpResponse> ptr;
+    typedef std::map<std::string, std::string, CaseInsensitiveLess>  MapType;
+    HttpResponse(uint8_t version = 0x11, bool close = true);
+
+    HttpStatus getStatus() const { return m_status; }
+    uint8_t getVersion() const { return m_version; }
+    const std::string& getBody() const { return m_body; }
+    const std::string& getReason() const { return m_body; }
+    const MapType& getHeaders() const { return  m_headers; }
+
+    void setStatus(HttpStatus v) { m_status = v; }
+    void setVersion(uint8_t v) { m_version = v; }
+    void setBody(const std::string& v) { m_body = v; }
+    void setReason(const std::string& v) { m_reason = v; }
+    void setHeaders(const MapType& v) { m_headers = v; }
+
+    bool isClose() const { return m_close; }
+    void setClose(bool v) { m_close = v; }
+
+    std::string getHeader(const std::string& key, const std::string& default_val = {});
+    void setHeader(const std::string& key, const std::string& val);
+    void delHeader(const std::string& key);
+
+    template<typename T>
+    bool checkHeaderAs(const std::string& key, T& val, const T& default_val = T{}) {
+        return checkGetAs(m_headers, key, val, default_val);
+    }
+
+    template<typename T>
+    T getHeaderAs(const std::string& key, T& val, const T& default_val = T{}) {
+        return getAs(m_headers, key, val, default_val);
+    }
+    std::ostream& dump(std::ostream& os) const;
+private:
+    HttpStatus m_status;
+    uint8_t m_version;
+    bool m_close;
+
+    std::string m_body;
+    std::string m_reason;
+    MapType m_headers;
 };
 
 }
