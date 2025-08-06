@@ -7,6 +7,14 @@ set(PUBLIC_HEADER
   Socket.h
   ByteArray.h
   Http.h
+  http_parser.h
+)
+
+add_custom_command(
+  OUTPUT   http11_parser.rl.cpp   httpclient_parser.rl.cpp
+  COMMAND ragel -G2 -C ${CMAKE_CURRENT_SOURCE_DIR}/httpclient_parser.rl -o ${CMAKE_CURRENT_BINARY_DIR}/httpclient_parser.rl.cpp
+  COMMAND ragel -G2 -C ${CMAKE_CURRENT_SOURCE_DIR}/http11_parser.rl -o ${CMAKE_CURRENT_BINARY_DIR}/http11_parser.rl.cpp
+  DEPENDS httpclient_parser.rl http11_parser.rl
 )
 
 target_sources(
@@ -16,12 +24,16 @@ target_sources(
   Socket.cpp
   ByteArray.cpp
   Http.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/http11_parser.rl.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/httpclient_parser.rl.cpp
+  http_parser.cpp
 )
 
 target_include_directories(
   ${LIB_NAME}
   PUBLIC
   ${SRC_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(

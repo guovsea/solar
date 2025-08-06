@@ -27,6 +27,7 @@ target_sources(
   test_socket.cpp
   test_bytearray.cpp
   test_http.cpp
+  test_http_parser.cpp
 )
 
 target_link_libraries(${EXE_NAME} 
