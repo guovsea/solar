@@ -108,6 +108,8 @@ public:
 
     std::ostream &dump(std::ostream &os) const;
 
+    std::string toString() const;
+
     int getSocket() const { return m_sock; }
 
     bool cancelRead();
@@ -133,6 +135,7 @@ private:
     Address::ptr m_localAddress;
     Address::ptr m_remoteAddress;
 };
+std::ostream& operator<<(std::ostream& os, const Socket& sock);
 }
 
 #endif //__SOLAR_SOCKET_H__

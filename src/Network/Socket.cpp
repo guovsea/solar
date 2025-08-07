@@ -379,6 +379,12 @@ std::ostream & Socket::dump(std::ostream &os) const {
     return os;
 }
 
+std::string Socket::toString() const {
+    std::stringstream ss;
+    dump(ss);
+    return ss.str();
+}
+
 bool Socket::cancelRead() {
     return IOManager::GetThis()->cancelEvent(m_sock, solar::IOManager::READ);
 }
@@ -425,6 +431,11 @@ bool Socket::init(int sock) {
         return true;
     }
     return false;
+}
+
+std::ostream & operator<<(std::ostream &os, const Socket &sock) {
+    sock.dump(os);
+    return os;
 }
 
 }
