@@ -3,8 +3,8 @@
 //
 #include <gtest/gtest.h>
 
-#include "Address.h"
-#include "TcpServer.h"
+#include "Network/Address.h"
+#include "Network/TcpServer.h"
 #include "Core/IOManager.h"
 #include "Log/Log.h"
 

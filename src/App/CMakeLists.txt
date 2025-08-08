@@ -11,8 +11,3 @@ target_link_libraries(${APP_NAME}
   PRIVATE 
   ${PROJECT_NAME}::log
 )
-
-# target_include_directories(${LIB}
-#     PUBLIC
-#     ${SRC_DIR}
-# )
