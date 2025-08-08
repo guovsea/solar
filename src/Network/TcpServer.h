@@ -15,7 +15,8 @@ namespace solar {
 class TcpServer : public std::enable_shared_from_this<TcpServer>{
 public:
     typedef std::shared_ptr<TcpServer> ptr;
-    TcpServer(IOManager* worker = IOManager::GetThis());
+    TcpServer(IOManager* worker = IOManager::GetThis(),
+            IOManager* accept_worker = IOManager::GetThis());
     virtual ~TcpServer();
 
     virtual bool bind(Address::ptr addr);
@@ -31,8 +32,10 @@ public:
     bool isStop() const { return m_isStop; }
 protected:
     virtual void handleClient(Socket::ptr client);
+    virtual void startAccept(Socket::ptr sock);
 private:
     IOManager* m_worker;
+    IOManager* m_acceptWorker;
     std::vector<Socket::ptr> m_socks; //< listening socket
     uint64_t m_readTimeout;
     std::string m_name;

@@ -9,6 +9,7 @@
 #include <netinet/ip.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <map>
 namespace solar {
 class IPAddress;
 class Address {

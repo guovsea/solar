@@ -8,6 +8,7 @@ set(PUBLIC_HEADER
   ByteArray.h
   Http.h
   http_parser.h
+  TcpServer.h
 )
 
 add_custom_command(
@@ -27,6 +28,7 @@ target_sources(
   ${CMAKE_CURRENT_BINARY_DIR}/http11_parser.rl.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/httpclient_parser.rl.cpp
   http_parser.cpp
+  TcpServer.cpp
 )
 
 target_include_directories(
