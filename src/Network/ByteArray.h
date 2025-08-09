@@ -127,15 +127,16 @@ public:
     uint64_t getWriteBuffers(std::vector<iovec>& buffers, uint64_t len);
 private:
     /**
-     * @brief 增加容量
-     * @param size 增加的字节数
+     * @brief 将可用容量增加到 size。如果当前可用容量小于 size,
+     *        则将可能容量增加到 >= size，否则就什么也不做
+     * @param size 可用容量增加到多少
      */
-    void addCapacity(size_t size);
+    void addAvailable(size_t size);
 
     /**
      * @brief 返回当前当前剩余容量
      */
-    size_t getRemainingCapacity() const { return m_capacity - m_position; }
+    size_t getAvailable() const { return m_capacity - m_position; }
 private:
     size_t m_baseSize;
     size_t m_position;

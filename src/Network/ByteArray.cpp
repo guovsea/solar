@@ -361,13 +361,13 @@ void ByteArray::write(const void *buf, size_t size) {
     if (size == 0) {
         return;
     }
-    addCapacity(size);
+    addAvailable(size);
 
     size_t block_pos = m_position % m_baseSize; // 分区
-    size_t block_cap = m_cur->size - block_pos;
+    size_t block_avail = m_cur->size - block_pos;
     size_t write_pos = 0;
     while (size > 0) {
-        if (block_cap >= size) {
+        if (block_avail >= size) {
             memcpy(m_cur->ptr + block_pos, (const char*)buf + write_pos, size);
             if (m_cur->size == (block_pos + size)) {
                 m_cur = m_cur->next;
@@ -376,12 +376,12 @@ void ByteArray::write(const void *buf, size_t size) {
             write_pos += size;
             size = 0;
         } else {
-            memcpy(m_cur->ptr + block_pos, (const char*)buf + write_pos, block_cap);
-            m_position += block_cap;
-            write_pos += block_cap;
-            size -= block_cap;
+            memcpy(m_cur->ptr + block_pos, (const char*)buf + write_pos, block_avail);
+            m_position += block_avail;
+            write_pos += block_avail;
+            size -= block_avail;
             m_cur = m_cur->next;
-            block_cap = m_cur->size;
+            block_avail = m_cur->size;
             block_pos = 0;
         }
     }
@@ -396,10 +396,10 @@ void ByteArray::read(void *buf, size_t size) {
     }
 
     size_t block_pos = m_position % m_baseSize;
-    size_t block_cap = m_cur->size - block_pos;
+    size_t block_avail = m_cur->size - block_pos;
     size_t read_pos = 0;
     while (size > 0) {
-        if (block_cap >= size) {
+        if (block_avail >= size) {
             memcpy((char*)buf + read_pos, m_cur->ptr + block_pos, size);
             if (m_cur->size == block_pos + size) {
                 m_cur = m_cur->next;
@@ -408,12 +408,12 @@ void ByteArray::read(void *buf, size_t size) {
             read_pos += size;
             size = 0;
         } else {
-            memcpy((char*)buf + read_pos, m_cur->ptr + block_pos, block_cap);
-            m_position += block_cap;
-            read_pos += block_cap;
-            size -= block_cap;
+            memcpy((char*)buf + read_pos, m_cur->ptr + block_pos, block_avail);
+            m_position += block_avail;
+            read_pos += block_avail;
+            size -= block_avail;
             m_cur = m_cur->next;
-            block_cap = m_cur->size;
+            block_avail = m_cur->size;
             block_pos = 0;
         }
     }
@@ -425,11 +425,11 @@ void ByteArray::read(void *buf, size_t size, size_t position) const {
     }
 
     size_t block_pos = m_position % m_baseSize;
-    size_t block_cap = m_cur->size - block_pos;
+    size_t block_avail = m_cur->size - block_pos;
     size_t read_pos = 0;
     Node* cur = m_cur;
     while (size > 0) {
-        if (block_cap >= size) {
+        if (block_avail >= size) {
             memcpy((char*)buf + read_pos, cur->ptr + block_pos, size);
             if (cur->size == block_pos + size) {
                 cur = cur->next;
@@ -438,12 +438,12 @@ void ByteArray::read(void *buf, size_t size, size_t position) const {
             read_pos += size;
             size = 0;
         } else {
-            memcpy((char*)buf + read_pos, cur->ptr + block_pos, block_cap);
-            position += block_cap;
-            read_pos += block_cap;
-            size -= block_cap;
+            memcpy((char*)buf + read_pos, cur->ptr + block_pos, block_avail);
+            position += block_avail;
+            read_pos += block_avail;
+            size -= block_avail;
             cur = cur->next;
-            block_cap = cur->size;
+            block_avail = cur->size;
             block_pos = 0;
         }
     }
@@ -540,21 +540,21 @@ uint64_t ByteArray::getReadBuffers(std::vector<iovec> &buffers, uint64_t len) co
         return 0;
     }
     size_t block_pos = m_position % m_baseSize;
-    size_t block_cap  = m_cur->size - block_pos;
+    size_t block_avail  = m_cur->size - block_pos;
     struct iovec iov;
     Node* cur = m_cur;
     size_t size = len;
     while (len > 0) {
-        if (block_cap >= len) {
+        if (block_avail >= len) {
             iov.iov_base = cur->ptr + block_pos;
             iov.iov_len = len;
             len = 0;
         } else {
             iov.iov_base = cur->ptr + block_pos;
-            iov.iov_len = block_cap;
-            len -= block_cap;
+            iov.iov_len = block_avail;
+            len -= block_avail;
             cur = cur->next;
-            block_cap = m_cur->size;
+            block_avail = m_cur->size;
             block_pos = 0;
         }
         buffers.push_back(iov);
@@ -575,20 +575,20 @@ uint64_t ByteArray::getReadBuffers(std::vector<iovec> &buffers, uint64_t len, ui
         --count;
     }
 
-    size_t block_cap  = m_cur->size - block_pos;
+    size_t block_avail  = m_cur->size - block_pos;
     struct iovec iov;
     size_t size = len;
     while (len > 0) {
-        if (block_cap >= len) {
+        if (block_avail >= len) {
             iov.iov_base = cur->ptr + block_pos;
             iov.iov_len = len;
             len = 0;
         } else {
             iov.iov_base = cur->ptr + block_pos;
-            iov.iov_len = block_cap;
-            len -= block_cap;
+            iov.iov_len = block_avail;
+            len -= block_avail;
             cur = cur->next;
-            block_cap = m_cur->size;
+            block_avail = m_cur->size;
             block_pos = 0;
         }
         buffers.push_back(iov);
@@ -600,23 +600,23 @@ uint64_t ByteArray::getWriteBuffers(std::vector<iovec> &buffers, uint64_t len) {
     if (len == 0) {
         return 0;
     }
-    addCapacity(len);
+    addAvailable(len);
     uint64_t size = len;
     size_t block_pos = m_position % m_baseSize;
-    size_t block_cap = m_cur->size - block_pos;
-    struct iovec iov;
+    size_t block_avail = m_cur->size - block_pos;
+    iovec iov{};
     Node* cur = m_cur;
     while (len > 0) {
-        if (block_cap >= len) {
+        if (block_avail >= len) {
             iov.iov_base = cur->ptr + block_pos;
             iov.iov_len = len;
             len = 0;
         } else {
             iov.iov_base = cur->ptr + block_pos;
-            iov.iov_len = block_cap;
-            len -= block_cap;
+            iov.iov_len = block_avail;
+            len -= block_avail;
             cur = cur->next;
-            block_cap = cur->size;
+            block_avail = cur->size;
             block_pos = 0;
         }
         buffers.push_back(iov);
@@ -624,15 +624,15 @@ uint64_t ByteArray::getWriteBuffers(std::vector<iovec> &buffers, uint64_t len) {
     return size;
 }
 
-void ByteArray::addCapacity(size_t size) {
+void ByteArray::addAvailable(size_t size) {
     if (size == 0) {
         return;
     }
-    size_t old_cap = getRemainingCapacity();
-    if (old_cap >= size) {
+    size_t old_avail = getAvailable();
+    if (old_avail >= size) {
         return;
     }
-    size = size - old_cap;
+    size = size - old_avail;
     size_t count = (size / m_baseSize) + (size % m_baseSize ? 1 : 0);
     Node* tmp = m_root;
     while (tmp->next) {
@@ -647,7 +647,7 @@ void ByteArray::addCapacity(size_t size) {
         tmp = tmp->next;
         m_capacity += m_baseSize;
     }
-    if (old_cap == 0) {
+    if (old_avail == 0) {
         m_cur = first;
     }
 }
