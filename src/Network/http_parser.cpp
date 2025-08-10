@@ -85,7 +85,7 @@ void on_request_http_field(void *data, const char *field, size_t flen, const cha
     HttpRequestParser* parser = static_cast<HttpRequestParser*>(data);
     if (flen == 0) {
         SOLAR_LOG_WARN(g_logger) << "invalid http request field length === 0";
-        parser->setError(HttpRequestParser::InvalidField);
+        // parser->setError(HttpRequestParser::InvalidField);
     }
     parser->getData()->setHeader(std::string(field, flen), std::string(value, vlen));
 }

@@ -24,6 +24,10 @@ public:
     };
     HttpRequestParser();
 
+    /**
+     * @brief 解析 http header 时的 buffer size
+     * @return 允许的 http header 的最大长度，header 超过 HttpRequestBufferSize 时视为错误
+     */
     static uint64_t GetHttpRequestBufferSize();
     static uint64_t GetHttpRequestMaxBodySize();
 
