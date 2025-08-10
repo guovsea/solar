@@ -90,6 +90,11 @@ public:
     void read(void* buf, size_t size, size_t position) const;
 
     size_t getPosition() const { return m_position; }
+
+    /**
+     * @brief 改变当前的位置
+     * @param v  如果 v > m_size，则 m_size = v
+     */
     void setPosition(size_t v);
 
     bool writeToFile(const std::string& name);
