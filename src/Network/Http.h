@@ -227,8 +227,8 @@ public:
     }
 
     template<typename T>
-    T getHeaderAs(const std::string& key, T& val, const T& default_val = T{}) {
-        return getAs(m_headers, key, val, default_val);
+    T getHeaderAs(const std::string& key, const T& default_val = T{}) {
+        return getAs(m_headers, key, default_val);
     }
 
     template<typename T>
@@ -300,8 +300,8 @@ public:
     }
 
     template<typename T>
-    T getHeaderAs(const std::string& key, T& val, const T& default_val = T{}) {
-        return getAs(m_headers, key, val, default_val);
+    T getHeaderAs(const std::string& key, const T& default_val = T{}) {
+        return getAs(m_headers, key, default_val);
     }
     std::ostream& dump(std::ostream& os) const;
     std::string toString() const;
@@ -314,6 +314,9 @@ private:
     std::string m_reason;
     MapType m_headers;
 };
+
+std::ostream& operator<<(std::ostream& os, const HttpRequest& req);
+std::ostream& operator<<(std::ostream& os, const HttpResponse& rsp);
 }
 
 

@@ -107,6 +107,14 @@ HttpRequestParser::HttpRequestParser()
     m_parser.data = this;
 }
 
+uint64_t HttpRequestParser::GetHttpRequestBufferSize() {
+    return s_http_request_buffer_size;
+}
+
+uint64_t HttpRequestParser::GetHttpRequestMaxBodySize() {
+    return s_http_request_max_body_size;
+}
+
 size_t HttpRequestParser::execute(char *data, size_t len) {
     size_t rt = http_parser_execute(&m_parser, data, len, 0);
     memmove(data, data + rt, len - rt);
@@ -119,6 +127,10 @@ int HttpRequestParser::isFinished() {
 
 bool HttpRequestParser::hasError() {
     return m_error || http_parser_has_error(&m_parser);
+}
+
+uint64_t HttpRequestParser::getContextLength() {
+    return m_data->getHeaderAs<uint64_t>("content-length", 0);
 }
 
 void on_response_reason_phrase(void *data, const char *at, size_t length) {

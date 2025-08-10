@@ -18,6 +18,7 @@ set(PUBLIC_HEADER
   TcpServer.h
   Stream.h
   SocketStream.h
+  HttpSession.h
 )
 
 target_sources(
@@ -33,6 +34,7 @@ target_sources(
   TcpServer.cpp
   Stream.cpp
   SocketStream.cpp
+  HttpSession.cpp
 )
 
 target_include_directories(

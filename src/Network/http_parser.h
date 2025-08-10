@@ -22,13 +22,17 @@ public:
         InvalidVersion = 10001,
         InvalidField
     };
-
     HttpRequestParser();
+
+    static uint64_t GetHttpRequestBufferSize();
+    static uint64_t GetHttpRequestMaxBodySize();
+
     size_t execute(char* data, size_t len);
     int isFinished();
     bool hasError();
     void setError(int v) { m_error = v; }
     HttpRequest::ptr getData() const { return m_data; }
+    uint64_t getContextLength();
 private:
     http_parser m_parser;
     HttpRequest::ptr m_data;
