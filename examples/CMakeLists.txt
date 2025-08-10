@@ -1,4 +1,4 @@
-add_executable(echo_server)
+add_executable(echo_server "")
 
 target_sources(
         echo_server

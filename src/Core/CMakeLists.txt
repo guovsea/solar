@@ -29,6 +29,8 @@ target_sources(
   fd_manager.cpp
 )
 
+find_package(Threads REQUIRED)
+
 target_include_directories(
   ${LIB_NAME}
   PUBLIC
@@ -40,4 +42,5 @@ target_link_libraries(
   PUBLIC
   ${PROJECT_NAME}::log
   dl
+  Threads::Threads
 )
