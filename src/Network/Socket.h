@@ -78,6 +78,13 @@ public:
 
     int send(const void *buffer, size_t length, int flags = 0);
 
+    /**
+     * @brief 使用 sendmsg 接收消息
+     * @param buffers msg_iov，iovec 数组
+     * @param length msg_iovlen, elements in msg_iov
+     * @param flags
+     * @return
+     */
     int send(const iovec *buffers, size_t length, int flags = 0);
 
     int sendTo(const void *buffer, size_t length, const Address::ptr to, int flags = 0);
@@ -86,6 +93,13 @@ public:
 
     int recv(void *buffer, size_t length, int flags = 0);
 
+    /**
+     * @brief 使用 recvmsg 接收消息
+     * @param buffers msg_iov，iovec 数组
+     * @param length msg_iovlen, elements in msg_iov
+     * @param flags msg_flags
+     * @return
+     */
     int recv(iovec *buffers, size_t length, int flags = 0);
 
     int recvFrom(void *buffer, size_t length, Address::ptr from, int flags = 0);

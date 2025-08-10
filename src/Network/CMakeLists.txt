@@ -17,6 +17,7 @@ set(PUBLIC_HEADER
   http_parser.h
   TcpServer.h
   Stream.h
+  SocketStream.h
 )
 
 target_sources(
@@ -31,6 +32,7 @@ target_sources(
   http_parser.cpp
   TcpServer.cpp
   Stream.cpp
+  SocketStream.cpp
 )
 
 target_include_directories(

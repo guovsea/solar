@@ -256,7 +256,7 @@ int Socket::recv(void *buffer, size_t length, int flags) {
 int Socket::recv(iovec *buffers, size_t length, int flags) {
     if (isConnected()) {
         msghdr msg{};
-        msg.msg_iov = const_cast<iovec*>(buffers);
+        msg.msg_iov = buffers;
         msg.msg_iovlen = length;
         return ::recvmsg(m_sock, &msg, flags);
     }

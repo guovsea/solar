@@ -115,26 +115,27 @@ public:
     std::string toHexString() const;
 
     /**
-     * @brief 只获取内容，不改变 position
-     * @param buffers
-     * @param len
+     * @brief 将从当前 position 开始的数据导出成 iovec 用于读取
+     * @param buffers 构造的 iovec 列表
+     * @param len 需要导出的数据的字节数
      * @return
      */
-    uint64_t getReadBuffers(std::vector<iovec>& buffers, uint64_t len = ~0) const;
+    uint64_t getReadBuffers(std::vector<iovec>& buffers, uint64_t len = ~0ull) const;
+
     uint64_t getReadBuffers(std::vector<iovec>& buffers, uint64_t len, uint64_t position) const;
 
     /**
-     * @brief 增加容量，不改变 position
-     * @param buffers
-     * @param len
+     * @brief 在 ByteArray 中申请空余内存用于写入。只影响容量，不影响 position
+     * @param buffers 构造的 iovec 列表
+     * @param len 申请的空余内存的字节数
      * @return
      */
     uint64_t getWriteBuffers(std::vector<iovec>& buffers, uint64_t len);
 private:
     /**
-     * @brief 将可用容量增加到 size。如果当前可用容量小于 size,
-     *        则将可能容量增加到 >= size，否则就什么也不做
-     * @param size 可用容量增加到多少
+     * @brief 将可用容量增加到 size。
+    * @param size 如果当前可用容量小于 size,
+     *        则将可用容量增加到 >= size，否则就什么也不做
      */
     void addAvailable(size_t size);
 
