@@ -11,7 +11,7 @@
 static solar::Logger::ptr g_logger = SOLAR_LOG_ROOT();
 
 
-void run() {
+static void run() {
     auto addr = solar::IPAddress::LookUpAny("0.0.0.0:8043");
     auto addr2 = std::make_shared<solar::UnixAddress>("/tmp/unix_address");
     std::vector<solar::Address::ptr> addrs;

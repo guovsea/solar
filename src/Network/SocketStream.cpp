@@ -13,6 +13,9 @@ SocketStream::SocketStream(Socket::ptr sock, bool owner)
 }
 
 SocketStream::~SocketStream() {
+    if (m_owner && m_socket) {
+        m_socket->close();
+    }
 }
 
 int SocketStream::read(void *buffer, size_t length) {
@@ -56,6 +59,9 @@ int SocketStream::write(ByteArray::ptr ba, size_t length) {
 }
 
 void SocketStream::close() {
+    if (m_socket) {
+        m_socket->close();
+    }
 }
 
 bool SocketStream::isConnected() const {

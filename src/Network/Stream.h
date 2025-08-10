@@ -12,7 +12,7 @@ namespace solar {
 class Stream {
 public:
     typedef std::shared_ptr<Stream> ptr;
-    virtual ~Stream();
+    virtual ~Stream() = default;
 
     /**
      *

@@ -13,17 +13,18 @@ HttpSession::HttpSession(Socket::ptr sock, bool owner)
 
 HttpRequest::ptr HttpSession::recvRequest() {
     uint64_t buff_size = HttpRequestParser::GetHttpRequestBufferSize();
-    std::shared_ptr<char[]> buffer =
-        std::make_shared<char[]>(buff_size);
-    char* data = buffer.get();
+    std::vector<char> buffer(buff_size);
+    char* data = buffer.data();
     HttpRequestParser::ptr parser = std::make_shared<HttpRequestParser>();
     int offset = 0;
     while (true) {
-        int len = read(data, buff_size - offset);
+        int len = read(data + offset, buff_size - offset);
         if (len <= 0) {
             return nullptr;
         }
         len += offset;
+        std::string tmp(data);
+        int n = tmp.size();
         size_t nparse = parser->execute(data, len);
         if (parser->hasError()) {
             return nullptr;

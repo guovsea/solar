@@ -14,7 +14,7 @@ public:
     typedef std::shared_ptr<SocketStream> ptr;
 
     SocketStream(Socket::ptr sock, bool owner = true);
-    ~SocketStream();
+    ~SocketStream() override;
     virtual int read(void *buffer, size_t length) override;
     virtual int read(ByteArray::ptr ba, size_t length) override;
 
