@@ -2,6 +2,13 @@ set(LIB_NAME network)
 add_library(${LIB_NAME})
 add_library(${PROJECT_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
 
+add_custom_command(
+        OUTPUT   http11_parser.rl.cpp   httpclient_parser.rl.cpp
+        COMMAND ragel -G2 -C ${CMAKE_CURRENT_SOURCE_DIR}/httpclient_parser.rl -o ${CMAKE_CURRENT_BINARY_DIR}/httpclient_parser.rl.cpp
+        COMMAND ragel -G2 -C ${CMAKE_CURRENT_SOURCE_DIR}/http11_parser.rl -o ${CMAKE_CURRENT_BINARY_DIR}/http11_parser.rl.cpp
+        DEPENDS httpclient_parser.rl http11_parser.rl
+)
+
 set(PUBLIC_HEADER
   Address.h
   Socket.h
@@ -9,13 +16,7 @@ set(PUBLIC_HEADER
   Http.h
   http_parser.h
   TcpServer.h
-)
-
-add_custom_command(
-  OUTPUT   http11_parser.rl.cpp   httpclient_parser.rl.cpp
-  COMMAND ragel -G2 -C ${CMAKE_CURRENT_SOURCE_DIR}/httpclient_parser.rl -o ${CMAKE_CURRENT_BINARY_DIR}/httpclient_parser.rl.cpp
-  COMMAND ragel -G2 -C ${CMAKE_CURRENT_SOURCE_DIR}/http11_parser.rl -o ${CMAKE_CURRENT_BINARY_DIR}/http11_parser.rl.cpp
-  DEPENDS httpclient_parser.rl http11_parser.rl
+  Stream.h
 )
 
 target_sources(
@@ -29,6 +30,7 @@ target_sources(
   ${CMAKE_CURRENT_BINARY_DIR}/httpclient_parser.rl.cpp
   http_parser.cpp
   TcpServer.cpp
+  Stream.cpp
 )
 
 target_include_directories(
