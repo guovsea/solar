@@ -23,8 +23,6 @@ HttpRequest::ptr HttpSession::recvRequest() {
             return nullptr;
         }
         len += offset;
-        std::string tmp(data);
-        int n = tmp.size();
         size_t nparse = parser->execute(data, len);
         if (parser->hasError()) {
             return nullptr;
