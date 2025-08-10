@@ -16,19 +16,24 @@ HttpRequest::ptr HttpSession::recvRequest() {
     std::vector<char> buffer(buff_size);
     char* data = buffer.data();
     HttpRequestParser::ptr parser = std::make_shared<HttpRequestParser>();
-    int offset = 0;
+    int parse_left = 0; // buffer 中未被解析的字节数
     while (true) {
-        int len = read(data + offset, buff_size - offset);
+        int len = read(data + parse_left, buff_size - parse_left);
         if (len <= 0) {
             return nullptr;
         }
-        len += offset;
+        len += parse_left;
         size_t nparse = parser->execute(data, len);
         if (parser->hasError()) {
             return nullptr;
         }
-        offset = len - nparse;
-        if (offset == buff_size) {
+        parse_left = len - nparse;
+        if (parse_left > 0) {
+            // 将未解析数据移动到缓冲区起始位置
+            memmove(data, data + nparse, parse_left);
+        }
+        if (parse_left == buff_size) {
+            // 如果解析后 buffer 中还剩下的数据量 == 整个 buffer 的大小，就直接认为请求无效，返回 nullptr
             return nullptr;
         }
         if (parser->isFinished()) {
@@ -39,13 +44,13 @@ HttpRequest::ptr HttpSession::recvRequest() {
     if (length > 0) {
         std::string body;
         body.resize(length);
-        if (length >= offset) {
-            body.append(data, offset);
+        if (length >= parse_left) {
+            body.append(data, parse_left);
         } else {
             body.append(data, length);
         }
-        body.append(data, offset);
-        length -= offset;
+        body.append(data, parse_left);
+        length -= parse_left;
         if (length > 0) {
           if (readFixSize(&body[body.size()], length) <=0) {
              return nullptr;
