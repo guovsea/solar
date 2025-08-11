@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include "Servlet.h"
+#include  <fnmatch.h>
 
 namespace solar::http {
 
@@ -89,8 +90,12 @@ Servlet::ptr ServletDispatch::getMatchedServlet(const std::string &uri) {
     if (result) {
         return  result;
     }
-    result = getGlobServlet(uri);
-    return result ? result : m_default;
+    auto it = std::find_if(m_globs.begin(), m_globs.end(),
+        [uri](auto& x) {
+            bool b =  fnmatch(x.first.c_str(), uri.c_str(), 0) == 0;
+            return b;
+        });
+    return it != m_globs.end() ? it->second : m_default;
 }
 
 NotFoundServlet::NotFoundServlet()
