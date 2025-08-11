@@ -54,7 +54,7 @@ uint64_t FdCtx::getTimeout(int type) {
 }
 FdManager::FdManager() { m_datas.resize(64); }
 FdCtx::ptr FdManager::get(int fd, bool auto_create) {
-    RWMutexType::ReadScopedLock lock(m_mutex);
+    RWMutexType::ReadLock lock(m_mutex);
     if (m_datas.size() <= fd) {
         if (!auto_create) {
             return nullptr;
@@ -65,7 +65,7 @@ FdCtx::ptr FdManager::get(int fd, bool auto_create) {
         }
     }
     lock.unlock();
-    RWMutexType::WriteScopedLock lock2(m_mutex);
+    RWMutexType::WriteLock lock2(m_mutex);
     FdCtx::ptr ctx{new FdCtx{fd}};
     // TODO 扩容
     m_datas[fd] = ctx;
@@ -73,7 +73,7 @@ FdCtx::ptr FdManager::get(int fd, bool auto_create) {
 }
 
 void FdManager::del(int fd) {
-    RWMutexType::WriteScopedLock lock(m_mutex);
+    RWMutexType::WriteLock lock(m_mutex);
     if (m_datas.size() <= fd) {
         return;
     }

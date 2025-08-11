@@ -20,6 +20,7 @@ set(PUBLIC_HEADER
   SocketStream.h
   HttpSession.h
   HttpServer.h
+  Servlet.h
 )
 
 target_sources(
@@ -37,6 +38,7 @@ target_sources(
   SocketStream.cpp
   HttpSession.cpp
   HttpServer.cpp
+  Servlet.cpp
 )
 
 target_include_directories(

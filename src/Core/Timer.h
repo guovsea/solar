@@ -115,7 +115,7 @@ protected:
      * @param timer
      * @param lock TimerManager 中的锁
      */
-    void addTimer(Timer::ptr timer, RWMutexType::WriteScopedLock &lock);
+    void addTimer(Timer::ptr timer, RWMutexType::WriteLock &lock);
 
     bool hasTimer();
 

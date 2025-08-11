@@ -55,8 +55,8 @@ private:
  */
 class RWMutex : public Noncopyable {
 public:
-    typedef ReadScopedLockImpl<RWMutex> ReadScopedLock;
-    typedef WriteScopedLockImpl<RWMutex> WriteScopedLock;
+    typedef ReadScopedLockImpl<RWMutex> ReadLock;
+    typedef WriteScopedLockImpl<RWMutex> WriteLock;
 
     RWMutex() { pthread_rwlock_init(&m_lock, nullptr); }
     ~RWMutex() { pthread_rwlock_destroy(&m_lock); }

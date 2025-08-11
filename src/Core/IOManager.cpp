@@ -81,13 +81,13 @@ IOManager::~IOManager() {
 
 int IOManager::addEvent(int fd, Event event, std::function<void()> cb) {
     FdContext *fd_ctx = nullptr;
-    RWMutexType::ReadScopedLock lock(m_mutex);
+    RWMutexType::ReadLock lock(m_mutex);
     if (m_fdContexts.size() > fd) {
         fd_ctx = m_fdContexts[fd];
         lock.unlock();
     } else {
         lock.unlock();
-        RWMutexType::WriteScopedLock lock2(m_mutex);
+        RWMutexType::WriteLock lock2(m_mutex);
         resizeContexts(fd * 1.5);
         fd_ctx = m_fdContexts[fd];
     }
@@ -129,7 +129,7 @@ int IOManager::addEvent(int fd, Event event, std::function<void()> cb) {
 }
 
 bool IOManager::delEvent(int fd, Event event) {
-    RWMutexType::ReadScopedLock lock(m_mutex);
+    RWMutexType::ReadLock lock(m_mutex);
     if (m_fdContexts.size() <= fd) {
         return false;
     }
@@ -163,7 +163,7 @@ bool IOManager::delEvent(int fd, Event event) {
 }
 
 bool IOManager::cancelEvent(int fd, Event event) {
-    RWMutexType::ReadScopedLock lock(m_mutex);
+    RWMutexType::ReadLock lock(m_mutex);
     if (m_fdContexts.size() <= fd) {
         return false;
     }
@@ -196,7 +196,7 @@ bool IOManager::cancelEvent(int fd, Event event) {
 }
 
 bool IOManager::cancelAll(int fd) {
-    RWMutexType::ReadScopedLock lock(m_mutex);
+    RWMutexType::ReadLock lock(m_mutex);
     if (m_fdContexts.size() <= fd) {
         return false;
     }

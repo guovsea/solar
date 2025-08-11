@@ -84,7 +84,7 @@ TEST(TestThreadMutex, TestRwLock) {
 static int g_cnt3 = 0;
 
 void work4() {
-    solar::RWMutex::WriteScopedLock lock(g_rw_mutex);
+    solar::RWMutex::WriteLock lock(g_rw_mutex);
     for (int i = 0; i < 1000'000; ++i) {
         g_cnt3++;
     }
