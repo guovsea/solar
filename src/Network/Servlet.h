@@ -18,8 +18,8 @@ namespace solar::http {
 class Servlet {
 public:
     typedef std::shared_ptr<Servlet> ptr;
-    Servlet(const std::string& name);
-    virtual ~Servlet();
+    Servlet(const std::string& name) : m_name{ name } {};
+    virtual ~Servlet() {}
     virtual int32_t handle(HttpRequest::ptr req, HttpResponse::ptr rsp
         ,HttpSession::ptr session) = 0;
     const std::string& getName() const { return m_name; }

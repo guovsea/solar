@@ -6,6 +6,7 @@
 #include "Servlet.h"
 
 namespace solar::http {
+
 FunctionServlet::FunctionServlet(callback cb)
     :Servlet{"FunctionServlet"}
     ,m_cb{cb}
@@ -45,7 +46,9 @@ void ServletDispatch::addGlobServlet(const std::string &uri, Servlet::ptr slt) {
     auto it = std::find_if(m_globs.begin(), m_globs.end(),
         [uri](auto& x){ return x.first == uri;}
         );
-    m_globs.erase(it);
+    if (it != m_globs.end()) {
+        m_globs.erase(it);
+    }
     m_globs.emplace_back(uri, slt);
 }
 

@@ -15,6 +15,21 @@ void run() {
     while (!server->bind(addr)) {
         sleep(2);
     }
+    auto sd = server->getServletDispatch();
+    sd->addServlet("/solar/xx", []( solar::http::HttpRequest::ptr req
+        ,solar::http::HttpResponse::ptr rsp
+        ,solar::http::HttpSession::ptr session
+        ) {
+            rsp->setBody(req->toString());
+            return 0;
+    });
+    sd->addGlobServlet("/solar/*", []( solar::http::HttpRequest::ptr req
+        ,solar::http::HttpResponse::ptr rsp
+        ,solar::http::HttpSession::ptr session
+        ) {
+            rsp->setBody("Glob:\r\r" + req->toString());
+            return 0;
+    });
     server->start();
 }
 

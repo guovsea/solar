@@ -12,8 +12,9 @@ namespace solar::http {
 static Logger::ptr g_logger = SOLAR_LOG_NAME("system");
 
 HttpServer::HttpServer(bool keepAlive, IOManager *worker, IOManager *accept_worker)
-    :TcpServer{worker, accept_worker}
-    , m_isKeepAlive{keepAlive} {
+    :TcpServer{ worker, accept_worker }
+    ,m_isKeepAlive{ keepAlive }
+    ,m_dispatch{ std::make_shared<ServletDispatch>() } {
 }
 
 void HttpServer::handleClient(Socket::ptr client) {
@@ -26,13 +27,7 @@ void HttpServer::handleClient(Socket::ptr client) {
             break;
         }
         HttpResponse::ptr rsp = std::make_shared<HttpResponse>(req->getVersion(), req->isClose() || !m_isKeepAlive);
-        rsp->setBody("hello world");
-
-        SOLAR_LOG_INFO(g_logger) << "request:" << std::endl
-            << *req << std::endl;
-        SOLAR_LOG_INFO(g_logger) << "response:" << std::endl
-            << *rsp;
-
+        m_dispatch->handle(req, rsp, session);
         session->sendResponse(rsp);
     } while (m_isKeepAlive);
     session->close();
