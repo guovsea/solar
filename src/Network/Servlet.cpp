@@ -86,9 +86,9 @@ Servlet::ptr ServletDispatch::getGlobServlet(const std::string &uri) {
 
 Servlet::ptr ServletDispatch::getMatchedServlet(const std::string &uri) {
     RWMutexType::WriteLock lock{ m_mutex };
-    Servlet::ptr result = getServlet(uri);
-    if (result) {
-        return  result;
+    auto i = m_datas.find(uri);
+    if (i != m_datas.end()) {
+        return  i->second;
     }
     auto it = std::find_if(m_globs.begin(), m_globs.end(),
         [uri](auto& x) {
