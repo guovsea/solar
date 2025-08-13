@@ -41,9 +41,9 @@ return #name;
 
 const char * HttpStatusToString(HttpStatus s) {
     switch (s) {
-#define XX(num, name, string) \
+#define XX(num, name, msg) \
 case HttpStatus::name: \
-return #name;
+return #msg;
         HTTP_STATUS_MAP(XX);
 #undef XX
         default:
@@ -196,9 +196,9 @@ void HttpResponse::delHeader(const std::string &key) {
 
 std::ostream & HttpResponse::dump(std::ostream &os) const {
     // 1. 状态行
-    os << " HTTP/" << ((uint32_t)m_version >> 4) // 取 (uint8_t)0x11 的高 4 位
+    os << " HTTP/" << ((uint32_t)(m_version >> 4)) // 取 (uint8_t)0x11 的高 4 位
        << "."
-       << ((uint32_t)m_version & 0x0F) // 取 (uint8_t)0x11 的低 4 位
+       << ((uint32_t)(m_version & 0x0F)) // 取 (uint8_t)0x11 的低 4 位
        << " "
        << (uint32_t)m_status
        << " "
@@ -217,7 +217,9 @@ std::ostream & HttpResponse::dump(std::ostream &os) const {
     }
     // 3. Response Body
     if (!m_body.empty()) {
-        os << m_body << "\r\n";
+        os << m_body;
+    } else {
+        os << "\r\n";
     }
     return os;
 }
