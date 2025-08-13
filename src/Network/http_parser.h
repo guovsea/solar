@@ -31,6 +31,13 @@ public:
     static uint64_t GetHttpRequestBufferSize();
     static uint64_t GetHttpRequestMaxBodySize();
 
+    /**
+     * @brief 解析 http 报文。每次执行时会将未处理数据向前移动到 data 所指的位置
+     * 解析完 header 之后会将 body copy 到 data 的起始位置
+     * @param data 起始位置
+     * @param len 数据的长度
+     * @return 已解析的字节数，data 的剩余有效数据为 len - v;
+     */
     size_t execute(char* data, size_t len);
     int isFinished();
     bool hasError();
