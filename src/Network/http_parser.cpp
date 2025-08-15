@@ -10,6 +10,7 @@
 
 namespace solar::http {
 static Logger::ptr g_logger = SOLAR_LOG_NAME("system");
+
 static ConfigVar<uint64_t>::ptr g_http_request_buffer_size =
     solar::Config::Lookup("http.request.buffer_size"
         ,(uint64_t)4 * 1024, "http request buffer size");
@@ -18,23 +19,42 @@ static solar::ConfigVar<uint64_t>::ptr g_http_request_max_body_size =
     solar::Config::Lookup("http.request.max_body_size"
         ,(uint64_t)64 * 1024, "http request max body size");
 
+static ConfigVar<uint64_t>::ptr g_http_response_buffer_size =
+    solar::Config::Lookup("http.response.buffer_size"
+        ,(uint64_t)4 * 1024, "http response buffer size");
+
+static solar::ConfigVar<uint64_t>::ptr g_http_response_max_body_size =
+    solar::Config::Lookup("http.response.max_body_size"
+        ,(uint64_t)64 * 1024, "http response max body size");
+
 static int s_http_request_buffer_size{0};
 static int s_http_request_max_body_size{0};
+static int s_http_response_buffer_size{0};
+static int s_http_response_max_body_size{0};
 
-struct _HttpRequestConfigIniter {
-    _HttpRequestConfigIniter() {
+struct _HttpConfigIniter {
+    _HttpConfigIniter() {
         s_http_request_buffer_size = g_http_request_buffer_size->getValue();
         s_http_request_max_body_size = g_http_request_max_body_size->getValue();
+        s_http_response_buffer_size = g_http_response_buffer_size->getValue();
+        s_http_response_max_body_size = g_http_response_max_body_size->getValue();
+
         g_http_request_buffer_size->addListener(0x83758, []( const int& ov, const int& nv) {
             s_http_request_buffer_size = nv;
         });
         g_http_request_max_body_size->addListener(0x55755, []( const int& ov, const int& nv) {
             s_http_request_max_body_size = nv;
         });
+        g_http_response_buffer_size->addListener(0x83758, []( const int& ov, const int& nv) {
+            s_http_response_buffer_size = nv;
+        });
+        g_http_response_max_body_size->addListener(0x55755, []( const int& ov, const int& nv) {
+            s_http_response_max_body_size = nv;
+        });
     }
 };
 
-static _HttpRequestConfigIniter _init;
+static _HttpConfigIniter _init;
 void on_request_method(void *data, const char *at, size_t length) {
     std::string str{at, length};
     HttpMethod m = StringToHttpMethod(str);
@@ -197,6 +217,14 @@ HttpResponseParser::HttpResponseParser()
     m_parser.last_chunk = on_response_last_chunk;
     m_parser.http_field = on_response_http_field;
     m_parser.data = this;
+}
+
+uint64_t HttpResponseParser::GetHttpResponseBufferSize() {
+    return s_http_response_buffer_size;
+}
+
+uint64_t HttpResponseParser::GetHttpResponseMaxBodySize() {
+    return s_http_response_max_body_size;
 }
 
 size_t HttpResponseParser::execute(char *data, size_t len) {

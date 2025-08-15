@@ -61,6 +61,10 @@ public:
         InvalidField = 1002
     };
     HttpResponseParser();
+
+    static uint64_t GetHttpResponseBufferSize();
+    static uint64_t GetHttpResponseMaxBodySize();
+
     size_t execute(char* data, size_t len);
     int isFinished();
     void setError(int v) { m_error = v; }

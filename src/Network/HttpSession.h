@@ -1,6 +1,9 @@
-//
-// Created by guo on 2025/8/10.
-//
+/**
+ * @file HttpSession.h
+ * @brief Http Session : 表示 Server 处理一个 Client 的整个过程的逻辑概念
+ * @author guovsea
+ * @email guovsea@gmail.com
+ */
 
 #ifndef __SOLAR_HTTPSESSION_H__
 #define __SOLAR_HTTPSESSION_H__
