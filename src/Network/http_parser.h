@@ -39,7 +39,7 @@ public:
      * @parm chunked 是否使用了分块传输编码
      * @return 已解析的字节数，data 的剩余有效数据为 len - v;
      */
-    size_t execute(char* data, size_t len, bool chunked);
+    size_t execute(char* data, size_t len, bool chunked = false);
     int isFinished();
     bool hasError();
     void setError(int v) { m_error = v; }
@@ -67,7 +67,7 @@ public:
     static uint64_t GetHttpResponseBufferSize();
     static uint64_t GetHttpResponseMaxBodySize();
 
-    size_t execute(char* data, size_t len, bool chunked);
+    size_t execute(char* data, size_t len, bool chunked = false);
     int isFinished();
     void setError(int v) { m_error = v; }
     bool hasError();
