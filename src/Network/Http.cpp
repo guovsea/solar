@@ -156,14 +156,16 @@ std::ostream& HttpRequest::dump(std::ostream &os) const {
         if (i.first == "connection") {
             continue;
         }
-        os << i.first << ":" << i.second << "\r\n";
+        os << i.first << ": " << i.second << "\r\n";
     }
     if (!m_body.empty()) {
         os << "content-length: " << m_body.size() << "\r\n\r\n";
     }
     // 3. Body
     if (!m_body.empty()) {
-        os << m_body << "\r\n";
+        os << m_body;
+    } else {
+        os << "\r\n"; // 如果 body 为空，一定要加上 \r\n 否则服务器将认为请求未结束，一直等待
     }
     return os;
 }
@@ -210,7 +212,7 @@ std::ostream & HttpResponse::dump(std::ostream &os) const {
         if (i.first == "connection") {
             continue;
         }
-        os << i.first << ":" << i.second << "\r\n";
+        os << i.first << ": " << i.second << "\r\n";
     }
     if (!m_body.empty()) {
         os << "content-length: " << m_body.size() << "\r\n\r\n";
