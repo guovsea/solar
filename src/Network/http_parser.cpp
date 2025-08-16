@@ -197,7 +197,7 @@ void on_response_http_field(void *data, const char *field, size_t flen, const ch
     HttpResponseParser* parser = static_cast<HttpResponseParser*>(data);
     if (flen == 0) {
         SOLAR_LOG_WARN(g_logger) << "invalid http request field length === 0";
-        parser->setError(HttpResponseParser::InvalidField);
+        // parser->setError(HttpResponseParser::InvalidField);
     }
     parser->getData()->setHeader(std::string(field, flen), std::string(value, vlen));
 }
@@ -239,6 +239,10 @@ int HttpResponseParser::isFinished() {
 
 bool HttpResponseParser::hasError() {
     return m_error || httpclient_parser_has_error(&m_parser);
+}
+
+uint64_t HttpResponseParser::getContextLength() {
+    return m_data->getHeaderAs<uint64_t>("content-length", 0);
 }
 
 }

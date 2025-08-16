@@ -21,6 +21,7 @@ set(PUBLIC_HEADER
   HttpSession.h
   HttpServer.h
   Servlet.h
+  HttpConnection.h
 )
 
 target_sources(
@@ -39,6 +40,7 @@ target_sources(
   HttpSession.cpp
   HttpServer.cpp
   Servlet.cpp
+  HttpConnection.cpp
 )
 
 target_include_directories(

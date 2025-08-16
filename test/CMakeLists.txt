@@ -30,6 +30,7 @@ target_sources(
   test_http_parser.cpp
   test_tcp_server.cpp
   test_http_server.cpp
+  test_http_connection.cpp
 )
 
 target_link_libraries(${EXE_NAME} 

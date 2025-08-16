@@ -70,6 +70,7 @@ public:
     void setError(int v) { m_error = v; }
     bool hasError();
     HttpResponse::ptr getData() const { return m_data; }
+    uint64_t getContextLength();
 private:
     httpclient_parser  m_parser;
     HttpResponse::ptr m_data;

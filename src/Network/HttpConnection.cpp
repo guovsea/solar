@@ -13,7 +13,7 @@ HttpConnection::HttpConnection(Socket::ptr sock, bool owner)
 
 HttpResponse::ptr HttpConnection::recvResponse() {
     uint64_t buff_size = HttpResponseParser::GetHttpResponseBufferSize();
-    std::vector<char> buffer(buff_size);
+    std::vector<char> buffer(buff_size + 1);
     char* data = buffer.data();
     HttpResponseParser::ptr parser = std::make_shared<HttpResponseParser>();
     int offset = 0; // 未解析的数据的下一个位置
@@ -24,6 +24,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
             return nullptr;
         }
         len += offset;  // 读了之后，所有未解析的数据的长度
+        data[len] = '\0'; // 避免 httpclient_parser.rl:197 的断言
         size_t nparse = parser->execute(data, len);
         if (parser->hasError()) {
             return nullptr;
@@ -39,7 +40,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
     }
     // header 解析完毕, body 将 从 data 的起始位置开始
     // offset 为未解析的数据 (body) 的长度
-    int64_t length = parser->getContextLength(); // request header 中的 "Content-Length"
+    int64_t length = parser->getContextLength(); //  header 中的 "Content-Length"
     if (length > 0) {
         std::string body;
         body.resize(length);

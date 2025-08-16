@@ -15,6 +15,7 @@ HttpServer::HttpServer(bool keepAlive, IOManager *worker, IOManager *accept_work
     :TcpServer{ worker, accept_worker }
     ,m_isKeepAlive{ keepAlive }
     ,m_dispatch{ std::make_shared<ServletDispatch>() } {
+
 }
 
 void HttpServer::handleClient(Socket::ptr client) {
