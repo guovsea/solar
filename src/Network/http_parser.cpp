@@ -101,12 +101,9 @@ void on_request_version(void *data, const char *at, size_t length) {
 void on_request_header_done(void *data, const char *at, size_t length) {
 }
 
+// 解析 fragment, UIR 中不一定会有 fragment
 void on_request_http_field(void *data, const char *field, size_t flen, const char *value, size_t vlen) {
     HttpRequestParser* parser = static_cast<HttpRequestParser*>(data);
-    if (flen == 0) {
-        SOLAR_LOG_WARN(g_logger) << "invalid http request field length === 0";
-        // parser->setError(HttpRequestParser::InvalidField);
-    }
     parser->getData()->setHeader(std::string(field, flen), std::string(value, vlen));
 }
 
@@ -193,12 +190,9 @@ void on_response_header_done(void *data, const char *at, size_t length) {
 void on_response_last_chunk(void *data, const char *at, size_t length) {
 }
 
+// 解析 fragment, URI 中不一定会有 fragment
 void on_response_http_field(void *data, const char *field, size_t flen, const char *value, size_t vlen) {
     HttpResponseParser* parser = static_cast<HttpResponseParser*>(data);
-    if (flen == 0) {
-        SOLAR_LOG_WARN(g_logger) << "invalid http request field length === 0";
-        // parser->setError(HttpResponseParser::InvalidField);
-    }
     parser->getData()->setHeader(std::string(field, flen), std::string(value, vlen));
 }
 
