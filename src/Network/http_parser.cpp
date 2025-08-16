@@ -132,7 +132,10 @@ uint64_t HttpRequestParser::GetHttpRequestMaxBodySize() {
     return s_http_request_max_body_size;
 }
 
-size_t HttpRequestParser::execute(char *data, size_t len) {
+size_t HttpRequestParser::execute(char *data, size_t len, bool chunked) {
+    if (chunked) {
+        http_parser_init(&m_parser);
+    }
     size_t rt = http_parser_execute(&m_parser, data, len, 0);
     memmove(data, data + rt, len - rt);
     return rt;
@@ -221,7 +224,10 @@ uint64_t HttpResponseParser::GetHttpResponseMaxBodySize() {
     return s_http_response_max_body_size;
 }
 
-size_t HttpResponseParser::execute(char *data, size_t len) {
+size_t HttpResponseParser::execute(char *data, size_t len, bool chunked) {
+    if (chunked) {
+        httpclient_parser_init(&m_parser);
+    }
     size_t offset = httpclient_parser_execute(&m_parser, data, len, 0);
     memmove(data, data + offset, (len - offset));
     return offset;

@@ -36,14 +36,16 @@ public:
      * 解析完 header 之后会将 body copy 到 data 的起始位置
      * @param data 起始位置
      * @param len 数据的长度
+     * @parm chunked 是否使用了分块传输编码
      * @return 已解析的字节数，data 的剩余有效数据为 len - v;
      */
-    size_t execute(char* data, size_t len);
+    size_t execute(char* data, size_t len, bool chunked);
     int isFinished();
     bool hasError();
     void setError(int v) { m_error = v; }
     HttpRequest::ptr getData() const { return m_data; }
     uint64_t getContextLength();
+    const http_parser& getParser() const { return m_parser; }
 private:
     http_parser m_parser;
     HttpRequest::ptr m_data;
@@ -65,12 +67,13 @@ public:
     static uint64_t GetHttpResponseBufferSize();
     static uint64_t GetHttpResponseMaxBodySize();
 
-    size_t execute(char* data, size_t len);
+    size_t execute(char* data, size_t len, bool chunked);
     int isFinished();
     void setError(int v) { m_error = v; }
     bool hasError();
     HttpResponse::ptr getData() const { return m_data; }
     uint64_t getContextLength();
+    const httpclient_parser& getParser() const { return m_parser; }
 private:
     httpclient_parser  m_parser;
     HttpResponse::ptr m_data;
