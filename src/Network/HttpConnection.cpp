@@ -78,8 +78,12 @@ HttpResult::ptr HttpConnection::DoRequest(HttpRequest::ptr req, Uri::ptr uri, ui
             nullptr, "invalid host: " + uri->getHost());
     }
     Socket::ptr sock = Socket::CreateTCP(addr);
-    sock->connect(addr);
     if (!sock) {
+        return std::make_shared<HttpResult>(HttpResult::CREATE_SOCKET_ERROR,
+            nullptr, "create socket fail: " + addr->toString()
+                + " errno=" + std::to_string(errno) + "errstr=" + strerror(errno));
+    }
+    if (!sock->connect(addr)) {
         return std::make_shared<HttpResult>(HttpResult::CONNECT_FAIL,
             nullptr, "connect fail: " + addr->toString());
     }

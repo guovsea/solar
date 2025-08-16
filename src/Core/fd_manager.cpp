@@ -54,6 +54,9 @@ uint64_t FdCtx::getTimeout(int type) {
 }
 FdManager::FdManager() { m_datas.resize(64); }
 FdCtx::ptr FdManager::get(int fd, bool auto_create) {
+    if (fd == -1) {
+        return nullptr;
+    }
     RWMutexType::ReadLock lock(m_mutex);
     if (m_datas.size() <= fd) {
         if (!auto_create) {

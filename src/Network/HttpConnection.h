@@ -19,6 +19,7 @@ struct HttpResult {
         OK = 0,
         INVALID_URI,
         INVALID_HOST,
+        CREATE_SOCKET_ERROR,
         CONNECT_FAIL,
         SEND_CLOSE_BY_PEER,
         SEND_SOCKET_ERROR,
