@@ -7,6 +7,103 @@
 #include "http_parser.h"
 
 namespace solar::http {
+HttpResult::ptr HttpConnection::DoGet(const std::string &url, uint64_t timeout_ms,
+        const std::map<std::string, std::string> &headers, const std::string &body) {
+    Uri::ptr uri = Uri::Create(url);
+    if (!uri) {
+        return std::make_shared<HttpResult>(HttpResult::Error::INVALID_URI, nullptr, "invalid url:" + url);
+    }
+    return DoGet(uri, timeout_ms, headers, body);
+}
+
+HttpResult::ptr HttpConnection::DoPost(const std::string &url, uint64_t timeout_ms,
+        const std::map<std::string, std::string> &headers, const std::string &body) {
+    Uri::ptr uri = Uri::Create(url);
+    if (!uri) {
+        return std::make_shared<HttpResult>(HttpResult::Error::INVALID_URI, nullptr, "invalid url:" + url);
+    }
+    return DoPost(uri, timeout_ms, headers, body);
+}
+
+HttpResult::ptr HttpConnection::DoGet(Uri::ptr uri, uint64_t timeout_ms,
+        const std::map<std::string, std::string> &headers, const std::string &body) {
+    return DoRequest(HttpMethod::GET, uri, timeout_ms, headers, body);
+}
+
+HttpResult::ptr HttpConnection::DoPost(Uri::ptr uri, uint64_t timeout_ms,
+        const std::map<std::string, std::string> &headers, const std::string &body) {
+    return DoRequest(HttpMethod::POST, uri, timeout_ms, headers, body);
+}
+
+HttpResult::ptr HttpConnection::DoRequest(HttpMethod method, const std::string &url, uint64_t timeout_ms,
+        const std::map<std::string, std::string> &headers, const std::string &body) {
+    Uri::ptr uri = Uri::Create(url);
+    if (!uri) {
+        return std::make_shared<HttpResult>(HttpResult::Error::INVALID_URI, nullptr, "invalid url:" + url);
+    }
+    return DoRequest(method, uri, timeout_ms, headers, body);
+}
+
+HttpResult::ptr HttpConnection::DoRequest(HttpMethod method, Uri::ptr uri, uint64_t timeout_ms,
+        const std::map<std::string, std::string> &headers, const std::string &body) {
+    HttpRequest::ptr req = std::make_shared<HttpRequest>();
+    req->setMethod(method);
+    req->setPath(uri->getPath());
+    req->setQuery(uri->getQuery());
+    req->setFragment(uri->getFragment());
+    bool has_host{ false };
+    for (auto& i : headers) {
+        if (strcasecmp(i.first.c_str(), "connection") == 0) {
+            if (strcasecmp(i.second.c_str(), "close") == 0) {
+                req->setClose(false);
+            }
+        }
+        if (strcasecmp(i.first.c_str(), "host") == 0) {
+            has_host = !i.second.empty();
+        }
+        req->setHeader(i.first, i.second);
+    }
+    if (!has_host) {
+        req->setHeader("Host", uri->getHost());
+    }
+    req->setBody(body);
+    return DoRequest(req, uri, timeout_ms);
+
+}
+
+HttpResult::ptr HttpConnection::DoRequest(HttpRequest::ptr req, Uri::ptr uri, uint64_t timeout_ms) {
+    Address::ptr addr = uri->createAddress();
+    if (!addr) {
+        return std::make_shared<HttpResult>(HttpResult::INVALID_HOST,
+            nullptr, "invalid host: " + uri->getHost());
+    }
+    Socket::ptr sock = Socket::CreateTCP(addr);
+    sock->connect(addr);
+    if (!sock) {
+        return std::make_shared<HttpResult>(HttpResult::CONNECT_FAIL,
+            nullptr, "connect fail: " + addr->toString());
+    }
+    sock->setRecvTimeout(timeout_ms);
+    HttpConnection::ptr conn = std::make_shared<HttpConnection>(sock);
+    int rt = conn->sendRequest(req);
+    if (rt == 0) {
+        return std::make_shared<HttpResult>(HttpResult::SEND_CLOSE_BY_PEER,
+            nullptr, "send request closed by peer" + addr->toString());
+    }
+    if (rt < 0) {
+        return std::make_shared<HttpResult>(HttpResult::SEND_SOCKET_ERROR,
+            nullptr, "send request socket error errno=" + std::to_string(errno)
+                + " errstr=" + strerror(errno));
+    }
+    HttpResponse::ptr rsp = conn->recvResponse();
+    if (!rsp) {
+        return std::make_shared<HttpResult>(HttpResult::TIMEOUT,
+            nullptr, "recv response timeout: " + addr->toString() +
+                + " timeout_ms:" + std::to_string(timeout_ms));
+    }
+    return std::make_shared<HttpResult>(HttpResult::OK, rsp, "ok");
+}
+
 HttpConnection::HttpConnection(Socket::ptr sock, bool owner)
     :SocketStream{sock, owner} {
 }
@@ -109,6 +206,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
                 memcpy(&body[0], data, offset);
                 length -= offset;
                 // 根据 Content-Length，还有 length 长度的数据未到达，继续读取
+                // TODO 如果 body 太长，缓冲区会溢出
                 if (readFixSize(&body[body.size()], length) <=0) {
                     close();
                     return nullptr;

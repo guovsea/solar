@@ -17,6 +17,7 @@ TEST(test_http_connection, with_content_length) {
     solar::http::HttpConnection::ptr conn = std::make_shared<solar::http::HttpConnection>(sock);
     solar::http::HttpRequest::ptr req = std::make_shared<solar::http::HttpRequest>();
     req->setPath("/get");
+    // HTTP/1.1 必须有 host
     req->setHeader("host", "www.httpbin.org");
     conn->sendRequest(req);
     auto rsp = conn->recvResponse();
@@ -38,6 +39,7 @@ TEST(test_http_connection, with_chunked) {
     solar::http::HttpConnection::ptr conn = std::make_shared<solar::http::HttpConnection>(sock);
     solar::http::HttpRequest::ptr req = std::make_shared<solar::http::HttpRequest>();
     req->setPath("/stream/5");
+    // HTTP/1.1 必须有 host
     req->setHeader("host", "www.httpbin.org");
     conn->sendRequest(req);
     auto rsp = conn->recvResponse();
@@ -48,4 +50,16 @@ TEST(test_http_connection, with_chunked) {
     }
 }
 
-
+TEST(test_http_connection, do_request) {
+    solar::http::HttpResult::ptr rt = solar::http::HttpConnection::DoGet(
+        "http://www.baidu.com", 300
+        // "http://www.httpbin.org", 300
+        );
+    EXPECT_TRUE(rt);
+    solar::http::HttpResponse::ptr rsp = rt->response;
+    std::stringstream ss;
+    ss << "result=" << rt->result << " error= " << rt->error
+        << " rsp=" << (rsp ? rsp->toString() : "");
+    std::string s = ss.str();
+    SOLAR_LOG_INFO(g_logger)  << s;
+}
