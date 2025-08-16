@@ -3,10 +3,11 @@ add_library(${LIB_NAME})
 add_library(${PROJECT_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
 
 add_custom_command(
-        OUTPUT   http11_parser.rl.cpp   httpclient_parser.rl.cpp
+        OUTPUT   http11_parser.rl.cpp   httpclient_parser.rl.cpp uri.rl.cpp
         COMMAND ragel -G2 -C ${CMAKE_CURRENT_SOURCE_DIR}/httpclient_parser.rl -o ${CMAKE_CURRENT_BINARY_DIR}/httpclient_parser.rl.cpp
         COMMAND ragel -G2 -C ${CMAKE_CURRENT_SOURCE_DIR}/http11_parser.rl -o ${CMAKE_CURRENT_BINARY_DIR}/http11_parser.rl.cpp
-        DEPENDS httpclient_parser.rl http11_parser.rl
+        COMMAND ragel -G2 -C ${CMAKE_CURRENT_SOURCE_DIR}/uri.rl -o ${CMAKE_CURRENT_BINARY_DIR}/uri.rl.cpp
+        DEPENDS httpclient_parser.rl http11_parser.rl uri.rl
 )
 
 set(PUBLIC_HEADER
@@ -33,6 +34,7 @@ target_sources(
   Http.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/http11_parser.rl.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/httpclient_parser.rl.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/uri.rl.cpp
   http_parser.cpp
   TcpServer.cpp
   Stream.cpp

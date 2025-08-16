@@ -8,7 +8,6 @@ static solar::Logger::ptr g_logger = SOLAR_LOG_ROOT();
 
 TEST(test_http_connection, with_content_length) {
     // 利用 www.httpbin.org 进行测试
-    GTEST_SKIP();
     solar::Address::ptr addr = solar::Address::LookUpAnyIpAddress("www.httpbin.org:80");
     EXPECT_TRUE(addr) << "get addr error";
 

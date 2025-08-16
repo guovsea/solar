@@ -10,6 +10,8 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <map>
+#include <vector>
+
 namespace solar {
 class IPAddress;
 class Address {

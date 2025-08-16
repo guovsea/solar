@@ -31,6 +31,7 @@ target_sources(
   test_tcp_server.cpp
   test_http_server.cpp
   test_http_connection.cpp
+  test_uri.cpp
 )
 
 target_link_libraries(${EXE_NAME} 
