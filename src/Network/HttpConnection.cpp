@@ -21,17 +21,20 @@ HttpResponse::ptr HttpConnection::recvResponse() {
         // 将读出的数据放到未解析的数据之后
         int len = read(data + offset, buff_size - offset);
         if (len <= 0) {
+            close();
             return nullptr;
         }
         len += offset;  // 读了之后，所有未解析的数据的长度
         data[len] = '\0'; // 避免 httpclient_parser.rl:197 的断言
         size_t nparse = parser->execute(data, len);
         if (parser->hasError()) {
+            close();
             return nullptr;
         }
         offset = len - nparse; // 解析之后剩余未解析数据的长度
         if (offset == buff_size) {
             // 有效数据满了，buff 中所有数据都未被解析，因此不能再接收数据
+            close();
             return nullptr;
         }
         if (parser->isFinished()) {
@@ -53,6 +56,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
                 if (len == 0) {
                     int rt = read(data + len, buff_size - len);
                     if (rt <= 0) {
+                        close();
                         return nullptr;
                     }
                     len += rt;
@@ -60,10 +64,12 @@ HttpResponse::ptr HttpConnection::recvResponse() {
                 data[len] = '\0';
                 size_t nparse = parser->execute(data, len, true);
                 if (parser->hasError()) {
+                    close();
                     return nullptr;
                 }
                 len -= nparse;
                 if (len == buff_size) {
+                    close();
                     return nullptr;
                 }
             } while (!parser->isFinished());  // 该 chunk 的头部接收并解析完成
@@ -82,6 +88,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
                 while (left > 0) {
                     int rt = read(data, left > buff_size ? buff_size : left);
                     if (rt <= 0) {
+                        close();
                         return nullptr;
                     }
                     body.append(data, rt);
@@ -103,6 +110,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
                 length -= offset;
                 // 根据 Content-Length，还有 length 长度的数据未到达，继续读取
                 if (readFixSize(&body[body.size()], length) <=0) {
+                    close();
                     return nullptr;
                 }
             }
