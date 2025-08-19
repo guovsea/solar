@@ -124,8 +124,7 @@ private:
     std::string m_host;
     std::string m_vhost;
     uint32_t m_port;
-    //< 连接池中持续存活最大连接数，当连接数大于该值时，一些 {TODO} 连接结束后会被释放
-    uint32_t m_maxSize;
+    // uint32_t m_maxSize; // 未使用
     uint32_t m_maxAliveTime;
     uint32_t m_maxRequest;
 

@@ -244,7 +244,7 @@ HttpConnectionPool::HttpConnectionPool(const std::string &host, const std::strin
             :m_host{ host }
             ,m_vhost{ vhost }
             ,m_port{ port }
-            ,m_maxSize{ maxSize }
+            // ,m_maxSize{ maxSize }
             ,m_maxAliveTime{ maxAliveTime }
             ,m_maxRequest{ maxRequest }
 {
@@ -257,14 +257,13 @@ HttpConnection::ptr HttpConnectionPool::getConnection() {
     MutexType::Lock lock(m_mutex);
     while (!m_conns.empty()) {
         auto conn = *m_conns.begin();
+        m_conns.pop_front();
         if (!conn->isConnected()) {
             invalid_conns.push_back(conn);
-            m_conns.pop_front();
             continue;
         }
         if (conn->m_createTime + m_maxAliveTime > now_ms) {
             invalid_conns.push_back(conn);
-            m_conns.pop_front();
             continue;
         }
         ptr = conn;
