@@ -223,8 +223,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
                 memcpy(&body[0], data, offset);
                 length -= offset;
                 // 根据 Content-Length，还有 length 长度的数据未到达，继续读取
-                // TODO 如果 body 太长，缓冲区会溢出
-                if (readFixSize(&body[body.size()], length) <=0) {
+                if (readFixSize(&body[offset], length) <=0) {
                     close();
                     return nullptr;
                 }
