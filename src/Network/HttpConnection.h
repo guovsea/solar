@@ -118,19 +118,27 @@ public:
     HttpResult::ptr doRequest(HttpRequest::ptr req, uint64_t timeout_ms);
 
 private:
+     /**
+     * @brief getConnection 返回的 HttpConnection::ptr 的自定义删除函数。
+     * 当 connection 关闭时, connection 数量大于 m_maxSize 时 delete ptr
+     * 否则，将 ptr 重新添加会 pool
+     * @param ptr
+     * @param pool
+     */
     static void ReleasePtr(HttpConnection* ptr, HttpConnectionPool* pool);
 
 private:
     std::string m_host;
     std::string m_vhost;
     uint32_t m_port;
-    // uint32_t m_maxSize; // 未使用
+    uint32_t m_maxSize;  //< 连接池中始终存在的最大连接数量，连接数量大于该值时，
+                         //  getConnection 也能成功，但是 get 出的 Connection 会被析构
     uint32_t m_maxAliveTime;
     uint32_t m_maxRequest;
 
     MutexType m_mutex;
     std::list<HttpConnection*> m_conns;
-    std::atomic<int32_t> m_total{ 0 };
+    std::atomic<int32_t> m_total{ 0 };  //< 通过该 Pool 申请的总连接数（不一定在 pool 中，可能已经被取走）
 };
 }
 
