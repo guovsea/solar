@@ -123,7 +123,14 @@ HttpResult::ptr HttpConnection::DoRequest(HttpRequest::ptr req, Uri::ptr uri, ui
 }
 
 HttpConnection::HttpConnection(Socket::ptr sock, bool owner)
-    :SocketStream{sock, owner} {
+    :SocketStream{sock, owner}
+    ,m_createTime{0}
+    ,m_request{0}
+{
+}
+
+HttpConnection::~HttpConnection() {
+    SOLAR_LOG_INFO(g_logger) << "HttpConnection::~HttpConnection";
 }
 
 HttpResponse::ptr HttpConnection::recvResponse() {
@@ -332,6 +339,7 @@ HttpResult::ptr HttpConnectionPool::doRequest(HttpMethod method, const std::stri
         const std::map<std::string, std::string> &headers, const std::string &body) {
     HttpRequest::ptr req = std::make_shared<HttpRequest>();
     req->setMethod(method);
+    req->setClose(false);
     req->setPath(url); // query fragment 在 url 中
     bool has_host{ false };
     for (auto& i : headers) {
@@ -399,8 +407,10 @@ HttpResult::ptr HttpConnectionPool::doRequest(HttpRequest::ptr req, uint64_t tim
 }
 
 void HttpConnectionPool::ReleasePtr(HttpConnection *ptr, HttpConnectionPool *pool) {
+    ++ptr->m_request;
     if (!ptr->isConnected()
-            || ptr->m_createTime + pool->m_maxAliveTime >= GetCurrentMS()) {
+            || ptr->m_createTime + pool->m_maxAliveTime >= GetCurrentMS()
+            || (ptr->m_request >= pool->m_maxRequest)) {
         delete ptr;
         --pool->m_total;
         return;

@@ -74,10 +74,12 @@ public:
     static HttpResult::ptr DoRequest(HttpRequest::ptr req, Uri::ptr uri, uint64_t timeout_ms);
 
     HttpConnection(Socket::ptr sock, bool owner = true);
+    ~HttpConnection();
     HttpResponse::ptr recvResponse();
     int sendRequest(HttpRequest::ptr rsp);
 private:
     uint64_t m_createTime;
+    uint64_t m_request; //< 已经发送到请求数
 };
 
 class HttpConnectionPool {
@@ -134,7 +136,7 @@ private:
     uint32_t m_maxSize;  //< 连接池中始终存在的最大连接数量，连接数量大于该值时，
                          //  getConnection 也能成功，但是 get 出的 Connection 会被析构
     uint32_t m_maxAliveTime;
-    uint32_t m_maxRequest;
+    uint32_t m_maxRequest; //< 每个连接发送到最大请求数
 
     MutexType m_mutex;
     std::list<HttpConnection*> m_conns;

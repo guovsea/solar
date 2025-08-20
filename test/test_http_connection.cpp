@@ -70,7 +70,7 @@ TEST(test_http_connection, do_request) {
 
 void test_pool() {
     solar::http::HttpConnectionPool::ptr pool = std::make_shared<solar::http::HttpConnectionPool>(
-        "www.baidu.com", "", 80, 10, 1000 * 20, 5);
+        "www.github.com", "", 80, 10, 1000 * 20, 5);
     solar::IOManager::GetThis()->addTimer(1000, [pool]() {
         solar::http::HttpResult::ptr rt = pool->doGet("/", 300);
         SOLAR_LOG_INFO(g_logger)  << rt->toString();
