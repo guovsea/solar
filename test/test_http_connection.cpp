@@ -8,7 +8,6 @@ static solar::Logger::ptr g_logger = SOLAR_LOG_ROOT();
 
 
 TEST(test_http_connection, with_content_length) {
-    GTEST_SKIP();
     // 利用 www.httpbin.org 进行测试
     solar::Address::ptr addr = solar::Address::LookUpAnyIpAddress("www.httpbin.org:80");
     EXPECT_TRUE(addr) << "get addr error";
@@ -33,7 +32,6 @@ TEST(test_http_connection, with_content_length) {
 
 
 TEST(test_http_connection, with_chunked) {
-    GTEST_SKIP();
     solar::Address::ptr addr = solar::Address::LookUpAnyIpAddress("www.httpbin.org:80");
     EXPECT_TRUE(addr) << "get addr error";
     solar::Socket::ptr sock = solar::Socket::CreateTCP(addr);
@@ -47,14 +45,13 @@ TEST(test_http_connection, with_chunked) {
     conn->sendRequest(req);
     auto rsp = conn->recvResponse();
     EXPECT_TRUE(rsp);
-    std::string s = rsp->toString();
     if (rsp) {
+        std::string s = rsp->toString();
         SOLAR_LOG_INFO(g_logger) << "rsp:\n" << *rsp;
     }
 }
 
 TEST(test_http_connection, do_request) {
-    GTEST_SKIP();
     solar::http::HttpResult::ptr rt = solar::http::HttpConnection::DoGet(
         "http://www.baidu.com", 300
         // "http://www.httpbin.org", 300
@@ -72,12 +69,13 @@ void test_pool() {
     solar::http::HttpConnectionPool::ptr pool = std::make_shared<solar::http::HttpConnectionPool>(
         "www.github.com", "", 80, 10, 1000 * 20, 5);
     solar::IOManager::GetThis()->addTimer(1000, [pool]() {
-        solar::http::HttpResult::ptr rt = pool->doGet("/", 300);
-        SOLAR_LOG_INFO(g_logger)  << rt->toString();
+            solar::http::HttpResult::ptr rt = pool->doGet("/", 300);
+            SOLAR_LOG_INFO(g_logger)  << rt->toString();
     }, true);
 }
 
 TEST(test_http_connection, test_pool) {
+    GTEST_SKIP();
     solar::IOManager iom{2};
     iom.schedule(test_pool);
 }

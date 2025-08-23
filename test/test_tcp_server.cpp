@@ -24,6 +24,7 @@ static void run() {
         sleep(2);
     }
     tcp_server->start();
+    tcp_server->stop();
 }
 
 TEST(test_tcp_server, test) {

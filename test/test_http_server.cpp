@@ -31,6 +31,7 @@ void run() {
             return 0;
     });
     server->start();
+    server->stop();
 }
 
 TEST(test_http_server, server) {

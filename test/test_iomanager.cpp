@@ -34,7 +34,7 @@ TEST(TestIOManager, test_epoll_wait_and_addEvent) {
         // 将会调用 read call back
         solar::IOManager::GetThis()->cancelEvent(sock, solar::IOManager::READ);
     });
-    int rt = connect(sock, (struct sockaddr *) &addr, sizeof(addr));
+    connect(sock, (struct sockaddr *) &addr, sizeof(addr));
 }
 
 namespace {
