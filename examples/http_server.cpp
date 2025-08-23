@@ -8,6 +8,7 @@
 solar::Logger::ptr g_logger = SOLAR_LOG_ROOT();
 
 void run() {
+    g_logger->setLevel(solar::LogLevel::INFO);
     solar::Address::ptr addr = solar::Address::LookUpAnyIpAddress("0.0.0.0:8020");
     if (!addr) {
         SOLAR_LOG_ERROR(g_logger) << "get address error";
