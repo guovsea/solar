@@ -254,7 +254,6 @@ public:
     std::string toString() const;
 private:
 
-
     HttpMethod m_method;
     uint8_t m_version;
     bool m_close;

@@ -124,7 +124,7 @@ void Scheduler::run() {
             MutexType::Lock lock(m_mutex);
             auto it = m_fibers.begin();
             while (it != m_fibers.end()) {
-                if (it->thread != -1 && it->thread != solar::GetFiberId()) {
+                if (it->thread != -1 && it->thread != (int)solar::GetFiberId()) {
                     ++it;
                     tickle_me = true;
                     continue;
@@ -175,7 +175,7 @@ void Scheduler::run() {
             }
         } else { // 没有任务
             if (is_active) {
-                -m_activeThreadCount;
+                --m_activeThreadCount;
             }
             if (idle_fiber->getState() == Fiber::TERM) {
                 SOLAR_LOG_INFO(g_logger) << "idle fiber term";

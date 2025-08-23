@@ -52,10 +52,10 @@ return #msg;
 }
 
 HttpRequest::HttpRequest(uint8_t version, bool close)
-    :m_path{"/"}
-    ,m_method{HttpMethod::GET}
+    :m_method{HttpMethod::GET}
     ,m_version{version}
     ,m_close{close}
+    ,m_path{"/"}
 {
 }
 

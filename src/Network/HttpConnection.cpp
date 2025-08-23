@@ -154,7 +154,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
             return nullptr;
         }
         offset = len - nparse; // 解析之后剩余未解析数据的长度
-        if (offset == buff_size) {
+        if (offset == (int)buff_size) {
             // 有效数据满了，buff 中所有数据都未被解析，因此不能再接收数据
             close();
             return nullptr;
@@ -190,7 +190,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
                     return nullptr;
                 }
                 len -= nparse;
-                if (len == buff_size) {
+                if (len == (int)buff_size) {
                     close();
                     return nullptr;
                 }
@@ -208,7 +208,7 @@ HttpResponse::ptr HttpConnection::recvResponse() {
                 // 到本 chunk 结束，还需要读的数据
                 int left = client_parser.content_len - (len - TAIL_CRLT_LEN);
                 while (left > 0) {
-                    int rt = read(data, left > buff_size ? buff_size : left);
+                    int rt = read(data, left > (int)buff_size ? buff_size : left);
                     if (rt <= 0) {
                         close();
                         return nullptr;

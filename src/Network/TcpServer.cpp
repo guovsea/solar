@@ -32,7 +32,6 @@ bool TcpServer::bind(Address::ptr addr) {
 }
 
 bool TcpServer::bind(const std::vector<Address::ptr>& addrs, std::vector<Address::ptr>& fails) {
-    bool rt = true;
     for (auto& addr : addrs) {
         Socket::ptr sock = Socket::CreateTCP(addr);
         if (!sock->bind(addr)) {

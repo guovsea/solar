@@ -31,7 +31,7 @@ HttpRequest::ptr HttpSession::recvRequest() {
             return nullptr;
         }
         offset = len - nparse; // 解析之后剩余未解析数据的长度
-        if (offset == buff_size) {
+        if ((uint64_t)offset == buff_size) {
             // 有效数据满了，buff 中所有数据都未被解析，因此不能再接收数据
             close();
             return nullptr;
@@ -47,7 +47,6 @@ HttpRequest::ptr HttpSession::recvRequest() {
         std::string body;
         body.resize(length);
 
-        int len = 0;
         if (length <= offset) {
             memcpy(&body[0], data, length);
         } else {

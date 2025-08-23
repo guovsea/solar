@@ -4,7 +4,17 @@ project(solar)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_compile_options(-Werror)
+add_compile_options(
+    $<$<CONFIG:Release>:-O3>
+    -rdynamic
+    -fPIC
+    -Wall
+    -Werror
+    -Wno-deprecated
+    -Wno-unused-function
+    -Wno-builtin-macro-redefined
+    -Wno-deprecated-declarations
+)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/$<CONFIG>)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/$<CONFIG>)

@@ -137,7 +137,7 @@ private:
          */
         FiberAndThread(Fiber::ptr *f, int thr) : thread{thr} { fiber.swap(*f); }
 
-        FiberAndThread(Fiber::ptr &&f, int thr) : thread{thr}, fiber{std::move(f)} {}
+        FiberAndThread(Fiber::ptr &&f, int thr) : fiber{std::move(f)}, thread{thr} {}
 
         FiberAndThread(std::function<void()> cb, int thr) : cb(cb), thread(thr) {}
         /**

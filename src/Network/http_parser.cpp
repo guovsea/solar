@@ -179,6 +179,7 @@ void on_response_http_version(void *data, const char *at, size_t length) {
             << std::string{at, length};
         parser->setError(HttpResponseParser::InvalidVersion);
     }
+    parser->getData()->setVersion(v);
 }
 
 void on_response_query(void *data, const char *at, size_t length) {

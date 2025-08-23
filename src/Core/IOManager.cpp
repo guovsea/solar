@@ -25,6 +25,7 @@ IOManager::FdContext::EventContext &IOManager::FdContext::getContext(Event event
             SOLAR_ASSERT2(false, "getContext");
             break;
     }
+    throw std::invalid_argument("getContext invalid event");
 }
 void IOManager::FdContext::resetContext(EventContext &ctx) {
     ctx.scheduler = nullptr;
@@ -82,7 +83,7 @@ IOManager::~IOManager() {
 int IOManager::addEvent(int fd, Event event, std::function<void()> cb) {
     FdContext *fd_ctx = nullptr;
     RWMutexType::ReadLock lock(m_mutex);
-    if (m_fdContexts.size() > fd) {
+    if ((int)m_fdContexts.size() > fd) {
         fd_ctx = m_fdContexts[fd];
         lock.unlock();
     } else {
@@ -130,7 +131,7 @@ int IOManager::addEvent(int fd, Event event, std::function<void()> cb) {
 
 bool IOManager::delEvent(int fd, Event event) {
     RWMutexType::ReadLock lock(m_mutex);
-    if (m_fdContexts.size() <= fd) {
+    if ((int)m_fdContexts.size() <= fd) {
         return false;
     }
     FdContext *fd_ctx = m_fdContexts[fd];
@@ -164,7 +165,7 @@ bool IOManager::delEvent(int fd, Event event) {
 
 bool IOManager::cancelEvent(int fd, Event event) {
     RWMutexType::ReadLock lock(m_mutex);
-    if (m_fdContexts.size() <= fd) {
+    if ((int)m_fdContexts.size() <= fd) {
         return false;
     }
     FdContext *fd_ctx = m_fdContexts[fd];
@@ -188,8 +189,6 @@ bool IOManager::cancelEvent(int fd, Event event) {
                                   << "):" << rt << " (" << errno << ") (" << strerror(errno) << ")";
         return false;
     }
-
-    FdContext::EventContext &event_ctx = fd_ctx->getContext(event);
     fd_ctx->triggerEvent(event);
     --m_pendingEventCount;
     return true;
@@ -197,7 +196,7 @@ bool IOManager::cancelEvent(int fd, Event event) {
 
 bool IOManager::cancelAll(int fd) {
     RWMutexType::ReadLock lock(m_mutex);
-    if (m_fdContexts.size() <= fd) {
+    if ((int)m_fdContexts.size() <= fd) {
         return false;
     }
     FdContext *fd_ctx = m_fdContexts[fd];
@@ -222,12 +221,10 @@ bool IOManager::cancelAll(int fd) {
     }
 
     if (fd_ctx->events & READ) {
-        FdContext::EventContext &event_ctx = fd_ctx->getContext(READ);
         fd_ctx->triggerEvent(READ);
         --m_pendingEventCount;
     }
     if (fd_ctx->events & WRITE) {
-        FdContext::EventContext &event_ctx = fd_ctx->getContext(WRITE);
         fd_ctx->triggerEvent(WRITE);
         --m_pendingEventCount;
     }
