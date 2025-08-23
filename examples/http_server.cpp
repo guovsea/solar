@@ -14,7 +14,7 @@ void run() {
         SOLAR_LOG_ERROR(g_logger) << "get address error";
         return;
     }
-    solar::http::HttpServer::ptr http_server = std::make_shared<solar::http::HttpServer>();
+    solar::http::HttpServer::ptr http_server = std::make_shared<solar::http::HttpServer>(true);
     while (!http_server->bind(addr)) {
         SOLAR_LOG_ERROR(g_logger) << "bind" << *addr << " fail";
         sleep(1);
