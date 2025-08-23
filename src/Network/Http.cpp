@@ -75,6 +75,13 @@ std::string HttpRequest::getCookie(const std::string &key, const std::string &de
 }
 
 void HttpRequest::setHeader(const std::string &key, const std::string &val) {
+    if (strcasecmp(key.c_str(), "connection") == 0) {
+        if(strcasecmp(val.c_str(), "keep-alive") == 0) {
+            m_close = false;
+        } else {
+            m_close = true;
+        }
+    }
     m_headers[key] = val;
 }
 

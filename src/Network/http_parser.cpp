@@ -109,8 +109,8 @@ void on_request_http_field(void *data, const char *field, size_t flen, const cha
 
 HttpRequestParser::HttpRequestParser()
     :m_parser{}
-,m_data{std::make_shared<HttpRequest>()}
-,m_error{Success}
+    ,m_data{std::make_shared<HttpRequest>()}
+    ,m_error{Success}
 {
     http_parser_init(&m_parser);
     m_parser.request_method = on_request_method;
