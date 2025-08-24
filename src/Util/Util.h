@@ -20,6 +20,7 @@ std::string BacktraceToString(int size = 64, int skip = 2, const std::string &pr
 
 uint64_t GetCurrentMS();
 uint64_t GetCurrentUS();
+std::string Time2Str(time_t ts, const std::string& format = "%Y-%m-%d %H:%M:%S");
 } // namespace solar
 
 #endif /* __SOLAR_UTIL_UTIL_H__ */

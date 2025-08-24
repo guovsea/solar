@@ -7,6 +7,7 @@ static solar::Logger::ptr g_logger = SOLAR_LOG_NAME("root");
 
 static std::shared_ptr<solar::Timer> timer1;
 int server_main1(int argc, char* argv[]) {
+    SOLAR_LOG_INFO(g_logger) << solar::ProcessInfoMgr::Instance()->toString();
     solar::IOManager iom{ 1 };
     timer1 = iom.addTimer(500, []() {
         SOLAR_LOG_INFO(g_logger) << "onTimer";
@@ -28,6 +29,7 @@ TEST(test_daemon, no_daemon) {
 
 static std::shared_ptr<solar::Timer> timer2;
 int server_main2(int argc, char* argv[]) {
+    SOLAR_LOG_INFO(g_logger) << solar::ProcessInfoMgr::Instance()->toString();
     solar::IOManager iom{ 1 };
     timer1 = iom.addTimer(500, []() {
         SOLAR_LOG_INFO(g_logger) << "onTimer";

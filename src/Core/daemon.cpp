@@ -19,13 +19,13 @@ static int real_start(int argc, char* argv[], std::function<int(int argc, char* 
 }
 static int real_daemon(int argc, char* argv[], std::function<int(int argc, char* argv[])> main_cb) {
     ProcessInfoMgr::Instance()->parent_id = getpid();
-    ProcessInfoMgr::Instance()->parent_start_time = GetCurrentMS();
+    ProcessInfoMgr::Instance()->parent_start_time = time(0);
     while (true) {
         pid_t pid = fork();
         if (pid == 0) {
             // 子进程返回
             ProcessInfoMgr::Instance()->main_id = getpid();
-            ProcessInfoMgr::Instance()->main_start_time = GetCurrentMS();
+            ProcessInfoMgr::Instance()->main_start_time = time(0);
             SOLAR_LOG_INFO(g_logger) << "process start pid=" << getpid();
             return main_cb(argc, argv);
         } else if (pid < 0) {
@@ -50,6 +50,15 @@ static int real_daemon(int argc, char* argv[], std::function<int(int argc, char*
     }
 }
 
+std::string ProcessInfo::toString() const {
+    std::stringstream ss;
+    ss << "[ProcessInfo parent_id=" << parent_id
+       << " main_id=" << main_id
+       << " parent_start_time=" << solar::Time2Str(parent_start_time)
+       << " main_start_time=" << solar::Time2Str(main_start_time)
+       << " restart_count=" << restart_count << "]";
+    return ss.str();
+}
 int start_daemon(int argc, char *argv[], std::function<int(int argc, char *argv[])> main_cb, bool is_daemon) {
     if (!is_daemon) {
         return real_start(argc, argv, main_cb);
