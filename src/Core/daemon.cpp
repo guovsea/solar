@@ -17,7 +17,11 @@ static ConfigVar<uint32_t>::ptr g_daemon_restart_interval
 static int real_start(int argc, char* argv[], std::function<int(int argc, char* argv[])> main_cb) {
     return main_cb(argc, argv);
 }
+
 static int real_daemon(int argc, char* argv[], std::function<int(int argc, char* argv[])> main_cb) {
+    // 不改变当前工作目录（继续使用当前的 working directory）。
+    // 关闭标准输入、输出和错误输出（重定向到 /dev/null）。
+    daemon(1, 0);
     ProcessInfoMgr::Instance()->parent_id = getpid();
     ProcessInfoMgr::Instance()->parent_start_time = time(0);
     while (true) {
