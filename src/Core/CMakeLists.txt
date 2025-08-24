@@ -14,6 +14,7 @@ set(PUBLIC_HEADER
     Hook.h
     fd_manager.h
     daemon.h
+    Env.h
 )
 
 target_sources(
@@ -29,6 +30,7 @@ target_sources(
     Hook.cpp
     fd_manager.cpp
     daemon.cpp
+    Env.cpp
 )
 
 find_package(Threads REQUIRED)

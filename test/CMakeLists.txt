@@ -33,6 +33,7 @@ target_sources(
     test_http_connection.cpp
     test_uri.cpp
     test_daemon.cpp
+    test_env.cpp
 )
 
 target_link_libraries(${EXE_NAME}

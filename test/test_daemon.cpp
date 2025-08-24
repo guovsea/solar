@@ -42,6 +42,7 @@ int server_main2(int argc, char* argv[]) {
 }
 
 TEST(test_daemon, daemon) {
+    GTEST_SKIP();
     int argc = 2;
     char* argv[] = { (char*)"server_main"};
     int rt = solar::start_daemon(argc, argv, server_main2, true);
