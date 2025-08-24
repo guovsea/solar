@@ -4,42 +4,43 @@ add_executable(${EXE_NAME} "")
 # gtest
 include(FetchContent)
 FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+    googletest
+    URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
 )
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 include(GoogleTest)
 target_sources(
-  ${EXE_NAME}
-  PRIVATE
-  test_main.cpp
-  test_log.cpp
-  test_config.cpp
-  test_thread_mutex.cpp
-  test_util.cpp
-  test_fiber.cpp
-  test_scheduler.cpp
-  test_iomanager.cpp
-  test_hook.cpp
-  test_address.cpp
-  test_socket.cpp
-  test_bytearray.cpp
-  test_http.cpp
-  test_http_parser.cpp
-  test_tcp_server.cpp
-  test_http_server.cpp
-  test_http_connection.cpp
-  test_uri.cpp
+    ${EXE_NAME}
+    PRIVATE
+    test_main.cpp
+    test_log.cpp
+    test_config.cpp
+    test_thread_mutex.cpp
+    test_util.cpp
+    test_fiber.cpp
+    test_scheduler.cpp
+    test_iomanager.cpp
+    test_hook.cpp
+    test_address.cpp
+    test_socket.cpp
+    test_bytearray.cpp
+    test_http.cpp
+    test_http_parser.cpp
+    test_tcp_server.cpp
+    test_http_server.cpp
+    test_http_connection.cpp
+    test_uri.cpp
+    test_daemon.cpp
 )
 
-target_link_libraries(${EXE_NAME} 
-  PRIVATE 
-  ${PROJECT_NAME}::log
-  ${PROJECT_NAME}::core
-  ${PROJECT_NAME}::network
-  GTest::gtest
+target_link_libraries(${EXE_NAME}
+    PRIVATE
+    ${PROJECT_NAME}::log
+    ${PROJECT_NAME}::core
+    ${PROJECT_NAME}::network
+    GTest::gtest
 )
 
 set(TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR})

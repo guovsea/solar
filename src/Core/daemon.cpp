@@ -27,9 +27,11 @@ static int real_daemon(int argc, char* argv[], std::function<int(int argc, char*
             ProcessInfoMgr::Instance()->main_id = getpid();
             ProcessInfoMgr::Instance()->main_start_time = GetCurrentMS();
             SOLAR_LOG_INFO(g_logger) << "process start pid=" << getpid();
+            return main_cb(argc, argv);
         } else if (pid < 0) {
             SOLAR_LOG_ERROR(g_logger) << "fork fail return=" << pid << " errno=" << errno
                 << " errstr=" << strerror(errno);
+            return -1;
         } else {
             // 父进程返回
             int status{ 0 };
@@ -40,6 +42,7 @@ static int real_daemon(int argc, char* argv[], std::function<int(int argc, char*
             } else {
                 // 正常退出
                 SOLAR_LOG_INFO(g_logger) << "child finished pid=" << pid;
+                return status;
             }
             ++ProcessInfoMgr::Instance()->restart_count;
             sleep(g_daemon_restart_interval->getValue()); // 等待子进程的资源释放
